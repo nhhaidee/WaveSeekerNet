@@ -1,0 +1,14 @@
+,Model,Balanced Accuracy,F1-Score (Macro),Precision (Macro),Recall (Macro),MCC
+0,Baseline,1.0,1.0,1.0,1.0,1.0
+1,Baseline_use_wavelets_False_and_use_fft_False,1.0,1.0,1.0,1.0,1.0
+2,Baseline_use_fft_False,1.0,1.0,1.0,1.0,1.0
+3,Baseline_use_fft_False_and_no_gMLP,1.0,1.0,1.0,1.0,1.0
+4,Baseline_use_wavelets_False,1.0,1.0,1.0,1.0,1.0
+5,Baseline_use_wavelets_False_and_no_gMLP,1.0,1.0,1.0,1.0,1.0
+6,Baseline_activation_mish_<class 'torch.nn.modules.activation.Mish'>,1.0,1.0,1.0,1.0,1.0
+7,Baseline_activation_gelu_<class 'torch.nn.modules.activation.GELU'>,1.0,1.0,1.0,1.0,1.0
+8,Baseline_activation_relu_<class 'torch.nn.modules.activation.ReLU'>,1.0,1.0,1.0,1.0,1.0
+9,Baseline_use_kan_False,1.0,1.0,1.0,1.0,1.0
+10,Baseline_use_smoe_False,1.0,1.0,1.0,1.0,1.0
+11,Baseline_use_gc_False,1.0,1.0,1.0,1.0,1.0
+12,Baseline_use_lookahead_False,0.9989495798319327,0.9994690772669802,0.9999963556851312,0.9989495798319327,0.9999690449442679

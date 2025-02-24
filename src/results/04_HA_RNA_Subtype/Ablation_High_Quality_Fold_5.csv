@@ -1,0 +1,79 @@
+,Model,Balanced Accuracy,F1-Score (Macro),Precision (Macro),Recall (Macro),MCC
+0,Baseline,1.0,1.0,1.0,1.0,1.0
+1,Baseline_use_wavelets_False_and_use_fft_False,1.0,1.0,1.0,1.0,1.0
+2,Baseline_use_fft_False,1.0,1.0,1.0,1.0,1.0
+3,Baseline_use_fft_False_and_no_gMLP,1.0,1.0,1.0,1.0,1.0
+4,Baseline_use_wavelets_False,1.0,1.0,1.0,1.0,1.0
+5,Baseline_use_wavelets_False_and_no_gMLP,1.0,1.0,1.0,1.0,1.0
+6,Baseline_activation_mish_<class 'torch.nn.modules.activation.Mish'>,1.0,1.0,1.0,1.0,1.0
+7,Baseline_activation_gelu_<class 'torch.nn.modules.activation.GELU'>,1.0,1.0,1.0,1.0,1.0
+8,Baseline_activation_relu_<class 'torch.nn.modules.activation.ReLU'>,1.0,1.0,1.0,1.0,1.0
+9,Baseline_use_kan_False,1.0,1.0,1.0,1.0,1.0
+10,Baseline_use_smoe_False,1.0,1.0,1.0,1.0,1.0
+11,Baseline_use_gc_False,1.0,1.0,1.0,1.0,1.0
+12,Baseline_use_lookahead_False,0.9989495798319327,0.9994690772669802,0.9999963556851312,0.9989495798319327,0.9999690449442679
+13,Baseline,1.0,1.0,1.0,1.0,1.0
+14,Baseline_use_wavelets_False_and_use_fft_False,1.0,1.0,1.0,1.0,1.0
+15,Baseline_use_fft_False,1.0,1.0,1.0,1.0,1.0
+16,Baseline_use_fft_False_and_no_gMLP,1.0,1.0,1.0,1.0,1.0
+17,Baseline_use_wavelets_False,1.0,1.0,1.0,1.0,1.0
+18,Baseline_use_wavelets_False_and_no_gMLP,0.9999973717271432,0.9994773094056085,0.9989648033126295,0.9999973717271432,0.9999690458326456
+19,Baseline_activation_mish_<class 'torch.nn.modules.activation.Mish'>,1.0,1.0,1.0,1.0,1.0
+20,Baseline_activation_gelu_<class 'torch.nn.modules.activation.GELU'>,1.0,1.0,1.0,1.0,1.0
+21,Baseline_activation_relu_<class 'torch.nn.modules.activation.ReLU'>,1.0,1.0,1.0,1.0,1.0
+22,Baseline_use_kan_False,1.0,1.0,1.0,1.0,1.0
+23,Baseline_use_smoe_False,1.0,1.0,1.0,1.0,1.0
+24,Baseline_use_gc_False,1.0,1.0,1.0,1.0,1.0
+25,Baseline_use_lookahead_False,1.0,1.0,1.0,1.0,1.0
+26,Baseline,1.0,1.0,1.0,1.0,1.0
+27,Baseline_use_wavelets_False_and_use_fft_False,1.0,1.0,1.0,1.0,1.0
+28,Baseline_use_fft_False,1.0,1.0,1.0,1.0,1.0
+29,Baseline_use_fft_False_and_no_gMLP,1.0,1.0,1.0,1.0,1.0
+30,Baseline_use_wavelets_False,1.0,1.0,1.0,1.0,1.0
+31,Baseline_use_wavelets_False_and_no_gMLP,1.0,1.0,1.0,1.0,1.0
+32,Baseline_activation_mish_<class 'torch.nn.modules.activation.Mish'>,1.0,1.0,1.0,1.0,1.0
+33,Baseline_activation_gelu_<class 'torch.nn.modules.activation.GELU'>,1.0,1.0,1.0,1.0,1.0
+34,Baseline_activation_relu_<class 'torch.nn.modules.activation.ReLU'>,1.0,1.0,1.0,1.0,1.0
+35,Baseline_use_kan_False,1.0,1.0,1.0,1.0,1.0
+36,Baseline_use_smoe_False,1.0,1.0,1.0,1.0,1.0
+37,Baseline_use_gc_False,1.0,1.0,1.0,1.0,1.0
+38,Baseline_use_lookahead_False,0.9327731092436975,0.8728517875886297,0.9309177646524307,0.8705882352941177,0.9995048380075603
+39,Baseline,1.0,1.0,1.0,1.0,1.0
+40,Baseline_use_wavelets_False_and_use_fft_False,1.0,1.0,1.0,1.0,1.0
+41,Baseline_use_fft_False,1.0,1.0,1.0,1.0,1.0
+42,Baseline_use_fft_False_and_no_gMLP,1.0,1.0,1.0,1.0,1.0
+43,Baseline_use_wavelets_False,1.0,1.0,1.0,1.0,1.0
+44,Baseline_use_wavelets_False_and_no_gMLP,0.996031746031746,0.9979573614695502,0.9999963556851312,0.996031746031746,0.9999690449437013
+45,Baseline_activation_mish_<class 'torch.nn.modules.activation.Mish'>,1.0,1.0,1.0,1.0,1.0
+46,Baseline_activation_gelu_<class 'torch.nn.modules.activation.GELU'>,1.0,1.0,1.0,1.0,1.0
+47,Baseline_activation_relu_<class 'torch.nn.modules.activation.ReLU'>,1.0,1.0,1.0,1.0,1.0
+48,Baseline_use_kan_False,1.0,1.0,1.0,1.0,1.0
+49,Baseline_use_smoe_False,1.0,1.0,1.0,1.0,1.0
+50,Baseline_use_gc_False,1.0,1.0,1.0,1.0,1.0
+51,Baseline_use_lookahead_False,1.0,1.0,1.0,1.0,1.0
+52,Baseline,1.0,1.0,1.0,1.0,1.0
+53,Baseline_use_wavelets_False_and_use_fft_False,1.0,1.0,1.0,1.0,1.0
+54,Baseline_use_fft_False,1.0,1.0,1.0,1.0,1.0
+55,Baseline_use_fft_False_and_no_gMLP,1.0,1.0,1.0,1.0,1.0
+56,Baseline_use_wavelets_False,1.0,1.0,1.0,1.0,1.0
+57,Baseline_use_wavelets_False_and_no_gMLP,1.0,1.0,1.0,1.0,1.0
+58,Baseline_activation_mish_<class 'torch.nn.modules.activation.Mish'>,1.0,1.0,1.0,1.0,1.0
+59,Baseline_activation_gelu_<class 'torch.nn.modules.activation.GELU'>,1.0,1.0,1.0,1.0,1.0
+60,Baseline_activation_relu_<class 'torch.nn.modules.activation.ReLU'>,1.0,1.0,1.0,1.0,1.0
+61,Baseline_use_kan_False,1.0,1.0,1.0,1.0,1.0
+62,Baseline_use_smoe_False,1.0,1.0,1.0,1.0,1.0
+63,Baseline_use_gc_False,1.0,1.0,1.0,1.0,1.0
+64,Baseline_use_lookahead_False,1.0,1.0,1.0,1.0,1.0
+65,Baseline,1.0,1.0,1.0,1.0,1.0
+66,Baseline_use_wavelets_False_and_use_fft_False,1.0,1.0,1.0,1.0,1.0
+67,Baseline_use_fft_False,1.0,1.0,1.0,1.0,1.0
+68,Baseline_use_fft_False_and_no_gMLP,1.0,1.0,1.0,1.0,1.0
+69,Baseline_use_wavelets_False,1.0,1.0,1.0,1.0,1.0
+70,Baseline_use_wavelets_False_and_no_gMLP,1.0,1.0,1.0,1.0,1.0
+71,Baseline_activation_mish_<class 'torch.nn.modules.activation.Mish'>,1.0,1.0,1.0,1.0,1.0
+72,Baseline_activation_gelu_<class 'torch.nn.modules.activation.GELU'>,1.0,1.0,1.0,1.0,1.0
+73,Baseline_activation_relu_<class 'torch.nn.modules.activation.ReLU'>,1.0,1.0,1.0,1.0,1.0
+74,Baseline_use_kan_False,1.0,1.0,1.0,1.0,1.0
+75,Baseline_use_smoe_False,1.0,1.0,1.0,1.0,1.0
+76,Baseline_use_gc_False,1.0,1.0,1.0,1.0,1.0
+77,Baseline_use_lookahead_False,1.0,1.0,1.0,1.0,1.0

@@ -1,0 +1,5 @@
+,Model,Balanced Accuracy,F1-Score (Macro),Precision (Macro),Recall (Macro),MCC
+0,Baseline_no_gMLP,1.0,1.0,1.0,1.0,1.0
+1,Baseline_no_gMLP,1.0,1.0,1.0,1.0,1.0
+2,Baseline_no_gMLP,1.0,1.0,1.0,1.0,1.0
+3,Baseline_no_gMLP,1.0,1.0,1.0,1.0,1.0

@@ -1,0 +1,1784 @@
+warning: refusing to reload ordenv; ORDENV_SETUP already set
+CUDA_VISIBLE_DEVICES=0
+Tue Jan 28 13:57:10 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 550.127.08             Driver Version: 550.127.08     CUDA Version: 12.4     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-40GB          Off |   00000000:07:00.0 Off |                    0 |
+| N/A   29C    P0             55W /  400W |       1MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/sklearn/metrics/_classification.py:2480: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/sklearn/metrics/_classification.py:2480: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/sklearn/metrics/_classification.py:2480: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/sklearn/metrics/_classification.py:2480: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+Set Global Seed
+
+FCGR Shape:
+Train data shape: (39162, 64, 64) (39162,)
+Test High-quality Data Shape: (53845, 64, 64) (53845,)
+Test Low-quality Data Shape (Post 2020): (3217, 64, 64) (3217,)
+*************************Fold:  0 **********************************
+
+Using: cuda:0!
+Total Trainable Parameters:  1034511.0
+Total Parameters:  1034511.0
+Epoch 1: BCE Loss: 2.6982
+KAN Loss: 0.0831, MH-SMoE (SA) Loss: 0.1357
+Val Loss: 2.7054 Val BA-Score:  0.079630 Training Time:  22.641137 Inference Time:  0.491979
+Epoch 2: BCE Loss: 1.9647
+KAN Loss: 0.0602, MH-SMoE (SA) Loss: 0.0541
+Val Loss: 1.6157 Val BA-Score:  0.317220 Training Time:  16.209905 Inference Time:  0.510463
+Epoch 3: BCE Loss: 1.0673
+KAN Loss: 0.0558, MH-SMoE (SA) Loss: 0.0441
+Val Loss: 1.1185 Val BA-Score:  0.517734 Training Time:  16.340565 Inference Time:  0.511276
+Epoch 4: BCE Loss: 0.6673
+KAN Loss: 0.0589, MH-SMoE (SA) Loss: 0.0399
+Val Loss: 0.5363 Val BA-Score:  0.718267 Training Time:  16.233288 Inference Time:  0.514494
+Epoch 5: BCE Loss: 0.3849
+KAN Loss: 0.0652, MH-SMoE (SA) Loss: 0.0374
+Val Loss: 0.2841 Val BA-Score:  0.757508 Training Time:  16.228162 Inference Time:  0.517789
+Epoch 6: BCE Loss: 0.2182
+KAN Loss: 0.0737, MH-SMoE (SA) Loss: 0.0357
+Val Loss: 0.1518 Val BA-Score:  0.995575 Training Time:  16.428446 Inference Time:  0.517078
+Epoch 7: BCE Loss: 0.1235
+KAN Loss: 0.0822, MH-SMoE (SA) Loss: 0.0345
+Val Loss: 0.0803 Val BA-Score:  0.984767 Training Time:  16.374618 Inference Time:  0.513302
+Epoch 8: BCE Loss: 0.0822
+KAN Loss: 0.0903, MH-SMoE (SA) Loss: 0.0336
+Val Loss: 0.0541 Val BA-Score:  1.000000 Training Time:  16.443317 Inference Time:  0.514328
+Epoch 9: BCE Loss: 0.0465
+KAN Loss: 0.0959, MH-SMoE (SA) Loss: 0.0328
+Val Loss: 0.0576 Val BA-Score:  1.000000 Training Time:  16.488696 Inference Time:  0.512778
+Epoch 10: BCE Loss: 0.0355
+KAN Loss: 0.1002, MH-SMoE (SA) Loss: 0.0324
+Val Loss: 0.0136 Val BA-Score:  1.000000 Training Time:  16.356201 Inference Time:  0.512579
+Epoch 11: BCE Loss: 0.0949
+KAN Loss: 0.1024, MH-SMoE (SA) Loss: 0.0324
+Val Loss: 0.0769 Val BA-Score:  0.998148 Training Time:  16.285179 Inference Time:  0.513846
+Epoch 12: BCE Loss: 0.0209
+KAN Loss: 0.1027, MH-SMoE (SA) Loss: 0.0320
+Val Loss: 0.0272 Val BA-Score:  1.000000 Training Time:  16.182041 Inference Time:  0.511205
+Epoch 13: BCE Loss: 0.0149
+KAN Loss: 0.1028, MH-SMoE (SA) Loss: 0.0315
+Val Loss: 0.0351 Val BA-Score:  1.000000 Training Time:  16.324068 Inference Time:  0.514493
+Epoch 14: BCE Loss: 0.0186
+KAN Loss: 0.1013, MH-SMoE (SA) Loss: 0.0315
+Val Loss: 0.0192 Val BA-Score:  1.000000 Training Time:  16.363129 Inference Time:  0.513846
+Epoch 15: BCE Loss: 0.0188
+KAN Loss: 0.0995, MH-SMoE (SA) Loss: 0.0315
+Val Loss: 0.0205 Val BA-Score:  1.000000 Training Time:  16.412293 Inference Time:  0.516705
+Epoch 16: BCE Loss: 0.0145
+KAN Loss: 0.0972, MH-SMoE (SA) Loss: 0.0314
+Val Loss: 0.0393 Val BA-Score:  1.000000 Training Time:  16.458121 Inference Time:  0.513364
+Epoch 17: BCE Loss: 0.0143
+KAN Loss: 0.0951, MH-SMoE (SA) Loss: 0.0312
+Val Loss: 0.0114 Val BA-Score:  1.000000 Training Time:  16.355748 Inference Time:  0.510181
+Epoch 18: BCE Loss: 0.0152
+KAN Loss: 0.0916, MH-SMoE (SA) Loss: 0.0312
+Val Loss: 0.0144 Val BA-Score:  1.000000 Training Time:  16.339325 Inference Time:  0.514055
+Epoch 19: BCE Loss: 0.0108
+KAN Loss: 0.0877, MH-SMoE (SA) Loss: 0.0311
+Val Loss: 0.0165 Val BA-Score:  1.000000 Training Time:  16.231760 Inference Time:  0.511870
+Epoch 20: BCE Loss: 0.0093
+KAN Loss: 0.0834, MH-SMoE (SA) Loss: 0.0309
+Val Loss: 0.0151 Val BA-Score:  0.999852 Training Time:  16.334024 Inference Time:  0.513686
+Epoch 21: BCE Loss: 0.0102
+KAN Loss: 0.0793, MH-SMoE (SA) Loss: 0.0310
+Val Loss: 0.0440 Val BA-Score:  1.000000 Training Time:  16.332718 Inference Time:  0.519779
+Epoch 22: BCE Loss: 0.0079
+KAN Loss: 0.0743, MH-SMoE (SA) Loss: 0.0308
+Val Loss: 0.0269 Val BA-Score:  1.000000 Training Time:  16.485915 Inference Time:  0.514857
+Epoch 23: BCE Loss: 0.0064
+KAN Loss: 0.0690, MH-SMoE (SA) Loss: 0.0306
+Val Loss: 0.0067 Val BA-Score:  1.000000 Training Time:  16.548049 Inference Time:  0.517061
+Epoch 24: BCE Loss: 0.0052
+KAN Loss: 0.0630, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0145 Val BA-Score:  0.999852 Training Time:  16.458306 Inference Time:  0.514706
+Epoch 25: BCE Loss: 0.0049
+KAN Loss: 0.0572, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0052 Val BA-Score:  0.999852 Training Time:  16.530820 Inference Time:  0.515197
+Epoch 26: BCE Loss: 0.0046
+KAN Loss: 0.0520, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0103 Val BA-Score:  0.999852 Training Time:  16.349221 Inference Time:  0.513677
+Epoch 27: BCE Loss: 0.0046
+KAN Loss: 0.0471, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0076 Val BA-Score:  0.999852 Training Time:  16.542843 Inference Time:  0.512440
+Epoch 28: BCE Loss: 0.0032
+KAN Loss: 0.0414, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0068 Val BA-Score:  0.999852 Training Time:  16.301341 Inference Time:  0.513333
+Epoch 29: BCE Loss: 0.0036
+KAN Loss: 0.0359, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0177 Val BA-Score:  1.000000 Training Time:  16.431157 Inference Time:  0.512139
+Epoch 30: BCE Loss: 0.0034
+KAN Loss: 0.0304, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0111 Val BA-Score:  0.999852 Training Time:  16.369037 Inference Time:  0.512836
+Epoch 31: BCE Loss: 0.0036
+KAN Loss: 0.0256, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0061 Val BA-Score:  0.999852 Training Time:  16.291477 Inference Time:  0.513236
+Epoch 32: BCE Loss: 0.0029
+KAN Loss: 0.0218, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0086 Val BA-Score:  0.999852 Training Time:  16.316574 Inference Time:  0.514165
+Epoch 33: BCE Loss: 0.0029
+KAN Loss: 0.0191, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0122 Val BA-Score:  0.999852 Training Time:  16.207628 Inference Time:  0.513453
+Epoch 34: BCE Loss: 0.0032
+KAN Loss: 0.0171, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0050 Val BA-Score:  0.999852 Training Time:  16.486454 Inference Time:  0.513222
+Epoch 35: BCE Loss: 0.0028
+KAN Loss: 0.0161, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0078 Val BA-Score:  0.999852 Training Time:  16.260812 Inference Time:  0.512993
+Baseline_no_gMLP Result:
+High Quality (Post 2020)
+1.0 1.0 1.0 1.0 1.0
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     19599
+           1       1.00      1.00      1.00        18
+           2       1.00      1.00      1.00     27177
+           3       1.00      1.00      1.00        68
+           4       1.00      1.00      1.00      6072
+           5       1.00      1.00      1.00       132
+           6       1.00      1.00      1.00       123
+           7       1.00      1.00      1.00        12
+           8       1.00      1.00      1.00       466
+           9       1.00      1.00      1.00        69
+          10       1.00      1.00      1.00        54
+          11       1.00      1.00      1.00        28
+          12       1.00      1.00      1.00        17
+          15       1.00      1.00      1.00        10
+
+    accuracy                           1.00     53845
+   macro avg       1.00      1.00      1.00     53845
+weighted avg       1.00      1.00      1.00     53845
+
+Low Quality (Post 2020)
+0.9994034967075103 0.8885927856722515 0.8888278052654084 0.8883586637400092 0.9988777418076933
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      1116
+           1       0.00       nan      0.00         0
+           2       1.00      1.00      1.00      1818
+           4       1.00      1.00      1.00       258
+           5       1.00      1.00      1.00         5
+           8       1.00      1.00      1.00        13
+          10       1.00      1.00      1.00         3
+          12       1.00      1.00      1.00         3
+          15       1.00      1.00      1.00         1
+
+    accuracy                           1.00      3217
+   macro avg       0.89      1.00      0.89      3217
+weighted avg       1.00      1.00      1.00      3217
+
+
+High Quality Post 2020
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  NaN  NaN      1
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  NaN  NaN      1
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  NaN  NaN      1
+
+Low Quality Post 2020
+                      mean  std  sem  count
+Model                                      
+Baseline_no_gMLP  0.888593  NaN  NaN      1
+                      mean  std  sem  count
+Model                                      
+Baseline_no_gMLP  0.999403  NaN  NaN      1
+                      mean  std  sem  count
+Model                                      
+Baseline_no_gMLP  0.998878  NaN  NaN      1
+*************************Fold:  1 **********************************
+
+Using: cuda:0!
+Total Trainable Parameters:  1034511.0
+Total Parameters:  1034511.0
+Epoch 1: BCE Loss: 2.6965
+KAN Loss: 0.0843, MH-SMoE (SA) Loss: 0.1369
+Val Loss: 2.6484 Val BA-Score:  0.055556 Training Time:  16.447882 Inference Time:  0.519007
+Epoch 2: BCE Loss: 2.2244
+KAN Loss: 0.0607, MH-SMoE (SA) Loss: 0.0558
+Val Loss: 2.0915 Val BA-Score:  0.205258 Training Time:  16.273484 Inference Time:  0.514343
+Epoch 3: BCE Loss: 1.2199
+KAN Loss: 0.0554, MH-SMoE (SA) Loss: 0.0432
+Val Loss: 1.0568 Val BA-Score:  0.415398 Training Time:  16.267051 Inference Time:  0.514139
+Epoch 4: BCE Loss: 0.6864
+KAN Loss: 0.0583, MH-SMoE (SA) Loss: 0.0393
+Val Loss: 0.6803 Val BA-Score:  0.607858 Training Time:  16.338845 Inference Time:  0.513748
+Epoch 5: BCE Loss: 0.3737
+KAN Loss: 0.0649, MH-SMoE (SA) Loss: 0.0372
+Val Loss: 0.2534 Val BA-Score:  0.943626 Training Time:  16.244264 Inference Time:  0.520931
+Epoch 6: BCE Loss: 0.1817
+KAN Loss: 0.0732, MH-SMoE (SA) Loss: 0.0355
+Val Loss: 0.1512 Val BA-Score:  0.972416 Training Time:  16.257596 Inference Time:  0.518722
+Epoch 7: BCE Loss: 0.1025
+KAN Loss: 0.0825, MH-SMoE (SA) Loss: 0.0341
+Val Loss: 0.0835 Val BA-Score:  0.941980 Training Time:  16.392780 Inference Time:  0.514954
+Epoch 8: BCE Loss: 0.0711
+KAN Loss: 0.0909, MH-SMoE (SA) Loss: 0.0334
+Val Loss: 0.9568 Val BA-Score:  0.774470 Training Time:  16.295939 Inference Time:  0.521506
+Epoch 9: BCE Loss: 0.0867
+KAN Loss: 0.0961, MH-SMoE (SA) Loss: 0.0333
+Val Loss: 0.0158 Val BA-Score:  0.999074 Training Time:  16.353588 Inference Time:  0.515242
+Epoch 10: BCE Loss: 0.0337
+KAN Loss: 0.1008, MH-SMoE (SA) Loss: 0.0324
+Val Loss: 0.0171 Val BA-Score:  0.998524 Training Time:  16.236413 Inference Time:  0.515735
+Epoch 11: BCE Loss: 0.0277
+KAN Loss: 0.1028, MH-SMoE (SA) Loss: 0.0325
+Val Loss: 0.0149 Val BA-Score:  0.998981 Training Time:  16.301541 Inference Time:  0.515740
+Epoch 12: BCE Loss: 0.0466
+KAN Loss: 0.1030, MH-SMoE (SA) Loss: 0.0322
+Val Loss: 0.0149 Val BA-Score:  0.999074 Training Time:  16.402650 Inference Time:  0.517396
+Epoch 13: BCE Loss: 0.0163
+KAN Loss: 0.1029, MH-SMoE (SA) Loss: 0.0317
+Val Loss: 0.0098 Val BA-Score:  0.998524 Training Time:  16.304338 Inference Time:  0.515253
+Epoch 14: BCE Loss: 0.0196
+KAN Loss: 0.1016, MH-SMoE (SA) Loss: 0.0318
+Val Loss: 0.0152 Val BA-Score:  0.998981 Training Time:  16.376688 Inference Time:  0.514929
+Epoch 15: BCE Loss: 0.0149
+KAN Loss: 0.1001, MH-SMoE (SA) Loss: 0.0314
+Val Loss: 0.0167 Val BA-Score:  0.998981 Training Time:  16.304821 Inference Time:  0.515228
+Epoch 16: BCE Loss: 0.0158
+KAN Loss: 0.0981, MH-SMoE (SA) Loss: 0.0314
+Val Loss: 0.0078 Val BA-Score:  0.998981 Training Time:  16.382600 Inference Time:  0.520608
+Epoch 17: BCE Loss: 0.0153
+KAN Loss: 0.0956, MH-SMoE (SA) Loss: 0.0313
+Val Loss: 0.0100 Val BA-Score:  0.998981 Training Time:  16.289442 Inference Time:  0.515941
+Epoch 18: BCE Loss: 0.0125
+KAN Loss: 0.0923, MH-SMoE (SA) Loss: 0.0311
+Val Loss: 0.0099 Val BA-Score:  0.998981 Training Time:  16.336592 Inference Time:  0.516496
+Epoch 19: BCE Loss: 0.0096
+KAN Loss: 0.0887, MH-SMoE (SA) Loss: 0.0310
+Val Loss: 0.0063 Val BA-Score:  0.998981 Training Time:  16.385858 Inference Time:  0.515923
+Epoch 20: BCE Loss: 0.0084
+KAN Loss: 0.0851, MH-SMoE (SA) Loss: 0.0309
+Val Loss: 0.0064 Val BA-Score:  0.999074 Training Time:  16.351506 Inference Time:  0.514791
+Epoch 21: BCE Loss: 0.0093
+KAN Loss: 0.0805, MH-SMoE (SA) Loss: 0.0310
+Val Loss: 0.0113 Val BA-Score:  0.998981 Training Time:  16.378523 Inference Time:  0.518673
+Epoch 22: BCE Loss: 0.0076
+KAN Loss: 0.0749, MH-SMoE (SA) Loss: 0.0307
+Val Loss: 0.0144 Val BA-Score:  0.998981 Training Time:  16.329893 Inference Time:  0.516578
+Epoch 23: BCE Loss: 0.0071
+KAN Loss: 0.0707, MH-SMoE (SA) Loss: 0.0306
+Val Loss: 0.0080 Val BA-Score:  0.998981 Training Time:  16.338302 Inference Time:  0.516984
+Epoch 24: BCE Loss: 0.0056
+KAN Loss: 0.0652, MH-SMoE (SA) Loss: 0.0306
+Val Loss: 0.0071 Val BA-Score:  0.998981 Training Time:  16.312858 Inference Time:  0.518408
+Epoch 25: BCE Loss: 0.0055
+KAN Loss: 0.0584, MH-SMoE (SA) Loss: 0.0306
+Val Loss: 0.0077 Val BA-Score:  0.998981 Training Time:  16.261574 Inference Time:  0.514522
+Epoch 26: BCE Loss: 0.0048
+KAN Loss: 0.0533, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0079 Val BA-Score:  0.998981 Training Time:  16.385294 Inference Time:  0.518996
+Epoch 27: BCE Loss: 0.0046
+KAN Loss: 0.0470, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0057 Val BA-Score:  0.998981 Training Time:  16.273462 Inference Time:  0.515849
+Epoch 28: BCE Loss: 0.0038
+KAN Loss: 0.0417, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0104 Val BA-Score:  0.998981 Training Time:  16.324911 Inference Time:  0.514453
+Epoch 29: BCE Loss: 0.0034
+KAN Loss: 0.0362, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0115 Val BA-Score:  0.998981 Training Time:  16.211700 Inference Time:  0.516344
+Epoch 30: BCE Loss: 0.0044
+KAN Loss: 0.0305, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0120 Val BA-Score:  0.998981 Training Time:  16.289932 Inference Time:  0.515031
+Epoch 31: BCE Loss: 0.0031
+KAN Loss: 0.0254, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0069 Val BA-Score:  0.998981 Training Time:  16.393919 Inference Time:  0.518231
+Epoch 32: BCE Loss: 0.0030
+KAN Loss: 0.0214, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0114 Val BA-Score:  0.998981 Training Time:  16.345449 Inference Time:  0.516381
+Epoch 33: BCE Loss: 0.0027
+KAN Loss: 0.0185, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0078 Val BA-Score:  0.998981 Training Time:  16.468234 Inference Time:  0.517964
+Epoch 34: BCE Loss: 0.0030
+KAN Loss: 0.0164, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0090 Val BA-Score:  0.998981 Training Time:  16.405616 Inference Time:  0.519427
+Epoch 35: BCE Loss: 0.0031
+KAN Loss: 0.0153, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0054 Val BA-Score:  0.998981 Training Time:  16.392690 Inference Time:  0.515638
+Baseline_no_gMLP Result:
+High Quality (Post 2020)
+1.0 1.0 1.0 1.0 1.0
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     19599
+           1       1.00      1.00      1.00        18
+           2       1.00      1.00      1.00     27177
+           3       1.00      1.00      1.00        68
+           4       1.00      1.00      1.00      6072
+           5       1.00      1.00      1.00       132
+           6       1.00      1.00      1.00       123
+           7       1.00      1.00      1.00        12
+           8       1.00      1.00      1.00       466
+           9       1.00      1.00      1.00        69
+          10       1.00      1.00      1.00        54
+          11       1.00      1.00      1.00        28
+          12       1.00      1.00      1.00        17
+          15       1.00      1.00      1.00        10
+
+    accuracy                           1.00     53845
+   macro avg       1.00      1.00      1.00     53845
+weighted avg       1.00      1.00      1.00     53845
+
+Low Quality (Post 2020)
+0.999515503875969 0.888673139158576 0.8888888888888888 0.888458225667528 0.9994389392160742
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      1116
+           2       1.00      1.00      1.00      1818
+           4       1.00      1.00      1.00       258
+           5       1.00      1.00      1.00         5
+           6       0.00       nan      0.00         0
+           8       1.00      1.00      1.00        13
+          10       1.00      1.00      1.00         3
+          12       1.00      1.00      1.00         3
+          15       1.00      1.00      1.00         1
+
+    accuracy                           1.00      3217
+   macro avg       0.89      1.00      0.89      3217
+weighted avg       1.00      1.00      1.00      3217
+
+
+High Quality Post 2020
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      2
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      2
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      2
+
+Low Quality Post 2020
+                      mean       std      sem  count
+Model                                               
+Baseline_no_gMLP  0.888633  0.000057  0.00004      2
+                     mean       std       sem  count
+Model                                               
+Baseline_no_gMLP  0.99946  0.000079  0.000056      2
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.999158  0.000397  0.000281      2
+*************************Fold:  2 **********************************
+
+Using: cuda:0!
+Total Trainable Parameters:  1034511.0
+Total Parameters:  1034511.0
+Epoch 1: BCE Loss: 2.6469
+KAN Loss: 0.0832, MH-SMoE (SA) Loss: 0.1630
+Val Loss: 2.6640 Val BA-Score:  0.055556 Training Time:  16.352408 Inference Time:  0.527023
+Epoch 2: BCE Loss: 2.1358
+KAN Loss: 0.0599, MH-SMoE (SA) Loss: 0.0657
+Val Loss: 1.9702 Val BA-Score:  0.248617 Training Time:  16.350300 Inference Time:  0.515756
+Epoch 3: BCE Loss: 1.1856
+KAN Loss: 0.0557, MH-SMoE (SA) Loss: 0.0467
+Val Loss: 1.0103 Val BA-Score:  0.503640 Training Time:  16.287500 Inference Time:  0.518004
+Epoch 4: BCE Loss: 0.7077
+KAN Loss: 0.0594, MH-SMoE (SA) Loss: 0.0425
+Val Loss: 0.7065 Val BA-Score:  0.740199 Training Time:  16.197449 Inference Time:  0.514819
+Epoch 5: BCE Loss: 0.4287
+KAN Loss: 0.0658, MH-SMoE (SA) Loss: 0.0385
+Val Loss: 0.4257 Val BA-Score:  0.897429 Training Time:  16.262640 Inference Time:  0.515444
+Epoch 6: BCE Loss: 0.2399
+KAN Loss: 0.0733, MH-SMoE (SA) Loss: 0.0360
+Val Loss: 0.1799 Val BA-Score:  0.950771 Training Time:  16.296096 Inference Time:  0.515272
+Epoch 7: BCE Loss: 0.1465
+KAN Loss: 0.0823, MH-SMoE (SA) Loss: 0.0348
+Val Loss: 0.1233 Val BA-Score:  0.999907 Training Time:  16.288690 Inference Time:  0.522361
+Epoch 8: BCE Loss: 0.1085
+KAN Loss: 0.0908, MH-SMoE (SA) Loss: 0.0337
+Val Loss: 0.1364 Val BA-Score:  0.993486 Training Time:  16.377779 Inference Time:  0.514556
+Epoch 9: BCE Loss: 0.0677
+KAN Loss: 0.0964, MH-SMoE (SA) Loss: 0.0330
+Val Loss: 0.0654 Val BA-Score:  0.967500 Training Time:  16.222009 Inference Time:  0.515978
+Epoch 10: BCE Loss: 0.0480
+KAN Loss: 0.1005, MH-SMoE (SA) Loss: 0.0329
+Val Loss: 0.0386 Val BA-Score:  1.000000 Training Time:  21.498614 Inference Time:  0.516472
+Epoch 11: BCE Loss: 0.0343
+KAN Loss: 0.1027, MH-SMoE (SA) Loss: 0.0322
+Val Loss: 0.0181 Val BA-Score:  1.000000 Training Time:  16.258090 Inference Time:  0.516739
+Epoch 12: BCE Loss: 0.0295
+KAN Loss: 0.1030, MH-SMoE (SA) Loss: 0.0320
+Val Loss: 0.0394 Val BA-Score:  1.000000 Training Time:  16.416682 Inference Time:  0.516366
+Epoch 13: BCE Loss: 0.0298
+KAN Loss: 0.1030, MH-SMoE (SA) Loss: 0.0321
+Val Loss: 0.0579 Val BA-Score:  0.999722 Training Time:  16.340027 Inference Time:  0.518409
+Epoch 14: BCE Loss: 0.0191
+KAN Loss: 0.1017, MH-SMoE (SA) Loss: 0.0317
+Val Loss: 0.0203 Val BA-Score:  1.000000 Training Time:  16.529897 Inference Time:  0.520788
+Epoch 15: BCE Loss: 0.0291
+KAN Loss: 0.1000, MH-SMoE (SA) Loss: 0.0316
+Val Loss: 0.0177 Val BA-Score:  1.000000 Training Time:  16.437312 Inference Time:  0.518528
+Epoch 16: BCE Loss: 0.0154
+KAN Loss: 0.0978, MH-SMoE (SA) Loss: 0.0312
+Val Loss: 0.0131 Val BA-Score:  1.000000 Training Time:  16.550256 Inference Time:  0.516809
+Epoch 17: BCE Loss: 0.0115
+KAN Loss: 0.0948, MH-SMoE (SA) Loss: 0.0312
+Val Loss: 0.0117 Val BA-Score:  1.000000 Training Time:  16.348044 Inference Time:  0.515315
+Epoch 18: BCE Loss: 0.0161
+KAN Loss: 0.0922, MH-SMoE (SA) Loss: 0.0312
+Val Loss: 0.0081 Val BA-Score:  1.000000 Training Time:  16.496165 Inference Time:  0.515787
+Epoch 19: BCE Loss: 0.0111
+KAN Loss: 0.0886, MH-SMoE (SA) Loss: 0.0310
+Val Loss: 0.0065 Val BA-Score:  1.000000 Training Time:  16.363658 Inference Time:  0.516006
+Epoch 20: BCE Loss: 0.0113
+KAN Loss: 0.0845, MH-SMoE (SA) Loss: 0.0311
+Val Loss: 0.0135 Val BA-Score:  1.000000 Training Time:  16.485174 Inference Time:  0.515918
+Epoch 21: BCE Loss: 0.0079
+KAN Loss: 0.0809, MH-SMoE (SA) Loss: 0.0309
+Val Loss: 0.0266 Val BA-Score:  1.000000 Training Time:  16.395618 Inference Time:  0.516083
+Epoch 22: BCE Loss: 0.0076
+KAN Loss: 0.0752, MH-SMoE (SA) Loss: 0.0308
+Val Loss: 0.0160 Val BA-Score:  0.999907 Training Time:  16.369988 Inference Time:  0.518427
+Epoch 23: BCE Loss: 0.0074
+KAN Loss: 0.0698, MH-SMoE (SA) Loss: 0.0307
+Val Loss: 0.0134 Val BA-Score:  0.999764 Training Time:  16.254950 Inference Time:  0.517816
+Epoch 24: BCE Loss: 0.0067
+KAN Loss: 0.0645, MH-SMoE (SA) Loss: 0.0306
+Val Loss: 0.0073 Val BA-Score:  1.000000 Training Time:  16.335868 Inference Time:  0.515364
+Epoch 25: BCE Loss: 0.0054
+KAN Loss: 0.0583, MH-SMoE (SA) Loss: 0.0306
+Val Loss: 0.0077 Val BA-Score:  1.000000 Training Time:  16.438992 Inference Time:  0.517247
+Epoch 26: BCE Loss: 0.0058
+KAN Loss: 0.0524, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0252 Val BA-Score:  1.000000 Training Time:  16.320146 Inference Time:  0.519607
+Epoch 27: BCE Loss: 0.0047
+KAN Loss: 0.0468, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0164 Val BA-Score:  1.000000 Training Time:  16.747433 Inference Time:  0.520974
+Epoch 28: BCE Loss: 0.0036
+KAN Loss: 0.0416, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0080 Val BA-Score:  1.000000 Training Time:  16.405295 Inference Time:  0.518229
+Epoch 29: BCE Loss: 0.0040
+KAN Loss: 0.0361, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0115 Val BA-Score:  1.000000 Training Time:  16.503514 Inference Time:  0.516172
+Epoch 30: BCE Loss: 0.0042
+KAN Loss: 0.0305, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0052 Val BA-Score:  1.000000 Training Time:  16.261324 Inference Time:  0.515837
+Epoch 31: BCE Loss: 0.0027
+KAN Loss: 0.0257, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0101 Val BA-Score:  1.000000 Training Time:  16.426523 Inference Time:  0.513198
+Epoch 32: BCE Loss: 0.0029
+KAN Loss: 0.0220, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0093 Val BA-Score:  1.000000 Training Time:  16.375367 Inference Time:  0.517501
+Epoch 33: BCE Loss: 0.0032
+KAN Loss: 0.0192, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0074 Val BA-Score:  1.000000 Training Time:  16.318790 Inference Time:  0.514439
+Epoch 34: BCE Loss: 0.0027
+KAN Loss: 0.0173, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0141 Val BA-Score:  1.000000 Training Time:  16.413557 Inference Time:  0.518107
+Epoch 35: BCE Loss: 0.0025
+KAN Loss: 0.0163, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0057 Val BA-Score:  1.000000 Training Time:  16.228767 Inference Time:  0.514451
+Baseline_no_gMLP Result:
+High Quality (Post 2020)
+1.0 1.0 1.0 1.0 1.0
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     19599
+           1       1.00      1.00      1.00        18
+           2       1.00      1.00      1.00     27177
+           3       1.00      1.00      1.00        68
+           4       1.00      1.00      1.00      6072
+           5       1.00      1.00      1.00       132
+           6       1.00      1.00      1.00       123
+           7       1.00      1.00      1.00        12
+           8       1.00      1.00      1.00       466
+           9       1.00      1.00      1.00        69
+          10       1.00      1.00      1.00        54
+          11       1.00      1.00      1.00        28
+          12       1.00      1.00      1.00        17
+          15       1.00      1.00      1.00        10
+
+    accuracy                           1.00     53845
+   macro avg       1.00      1.00      1.00     53845
+weighted avg       1.00      1.00      1.00     53845
+
+Low Quality (Post 2020)
+0.999515503875969 0.888673139158576 0.8888888888888888 0.888458225667528 0.9994389392160742
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      1116
+           2       1.00      1.00      1.00      1818
+           4       1.00      1.00      1.00       258
+           5       1.00      1.00      1.00         5
+           6       0.00       nan      0.00         0
+           8       1.00      1.00      1.00        13
+          10       1.00      1.00      1.00         3
+          12       1.00      1.00      1.00         3
+          15       1.00      1.00      1.00         1
+
+    accuracy                           1.00      3217
+   macro avg       0.89      1.00      0.89      3217
+weighted avg       1.00      1.00      1.00      3217
+
+
+High Quality Post 2020
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      3
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      3
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      3
+
+Low Quality Post 2020
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.888646  0.000046  0.000027      3
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.999478  0.000065  0.000037      3
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.999252  0.000324  0.000187      3
+*************************Fold:  3 **********************************
+
+Using: cuda:0!
+Total Trainable Parameters:  1034511.0
+Total Parameters:  1034511.0
+Epoch 1: BCE Loss: 2.6563
+KAN Loss: 0.0843, MH-SMoE (SA) Loss: 0.1545
+Val Loss: 2.6359 Val BA-Score:  0.103704 Training Time:  16.216957 Inference Time:  0.517467
+Epoch 2: BCE Loss: 2.0890
+KAN Loss: 0.0606, MH-SMoE (SA) Loss: 0.0609
+Val Loss: 1.9232 Val BA-Score:  0.212673 Training Time:  16.343339 Inference Time:  0.516615
+Epoch 3: BCE Loss: 1.2359
+KAN Loss: 0.0555, MH-SMoE (SA) Loss: 0.0456
+Val Loss: 1.1374 Val BA-Score:  0.374034 Training Time:  16.325599 Inference Time:  0.536679
+Epoch 4: BCE Loss: 0.7325
+KAN Loss: 0.0591, MH-SMoE (SA) Loss: 0.0411
+Val Loss: 0.6394 Val BA-Score:  0.686753 Training Time:  16.864018 Inference Time:  0.519135
+Epoch 5: BCE Loss: 0.4013
+KAN Loss: 0.0653, MH-SMoE (SA) Loss: 0.0389
+Val Loss: 0.3641 Val BA-Score:  0.960659 Training Time:  16.263986 Inference Time:  0.524156
+Epoch 6: BCE Loss: 0.2104
+KAN Loss: 0.0742, MH-SMoE (SA) Loss: 0.0360
+Val Loss: 0.1872 Val BA-Score:  0.938894 Training Time:  16.913227 Inference Time:  0.541288
+Epoch 7: BCE Loss: 0.1191
+KAN Loss: 0.0824, MH-SMoE (SA) Loss: 0.0345
+Val Loss: 0.0476 Val BA-Score:  0.999815 Training Time:  16.391828 Inference Time:  0.515918
+Epoch 8: BCE Loss: 0.0801
+KAN Loss: 0.0904, MH-SMoE (SA) Loss: 0.0335
+Val Loss: 0.0448 Val BA-Score:  0.999815 Training Time:  16.332429 Inference Time:  0.547552
+Epoch 9: BCE Loss: 0.0459
+KAN Loss: 0.0965, MH-SMoE (SA) Loss: 0.0332
+Val Loss: 0.0479 Val BA-Score:  0.971111 Training Time:  16.558746 Inference Time:  0.517006
+Epoch 10: BCE Loss: 0.0379
+KAN Loss: 0.1009, MH-SMoE (SA) Loss: 0.0327
+Val Loss: 0.0244 Val BA-Score:  0.999815 Training Time:  16.547381 Inference Time:  0.552757
+Epoch 11: BCE Loss: 0.0304
+KAN Loss: 0.1030, MH-SMoE (SA) Loss: 0.0324
+Val Loss: 0.0372 Val BA-Score:  0.999815 Training Time:  16.649784 Inference Time:  0.519916
+Epoch 12: BCE Loss: 0.0208
+KAN Loss: 0.1035, MH-SMoE (SA) Loss: 0.0323
+Val Loss: 0.0246 Val BA-Score:  0.999815 Training Time:  16.656224 Inference Time:  0.536556
+Epoch 13: BCE Loss: 0.0211
+KAN Loss: 0.1034, MH-SMoE (SA) Loss: 0.0317
+Val Loss: 0.0251 Val BA-Score:  0.998889 Training Time:  16.614054 Inference Time:  0.516556
+Epoch 14: BCE Loss: 0.0169
+KAN Loss: 0.1023, MH-SMoE (SA) Loss: 0.0316
+Val Loss: 0.0085 Val BA-Score:  0.999815 Training Time:  16.811114 Inference Time:  0.526264
+Epoch 15: BCE Loss: 0.0143
+KAN Loss: 0.1004, MH-SMoE (SA) Loss: 0.0316
+Val Loss: 0.0139 Val BA-Score:  0.999815 Training Time:  16.303799 Inference Time:  0.521826
+Epoch 16: BCE Loss: 0.0135
+KAN Loss: 0.0982, MH-SMoE (SA) Loss: 0.0312
+Val Loss: 0.0137 Val BA-Score:  0.999815 Training Time:  16.332545 Inference Time:  0.514337
+Epoch 17: BCE Loss: 0.0126
+KAN Loss: 0.0953, MH-SMoE (SA) Loss: 0.0312
+Val Loss: 0.0137 Val BA-Score:  0.999815 Training Time:  16.277343 Inference Time:  0.516797
+Epoch 18: BCE Loss: 0.0117
+KAN Loss: 0.0928, MH-SMoE (SA) Loss: 0.0315
+Val Loss: 0.0211 Val BA-Score:  0.999815 Training Time:  16.454801 Inference Time:  0.618322
+Epoch 19: BCE Loss: 0.0102
+KAN Loss: 0.0888, MH-SMoE (SA) Loss: 0.0309
+Val Loss: 0.0180 Val BA-Score:  0.999815 Training Time:  16.455473 Inference Time:  0.515921
+Epoch 20: BCE Loss: 0.0081
+KAN Loss: 0.0849, MH-SMoE (SA) Loss: 0.0310
+Val Loss: 0.0097 Val BA-Score:  0.999815 Training Time:  16.505577 Inference Time:  0.519275
+Epoch 21: BCE Loss: 0.0077
+KAN Loss: 0.0808, MH-SMoE (SA) Loss: 0.0308
+Val Loss: 0.0109 Val BA-Score:  0.999815 Training Time:  16.536219 Inference Time:  0.516162
+Epoch 22: BCE Loss: 0.0040
+KAN Loss: 0.0756, MH-SMoE (SA) Loss: 0.0307
+Val Loss: 0.0121 Val BA-Score:  0.999815 Training Time:  16.447489 Inference Time:  0.515123
+Epoch 23: BCE Loss: 0.0065
+KAN Loss: 0.0701, MH-SMoE (SA) Loss: 0.0307
+Val Loss: 0.0110 Val BA-Score:  0.999815 Training Time:  16.544803 Inference Time:  0.515192
+Epoch 24: BCE Loss: 0.0058
+KAN Loss: 0.0650, MH-SMoE (SA) Loss: 0.0306
+Val Loss: 0.0118 Val BA-Score:  0.999815 Training Time:  16.444720 Inference Time:  0.515189
+Epoch 25: BCE Loss: 0.0049
+KAN Loss: 0.0594, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0106 Val BA-Score:  0.999815 Training Time:  16.522215 Inference Time:  0.516316
+Epoch 26: BCE Loss: 0.0041
+KAN Loss: 0.0532, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0091 Val BA-Score:  0.999815 Training Time:  16.497205 Inference Time:  0.516539
+Epoch 27: BCE Loss: 0.0033
+KAN Loss: 0.0472, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0079 Val BA-Score:  0.999815 Training Time:  16.353982 Inference Time:  0.514971
+Epoch 28: BCE Loss: 0.0035
+KAN Loss: 0.0422, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0093 Val BA-Score:  0.999815 Training Time:  16.556249 Inference Time:  0.515691
+Epoch 29: BCE Loss: 0.0036
+KAN Loss: 0.0371, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0103 Val BA-Score:  0.999815 Training Time:  16.406134 Inference Time:  0.515571
+Epoch 30: BCE Loss: 0.0022
+KAN Loss: 0.0313, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0111 Val BA-Score:  0.999815 Training Time:  16.594069 Inference Time:  0.515565
+Epoch 31: BCE Loss: 0.0028
+KAN Loss: 0.0261, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0106 Val BA-Score:  0.999815 Training Time:  16.405140 Inference Time:  0.514325
+Epoch 32: BCE Loss: 0.0022
+KAN Loss: 0.0218, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0159 Val BA-Score:  0.999815 Training Time:  16.686369 Inference Time:  0.515232
+Epoch 33: BCE Loss: 0.0019
+KAN Loss: 0.0187, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0132 Val BA-Score:  0.999815 Training Time:  16.491735 Inference Time:  0.517891
+Epoch 34: BCE Loss: 0.0020
+KAN Loss: 0.0166, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0104 Val BA-Score:  0.999815 Training Time:  16.456525 Inference Time:  0.515031
+Epoch 35: BCE Loss: 0.0020
+KAN Loss: 0.0154, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0094 Val BA-Score:  0.999815 Training Time:  16.525353 Inference Time:  0.516557
+Baseline_no_gMLP Result:
+High Quality (Post 2020)
+1.0 1.0 1.0 1.0 1.0
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     19599
+           1       1.00      1.00      1.00        18
+           2       1.00      1.00      1.00     27177
+           3       1.00      1.00      1.00        68
+           4       1.00      1.00      1.00      6072
+           5       1.00      1.00      1.00       132
+           6       1.00      1.00      1.00       123
+           7       1.00      1.00      1.00        12
+           8       1.00      1.00      1.00       466
+           9       1.00      1.00      1.00        69
+          10       1.00      1.00      1.00        54
+          11       1.00      1.00      1.00        28
+          12       1.00      1.00      1.00        17
+          15       1.00      1.00      1.00        10
+
+    accuracy                           1.00     53845
+   macro avg       1.00      1.00      1.00     53845
+weighted avg       1.00      1.00      1.00     53845
+
+Low Quality (Post 2020)
+0.999515503875969 0.9951276519237684 0.9910714285714286 0.999515503875969 0.9994389378445424
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      1116
+           2       1.00      1.00      1.00      1818
+           4       1.00      1.00      1.00       258
+           5       1.00      1.00      1.00         5
+           8       0.93      1.00      0.96        13
+          10       1.00      1.00      1.00         3
+          12       1.00      1.00      1.00         3
+          15       1.00      1.00      1.00         1
+
+    accuracy                           1.00      3217
+   macro avg       0.99      1.00      1.00      3217
+weighted avg       1.00      1.00      1.00      3217
+
+
+High Quality Post 2020
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      4
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      4
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      4
+
+Low Quality Post 2020
+                      mean       std      sem  count
+Model                                               
+Baseline_no_gMLP  0.915267  0.053241  0.02662      4
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.999488  0.000056  0.000028      4
+                      mean       std      sem  count
+Model                                               
+Baseline_no_gMLP  0.999299  0.000281  0.00014      4
+*************************Fold:  4 **********************************
+
+Using: cuda:0!
+Total Trainable Parameters:  1034511.0
+Total Parameters:  1034511.0
+Epoch 1: BCE Loss: 2.7165
+KAN Loss: 0.0848, MH-SMoE (SA) Loss: 0.1328
+Val Loss: 2.7217 Val BA-Score:  0.055556 Training Time:  16.543397 Inference Time:  0.518207
+Epoch 2: BCE Loss: 2.0758
+KAN Loss: 0.0616, MH-SMoE (SA) Loss: 0.0553
+Val Loss: 1.8216 Val BA-Score:  0.255268 Training Time:  16.257962 Inference Time:  0.514254
+Epoch 3: BCE Loss: 1.0904
+KAN Loss: 0.0565, MH-SMoE (SA) Loss: 0.0439
+Val Loss: 1.1048 Val BA-Score:  0.441554 Training Time:  16.232438 Inference Time:  0.515465
+Epoch 4: BCE Loss: 0.6178
+KAN Loss: 0.0596, MH-SMoE (SA) Loss: 0.0413
+Val Loss: 0.5523 Val BA-Score:  0.779651 Training Time:  16.314017 Inference Time:  0.516129
+Epoch 5: BCE Loss: 0.3459
+KAN Loss: 0.0657, MH-SMoE (SA) Loss: 0.0379
+Val Loss: 0.2974 Val BA-Score:  0.887224 Training Time:  16.288507 Inference Time:  0.515354
+Epoch 6: BCE Loss: 0.1918
+KAN Loss: 0.0731, MH-SMoE (SA) Loss: 0.0355
+Val Loss: 0.1524 Val BA-Score:  0.995265 Training Time:  16.417948 Inference Time:  0.516295
+Epoch 7: BCE Loss: 0.1203
+KAN Loss: 0.0811, MH-SMoE (SA) Loss: 0.0348
+Val Loss: 0.0534 Val BA-Score:  0.996491 Training Time:  16.237113 Inference Time:  0.515754
+Epoch 8: BCE Loss: 0.0828
+KAN Loss: 0.0895, MH-SMoE (SA) Loss: 0.0337
+Val Loss: 0.0678 Val BA-Score:  0.997075 Training Time:  16.339559 Inference Time:  0.515087
+Epoch 9: BCE Loss: 0.0663
+KAN Loss: 0.0962, MH-SMoE (SA) Loss: 0.0330
+Val Loss: 0.0346 Val BA-Score:  0.997848 Training Time:  16.385616 Inference Time:  0.515579
+Epoch 10: BCE Loss: 0.0449
+KAN Loss: 0.1011, MH-SMoE (SA) Loss: 0.0329
+Val Loss: 0.0262 Val BA-Score:  0.998148 Training Time:  16.286204 Inference Time:  0.508157
+Epoch 11: BCE Loss: 0.0381
+KAN Loss: 0.1038, MH-SMoE (SA) Loss: 0.0323
+Val Loss: 0.0338 Val BA-Score:  0.998148 Training Time:  16.530460 Inference Time:  0.516296
+Epoch 12: BCE Loss: 0.0231
+KAN Loss: 0.1034, MH-SMoE (SA) Loss: 0.0318
+Val Loss: 0.0279 Val BA-Score:  0.998148 Training Time:  16.299185 Inference Time:  0.515761
+Epoch 13: BCE Loss: 0.0253
+KAN Loss: 0.1029, MH-SMoE (SA) Loss: 0.0317
+Val Loss: 0.0213 Val BA-Score:  0.998148 Training Time:  16.361478 Inference Time:  0.515836
+Epoch 14: BCE Loss: 0.0202
+KAN Loss: 0.1016, MH-SMoE (SA) Loss: 0.0314
+Val Loss: 0.0121 Val BA-Score:  0.998148 Training Time:  16.292780 Inference Time:  0.518447
+Epoch 15: BCE Loss: 0.0172
+KAN Loss: 0.1001, MH-SMoE (SA) Loss: 0.0315
+Val Loss: 0.0204 Val BA-Score:  0.998148 Training Time:  16.557740 Inference Time:  0.516209
+Epoch 16: BCE Loss: 0.0154
+KAN Loss: 0.0978, MH-SMoE (SA) Loss: 0.0312
+Val Loss: 0.0227 Val BA-Score:  0.998148 Training Time:  16.533565 Inference Time:  0.516830
+Epoch 17: BCE Loss: 0.0159
+KAN Loss: 0.0951, MH-SMoE (SA) Loss: 0.0313
+Val Loss: 0.0080 Val BA-Score:  0.998148 Training Time:  16.538074 Inference Time:  0.517461
+Epoch 18: BCE Loss: 0.0096
+KAN Loss: 0.0924, MH-SMoE (SA) Loss: 0.0311
+Val Loss: 0.0101 Val BA-Score:  0.998148 Training Time:  16.638919 Inference Time:  0.516976
+Epoch 19: BCE Loss: 0.0125
+KAN Loss: 0.0886, MH-SMoE (SA) Loss: 0.0311
+Val Loss: 0.0281 Val BA-Score:  0.998056 Training Time:  16.560504 Inference Time:  0.517314
+Epoch 20: BCE Loss: 0.0116
+KAN Loss: 0.0846, MH-SMoE (SA) Loss: 0.0309
+Val Loss: 0.0109 Val BA-Score:  0.998148 Training Time:  16.355071 Inference Time:  0.511666
+Epoch 21: BCE Loss: 0.0081
+KAN Loss: 0.0798, MH-SMoE (SA) Loss: 0.0308
+Val Loss: 0.0080 Val BA-Score:  0.998148 Training Time:  16.600647 Inference Time:  0.517253
+Epoch 22: BCE Loss: 0.0087
+KAN Loss: 0.0754, MH-SMoE (SA) Loss: 0.0307
+Val Loss: 0.0172 Val BA-Score:  0.998148 Training Time:  16.331507 Inference Time:  0.517288
+Epoch 23: BCE Loss: 0.0083
+KAN Loss: 0.0703, MH-SMoE (SA) Loss: 0.0306
+Val Loss: 0.0098 Val BA-Score:  0.998148 Training Time:  16.610635 Inference Time:  0.517614
+Epoch 24: BCE Loss: 0.0053
+KAN Loss: 0.0646, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0071 Val BA-Score:  0.998148 Training Time:  16.276328 Inference Time:  0.514632
+Epoch 25: BCE Loss: 0.0055
+KAN Loss: 0.0584, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0115 Val BA-Score:  0.998148 Training Time:  16.572183 Inference Time:  0.516495
+Epoch 26: BCE Loss: 0.0040
+KAN Loss: 0.0522, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0105 Val BA-Score:  0.998148 Training Time:  16.378197 Inference Time:  0.516878
+Epoch 27: BCE Loss: 0.0049
+KAN Loss: 0.0472, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0359 Val BA-Score:  0.998148 Training Time:  16.473238 Inference Time:  0.515081
+Epoch 28: BCE Loss: 0.0036
+KAN Loss: 0.0414, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0123 Val BA-Score:  0.998148 Training Time:  16.376747 Inference Time:  0.516727
+Epoch 29: BCE Loss: 0.0038
+KAN Loss: 0.0359, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0075 Val BA-Score:  0.998148 Training Time:  16.323550 Inference Time:  0.518560
+Epoch 30: BCE Loss: 0.0030
+KAN Loss: 0.0304, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0090 Val BA-Score:  0.998148 Training Time:  16.317296 Inference Time:  0.516652
+Epoch 31: BCE Loss: 0.0031
+KAN Loss: 0.0256, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0060 Val BA-Score:  0.998148 Training Time:  16.204070 Inference Time:  0.515452
+Epoch 32: BCE Loss: 0.0031
+KAN Loss: 0.0219, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0090 Val BA-Score:  0.998148 Training Time:  16.570429 Inference Time:  0.515452
+Epoch 33: BCE Loss: 0.0026
+KAN Loss: 0.0191, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0096 Val BA-Score:  0.998148 Training Time:  16.204512 Inference Time:  0.515262
+Epoch 34: BCE Loss: 0.0027
+KAN Loss: 0.0171, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0100 Val BA-Score:  0.998148 Training Time:  16.493812 Inference Time:  0.516080
+Epoch 35: BCE Loss: 0.0027
+KAN Loss: 0.0161, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0110 Val BA-Score:  0.998148 Training Time:  16.462754 Inference Time:  0.514986
+Baseline_no_gMLP Result:
+High Quality (Post 2020)
+1.0 1.0 1.0 1.0 1.0
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     19599
+           1       1.00      1.00      1.00        18
+           2       1.00      1.00      1.00     27177
+           3       1.00      1.00      1.00        68
+           4       1.00      1.00      1.00      6072
+           5       1.00      1.00      1.00       132
+           6       1.00      1.00      1.00       123
+           7       1.00      1.00      1.00        12
+           8       1.00      1.00      1.00       466
+           9       1.00      1.00      1.00        69
+          10       1.00      1.00      1.00        54
+          11       1.00      1.00      1.00        28
+          12       1.00      1.00      1.00        17
+          15       1.00      1.00      1.00        10
+
+    accuracy                           1.00     53845
+   macro avg       1.00      1.00      1.00     53845
+weighted avg       1.00      1.00      1.00     53845
+
+Low Quality (Post 2020)
+0.9994034967075103 0.7997610022933683 0.8 0.7995227973660082 0.9988781232616378
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      1116
+           2       1.00      1.00      1.00      1818
+           4       1.00      1.00      1.00       258
+           5       1.00      1.00      1.00         5
+           7       0.00       nan      0.00         0
+           8       1.00      1.00      1.00        13
+           9       0.00       nan      0.00         0
+          10       1.00      1.00      1.00         3
+          12       1.00      1.00      1.00         3
+          15       1.00      1.00      1.00         1
+
+    accuracy                           1.00      3217
+   macro avg       0.80      1.00      0.80      3217
+weighted avg       1.00      1.00      1.00      3217
+
+
+High Quality Post 2020
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      5
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      5
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      5
+
+Low Quality Post 2020
+                      mean      std       sem  count
+Model                                               
+Baseline_no_gMLP  0.892166  0.06924  0.030965      5
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.999471  0.000061  0.000027      5
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.999215  0.000307  0.000137      5
+*************************Fold:  5 **********************************
+
+Using: cuda:0!
+Total Trainable Parameters:  1034511.0
+Total Parameters:  1034511.0
+Epoch 1: BCE Loss: 2.6241
+KAN Loss: 0.0841, MH-SMoE (SA) Loss: 0.1597
+Val Loss: 2.6680 Val BA-Score:  0.055556 Training Time:  16.429829 Inference Time:  0.521515
+Epoch 2: BCE Loss: 2.2537
+KAN Loss: 0.0599, MH-SMoE (SA) Loss: 0.0641
+Val Loss: 2.1183 Val BA-Score:  0.249409 Training Time:  16.411970 Inference Time:  0.515665
+Epoch 3: BCE Loss: 1.2853
+KAN Loss: 0.0554, MH-SMoE (SA) Loss: 0.0456
+Val Loss: 1.1841 Val BA-Score:  0.406125 Training Time:  16.453096 Inference Time:  0.516827
+Epoch 4: BCE Loss: 0.7611
+KAN Loss: 0.0587, MH-SMoE (SA) Loss: 0.0431
+Val Loss: 0.6562 Val BA-Score:  0.700487 Training Time:  16.454443 Inference Time:  0.515530
+Epoch 5: BCE Loss: 0.4262
+KAN Loss: 0.0647, MH-SMoE (SA) Loss: 0.0388
+Val Loss: 0.3497 Val BA-Score:  0.993582 Training Time:  16.586802 Inference Time:  0.516840
+Epoch 6: BCE Loss: 0.2192
+KAN Loss: 0.0727, MH-SMoE (SA) Loss: 0.0367
+Val Loss: 0.1546 Val BA-Score:  0.994534 Training Time:  16.517105 Inference Time:  0.517328
+Epoch 7: BCE Loss: 0.1195
+KAN Loss: 0.0808, MH-SMoE (SA) Loss: 0.0350
+Val Loss: 0.1196 Val BA-Score:  0.998589 Training Time:  16.523211 Inference Time:  0.514426
+Epoch 8: BCE Loss: 0.0779
+KAN Loss: 0.0893, MH-SMoE (SA) Loss: 0.0340
+Val Loss: 0.0484 Val BA-Score:  0.998818 Training Time:  16.601436 Inference Time:  0.517083
+Epoch 9: BCE Loss: 0.0486
+KAN Loss: 0.0960, MH-SMoE (SA) Loss: 0.0331
+Val Loss: 0.0951 Val BA-Score:  0.996622 Training Time:  16.411839 Inference Time:  0.518844
+Epoch 10: BCE Loss: 0.0479
+KAN Loss: 0.1013, MH-SMoE (SA) Loss: 0.0328
+Val Loss: 0.0316 Val BA-Score:  1.000000 Training Time:  16.611675 Inference Time:  0.522817
+Epoch 11: BCE Loss: 0.0311
+KAN Loss: 0.1039, MH-SMoE (SA) Loss: 0.0323
+Val Loss: 0.0328 Val BA-Score:  1.000000 Training Time:  16.471432 Inference Time:  0.520483
+Epoch 12: BCE Loss: 0.0255
+KAN Loss: 0.1041, MH-SMoE (SA) Loss: 0.0320
+Val Loss: 0.0054 Val BA-Score:  1.000000 Training Time:  16.711709 Inference Time:  0.517348
+Epoch 13: BCE Loss: 0.0239
+KAN Loss: 0.1035, MH-SMoE (SA) Loss: 0.0317
+Val Loss: 0.0217 Val BA-Score:  1.000000 Training Time:  16.315141 Inference Time:  0.517622
+Epoch 14: BCE Loss: 0.0255
+KAN Loss: 0.1019, MH-SMoE (SA) Loss: 0.0315
+Val Loss: 0.0078 Val BA-Score:  0.999700 Training Time:  16.598568 Inference Time:  0.517896
+Epoch 15: BCE Loss: 0.0170
+KAN Loss: 0.1003, MH-SMoE (SA) Loss: 0.0313
+Val Loss: 0.0307 Val BA-Score:  1.000000 Training Time:  16.442178 Inference Time:  0.519788
+Epoch 16: BCE Loss: 0.0190
+KAN Loss: 0.0982, MH-SMoE (SA) Loss: 0.0314
+Val Loss: 0.0167 Val BA-Score:  0.999074 Training Time:  16.489557 Inference Time:  0.499680
+Epoch 17: BCE Loss: 0.0160
+KAN Loss: 0.0950, MH-SMoE (SA) Loss: 0.0311
+Val Loss: 0.0093 Val BA-Score:  1.000000 Training Time:  16.448771 Inference Time:  0.520890
+Epoch 18: BCE Loss: 0.0153
+KAN Loss: 0.0935, MH-SMoE (SA) Loss: 0.0311
+Val Loss: 0.0284 Val BA-Score:  0.999399 Training Time:  16.518257 Inference Time:  0.517692
+Epoch 19: BCE Loss: 0.0100
+KAN Loss: 0.0887, MH-SMoE (SA) Loss: 0.0310
+Val Loss: 0.0049 Val BA-Score:  1.000000 Training Time:  16.462877 Inference Time:  0.517182
+Epoch 20: BCE Loss: 0.0100
+KAN Loss: 0.0849, MH-SMoE (SA) Loss: 0.0308
+Val Loss: 0.0184 Val BA-Score:  1.000000 Training Time:  16.502769 Inference Time:  0.515899
+Epoch 21: BCE Loss: 0.0098
+KAN Loss: 0.0809, MH-SMoE (SA) Loss: 0.0308
+Val Loss: 0.0295 Val BA-Score:  1.000000 Training Time:  16.412818 Inference Time:  0.517017
+Epoch 22: BCE Loss: 0.0085
+KAN Loss: 0.0756, MH-SMoE (SA) Loss: 0.0307
+Val Loss: 0.0139 Val BA-Score:  1.000000 Training Time:  16.573796 Inference Time:  0.518343
+Epoch 23: BCE Loss: 0.0075
+KAN Loss: 0.0709, MH-SMoE (SA) Loss: 0.0307
+Val Loss: 0.1025 Val BA-Score:  1.000000 Training Time:  16.369713 Inference Time:  0.515355
+Epoch 24: BCE Loss: 0.0049
+KAN Loss: 0.0649, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0082 Val BA-Score:  1.000000 Training Time:  16.562114 Inference Time:  0.515385
+Epoch 25: BCE Loss: 0.0053
+KAN Loss: 0.0592, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0066 Val BA-Score:  1.000000 Training Time:  16.378699 Inference Time:  0.515043
+Epoch 26: BCE Loss: 0.0047
+KAN Loss: 0.0541, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0104 Val BA-Score:  1.000000 Training Time:  16.527131 Inference Time:  0.517368
+Epoch 27: BCE Loss: 0.0053
+KAN Loss: 0.0483, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0168 Val BA-Score:  1.000000 Training Time:  16.363976 Inference Time:  0.515979
+Epoch 28: BCE Loss: 0.0038
+KAN Loss: 0.0434, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0168 Val BA-Score:  1.000000 Training Time:  16.532165 Inference Time:  0.517868
+Epoch 29: BCE Loss: 0.0037
+KAN Loss: 0.0380, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0146 Val BA-Score:  1.000000 Training Time:  16.456091 Inference Time:  0.516257
+Epoch 30: BCE Loss: 0.0034
+KAN Loss: 0.0324, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0340 Val BA-Score:  1.000000 Training Time:  16.506623 Inference Time:  0.516193
+Epoch 31: BCE Loss: 0.0032
+KAN Loss: 0.0276, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0272 Val BA-Score:  1.000000 Training Time:  16.441209 Inference Time:  0.514616
+Epoch 32: BCE Loss: 0.0029
+KAN Loss: 0.0237, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0094 Val BA-Score:  1.000000 Training Time:  16.517985 Inference Time:  0.517946
+Epoch 33: BCE Loss: 0.0028
+KAN Loss: 0.0209, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0060 Val BA-Score:  1.000000 Training Time:  16.452727 Inference Time:  0.514810
+Epoch 34: BCE Loss: 0.0027
+KAN Loss: 0.0189, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0115 Val BA-Score:  1.000000 Training Time:  16.482018 Inference Time:  0.517168
+Epoch 35: BCE Loss: 0.0027
+KAN Loss: 0.0178, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0138 Val BA-Score:  1.000000 Training Time:  16.418610 Inference Time:  0.514813
+Baseline_no_gMLP Result:
+High Quality (Post 2020)
+1.0 1.0 1.0 1.0 1.0
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     19599
+           1       1.00      1.00      1.00        18
+           2       1.00      1.00      1.00     27177
+           3       1.00      1.00      1.00        68
+           4       1.00      1.00      1.00      6072
+           5       1.00      1.00      1.00       132
+           6       1.00      1.00      1.00       123
+           7       1.00      1.00      1.00        12
+           8       1.00      1.00      1.00       466
+           9       1.00      1.00      1.00        69
+          10       1.00      1.00      1.00        54
+          11       1.00      1.00      1.00        28
+          12       1.00      1.00      1.00        17
+          15       1.00      1.00      1.00        10
+
+    accuracy                           1.00     53845
+   macro avg       1.00      1.00      1.00     53845
+weighted avg       1.00      1.00      1.00     53845
+
+Low Quality (Post 2020)
+1.0 1.0 1.0 1.0 1.0
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      1116
+           2       1.00      1.00      1.00      1818
+           4       1.00      1.00      1.00       258
+           5       1.00      1.00      1.00         5
+           8       1.00      1.00      1.00        13
+          10       1.00      1.00      1.00         3
+          12       1.00      1.00      1.00         3
+          15       1.00      1.00      1.00         1
+
+    accuracy                           1.00      3217
+   macro avg       1.00      1.00      1.00      3217
+weighted avg       1.00      1.00      1.00      3217
+
+
+High Quality Post 2020
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      6
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      6
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      6
+
+Low Quality Post 2020
+                      mean       std      sem  count
+Model                                               
+Baseline_no_gMLP  0.910138  0.075983  0.03102      6
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.999559  0.000223  0.000091      6
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.999345  0.000422  0.000172      6
+*************************Fold:  6 **********************************
+
+Using: cuda:0!
+Total Trainable Parameters:  1034511.0
+Total Parameters:  1034511.0
+Epoch 1: BCE Loss: 2.6587
+KAN Loss: 0.0844, MH-SMoE (SA) Loss: 0.1508
+Val Loss: 2.5993 Val BA-Score:  0.122685 Training Time:  16.271340 Inference Time:  0.519210
+Epoch 2: BCE Loss: 1.9562
+KAN Loss: 0.0605, MH-SMoE (SA) Loss: 0.0648
+Val Loss: 1.8078 Val BA-Score:  0.264535 Training Time:  16.364007 Inference Time:  0.516295
+Epoch 3: BCE Loss: 1.1285
+KAN Loss: 0.0555, MH-SMoE (SA) Loss: 0.0462
+Val Loss: 1.1499 Val BA-Score:  0.373950 Training Time:  16.399160 Inference Time:  0.517592
+Epoch 4: BCE Loss: 0.6954
+KAN Loss: 0.0591, MH-SMoE (SA) Loss: 0.0415
+Val Loss: 0.6846 Val BA-Score:  0.743243 Training Time:  16.525640 Inference Time:  0.518553
+Epoch 5: BCE Loss: 0.4178
+KAN Loss: 0.0651, MH-SMoE (SA) Loss: 0.0390
+Val Loss: 0.3484 Val BA-Score:  0.919201 Training Time:  16.447541 Inference Time:  0.519652
+Epoch 6: BCE Loss: 0.2299
+KAN Loss: 0.0725, MH-SMoE (SA) Loss: 0.0365
+Val Loss: 0.1738 Val BA-Score:  0.986942 Training Time:  16.476126 Inference Time:  0.517895
+Epoch 7: BCE Loss: 0.1327
+KAN Loss: 0.0813, MH-SMoE (SA) Loss: 0.0356
+Val Loss: 0.0942 Val BA-Score:  0.992499 Training Time:  16.489253 Inference Time:  0.517489
+Epoch 8: BCE Loss: 0.0806
+KAN Loss: 0.0897, MH-SMoE (SA) Loss: 0.0341
+Val Loss: 0.0717 Val BA-Score:  0.996893 Training Time:  16.308352 Inference Time:  0.516912
+Epoch 9: BCE Loss: 0.0640
+KAN Loss: 0.0968, MH-SMoE (SA) Loss: 0.0335
+Val Loss: 0.0464 Val BA-Score:  0.998445 Training Time:  16.396119 Inference Time:  0.516126
+Epoch 10: BCE Loss: 0.0468
+KAN Loss: 0.1017, MH-SMoE (SA) Loss: 0.0330
+Val Loss: 0.0315 Val BA-Score:  0.998745 Training Time:  16.256130 Inference Time:  0.521981
+Epoch 11: BCE Loss: 0.0341
+KAN Loss: 0.1039, MH-SMoE (SA) Loss: 0.0324
+Val Loss: 0.0186 Val BA-Score:  0.998745 Training Time:  16.434482 Inference Time:  0.516837
+Epoch 12: BCE Loss: 0.0265
+KAN Loss: 0.1035, MH-SMoE (SA) Loss: 0.0321
+Val Loss: 0.0113 Val BA-Score:  0.998745 Training Time:  16.475748 Inference Time:  0.519886
+Epoch 13: BCE Loss: 0.0251
+KAN Loss: 0.1033, MH-SMoE (SA) Loss: 0.0318
+Val Loss: 0.0132 Val BA-Score:  0.998745 Training Time:  16.403249 Inference Time:  0.516866
+Epoch 14: BCE Loss: 0.0232
+KAN Loss: 0.1019, MH-SMoE (SA) Loss: 0.0318
+Val Loss: 0.0190 Val BA-Score:  0.998745 Training Time:  16.528300 Inference Time:  0.517679
+Epoch 15: BCE Loss: 0.0171
+KAN Loss: 0.1003, MH-SMoE (SA) Loss: 0.0315
+Val Loss: 0.0143 Val BA-Score:  0.998745 Training Time:  16.371460 Inference Time:  0.515832
+Epoch 16: BCE Loss: 0.0189
+KAN Loss: 0.0980, MH-SMoE (SA) Loss: 0.0313
+Val Loss: 0.0138 Val BA-Score:  0.998745 Training Time:  17.130667 Inference Time:  0.555828
+Epoch 17: BCE Loss: 0.0150
+KAN Loss: 0.0953, MH-SMoE (SA) Loss: 0.0312
+Val Loss: 0.0073 Val BA-Score:  0.998838 Training Time:  16.858906 Inference Time:  0.535387
+Epoch 18: BCE Loss: 0.0127
+KAN Loss: 0.0927, MH-SMoE (SA) Loss: 0.0311
+Val Loss: 0.0074 Val BA-Score:  0.998838 Training Time:  16.739230 Inference Time:  0.527945
+Epoch 19: BCE Loss: 0.0099
+KAN Loss: 0.0894, MH-SMoE (SA) Loss: 0.0309
+Val Loss: 0.0127 Val BA-Score:  0.998838 Training Time:  16.543485 Inference Time:  0.531557
+Epoch 20: BCE Loss: 0.0104
+KAN Loss: 0.0853, MH-SMoE (SA) Loss: 0.0310
+Val Loss: 0.0077 Val BA-Score:  0.998838 Training Time:  16.552547 Inference Time:  0.530507
+Epoch 21: BCE Loss: 0.0085
+KAN Loss: 0.0800, MH-SMoE (SA) Loss: 0.0309
+Val Loss: 0.0082 Val BA-Score:  0.998745 Training Time:  16.551207 Inference Time:  0.529802
+Epoch 22: BCE Loss: 0.0069
+KAN Loss: 0.0756, MH-SMoE (SA) Loss: 0.0308
+Val Loss: 0.0159 Val BA-Score:  0.998838 Training Time:  16.447787 Inference Time:  0.530624
+Epoch 23: BCE Loss: 0.0075
+KAN Loss: 0.0702, MH-SMoE (SA) Loss: 0.0307
+Val Loss: 0.0092 Val BA-Score:  0.998745 Training Time:  16.796006 Inference Time:  0.559000
+Epoch 24: BCE Loss: 0.0047
+KAN Loss: 0.0647, MH-SMoE (SA) Loss: 0.0307
+Val Loss: 0.0167 Val BA-Score:  0.998745 Training Time:  17.271499 Inference Time:  0.547538
+Epoch 25: BCE Loss: 0.0058
+KAN Loss: 0.0589, MH-SMoE (SA) Loss: 0.0306
+Val Loss: 0.0140 Val BA-Score:  0.998745 Training Time:  18.198541 Inference Time:  0.602495
+Epoch 26: BCE Loss: 0.0046
+KAN Loss: 0.0535, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0097 Val BA-Score:  0.998745 Training Time:  18.470381 Inference Time:  0.564554
+Epoch 27: BCE Loss: 0.0034
+KAN Loss: 0.0476, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0052 Val BA-Score:  0.998745 Training Time:  17.174617 Inference Time:  0.541559
+Epoch 28: BCE Loss: 0.0042
+KAN Loss: 0.0420, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0096 Val BA-Score:  0.998745 Training Time:  17.416959 Inference Time:  0.565674
+Epoch 29: BCE Loss: 0.0039
+KAN Loss: 0.0363, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0083 Val BA-Score:  0.998745 Training Time:  16.984126 Inference Time:  0.528011
+Epoch 30: BCE Loss: 0.0033
+KAN Loss: 0.0306, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0091 Val BA-Score:  0.998745 Training Time:  17.778634 Inference Time:  0.548266
+Epoch 31: BCE Loss: 0.0035
+KAN Loss: 0.0254, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0067 Val BA-Score:  0.998745 Training Time:  16.444432 Inference Time:  0.515147
+Epoch 32: BCE Loss: 0.0030
+KAN Loss: 0.0213, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0062 Val BA-Score:  0.998745 Training Time:  16.347160 Inference Time:  0.517301
+Epoch 33: BCE Loss: 0.0027
+KAN Loss: 0.0184, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0087 Val BA-Score:  0.998745 Training Time:  16.630691 Inference Time:  0.517578
+Epoch 34: BCE Loss: 0.0032
+KAN Loss: 0.0163, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0085 Val BA-Score:  0.998745 Training Time:  16.328046 Inference Time:  0.514435
+Epoch 35: BCE Loss: 0.0025
+KAN Loss: 0.0152, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0162 Val BA-Score:  0.998745 Training Time:  16.669650 Inference Time:  0.516425
+Baseline_no_gMLP Result:
+High Quality (Post 2020)
+1.0 1.0 1.0 1.0 1.0
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     19599
+           1       1.00      1.00      1.00        18
+           2       1.00      1.00      1.00     27177
+           3       1.00      1.00      1.00        68
+           4       1.00      1.00      1.00      6072
+           5       1.00      1.00      1.00       132
+           6       1.00      1.00      1.00       123
+           7       1.00      1.00      1.00        12
+           8       1.00      1.00      1.00       466
+           9       1.00      1.00      1.00        69
+          10       1.00      1.00      1.00        54
+          11       1.00      1.00      1.00        28
+          12       1.00      1.00      1.00        17
+          15       1.00      1.00      1.00        10
+
+    accuracy                           1.00     53845
+   macro avg       1.00      1.00      1.00     53845
+weighted avg       1.00      1.00      1.00     53845
+
+Low Quality (Post 2020)
+1.0 1.0 1.0 1.0 1.0
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      1116
+           2       1.00      1.00      1.00      1818
+           4       1.00      1.00      1.00       258
+           5       1.00      1.00      1.00         5
+           8       1.00      1.00      1.00        13
+          10       1.00      1.00      1.00         3
+          12       1.00      1.00      1.00         3
+          15       1.00      1.00      1.00         1
+
+    accuracy                           1.00      3217
+   macro avg       1.00      1.00      1.00      3217
+weighted avg       1.00      1.00      1.00      3217
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/sklearn/metrics/_classification.py:2480: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1531: UndefinedMetricWarning: Recall is ill-defined and being set to 0.0 in labels with no true samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+
+
+High Quality Post 2020
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      7
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      7
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      7
+
+Low Quality Post 2020
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.922975  0.077232  0.029191      7
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.999622  0.000263  0.000099      7
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.999439  0.000458  0.000173      7
+*************************Fold:  7 **********************************
+
+Using: cuda:0!
+Total Trainable Parameters:  1034511.0
+Total Parameters:  1034511.0
+Epoch 1: BCE Loss: 2.5917
+KAN Loss: 0.0836, MH-SMoE (SA) Loss: 0.1459
+Val Loss: 2.6314 Val BA-Score:  0.056019 Training Time:  16.415351 Inference Time:  0.519621
+Epoch 2: BCE Loss: 2.0998
+KAN Loss: 0.0602, MH-SMoE (SA) Loss: 0.0553
+Val Loss: 1.8972 Val BA-Score:  0.254909 Training Time:  16.275403 Inference Time:  0.515277
+Epoch 3: BCE Loss: 1.1925
+KAN Loss: 0.0566, MH-SMoE (SA) Loss: 0.0445
+Val Loss: 1.0613 Val BA-Score:  0.396134 Training Time:  16.566235 Inference Time:  0.520761
+Epoch 4: BCE Loss: 0.6835
+KAN Loss: 0.0595, MH-SMoE (SA) Loss: 0.0397
+Val Loss: 0.6256 Val BA-Score:  0.756904 Training Time:  16.306435 Inference Time:  0.520090
+Epoch 5: BCE Loss: 0.4000
+KAN Loss: 0.0663, MH-SMoE (SA) Loss: 0.0379
+Val Loss: 0.3294 Val BA-Score:  0.901290 Training Time:  16.602663 Inference Time:  0.515972
+Epoch 6: BCE Loss: 0.2156
+KAN Loss: 0.0741, MH-SMoE (SA) Loss: 0.0364
+Val Loss: 0.1880 Val BA-Score:  0.991807 Training Time:  16.287813 Inference Time:  0.517260
+Epoch 7: BCE Loss: 0.1370
+KAN Loss: 0.0824, MH-SMoE (SA) Loss: 0.0349
+Val Loss: 0.0917 Val BA-Score:  0.998804 Training Time:  16.501311 Inference Time:  0.515803
+Epoch 8: BCE Loss: 0.0824
+KAN Loss: 0.0906, MH-SMoE (SA) Loss: 0.0338
+Val Loss: 0.0512 Val BA-Score:  0.997498 Training Time:  16.339113 Inference Time:  0.518250
+Epoch 9: BCE Loss: 0.0598
+KAN Loss: 0.0979, MH-SMoE (SA) Loss: 0.0333
+Val Loss: 0.0334 Val BA-Score:  0.999700 Training Time:  16.430388 Inference Time:  0.515374
+Epoch 10: BCE Loss: 0.0440
+KAN Loss: 0.1019, MH-SMoE (SA) Loss: 0.0325
+Val Loss: 0.0308 Val BA-Score:  0.999399 Training Time:  16.351718 Inference Time:  0.517512
+Epoch 11: BCE Loss: 0.0321
+KAN Loss: 0.1042, MH-SMoE (SA) Loss: 0.0323
+Val Loss: 0.0349 Val BA-Score:  0.999700 Training Time:  16.598086 Inference Time:  0.543194
+Epoch 12: BCE Loss: 0.0257
+KAN Loss: 0.1036, MH-SMoE (SA) Loss: 0.0319
+Val Loss: 0.0231 Val BA-Score:  0.999700 Training Time:  16.444535 Inference Time:  0.518790
+Epoch 13: BCE Loss: 0.0239
+KAN Loss: 0.1031, MH-SMoE (SA) Loss: 0.0317
+Val Loss: 0.0389 Val BA-Score:  0.978167 Training Time:  16.613336 Inference Time:  0.539281
+Epoch 14: BCE Loss: 0.0240
+KAN Loss: 0.1017, MH-SMoE (SA) Loss: 0.0315
+Val Loss: 0.0314 Val BA-Score:  0.999700 Training Time:  16.712111 Inference Time:  0.522882
+Epoch 15: BCE Loss: 0.0186
+KAN Loss: 0.0998, MH-SMoE (SA) Loss: 0.0313
+Val Loss: 0.0194 Val BA-Score:  0.998774 Training Time:  16.868054 Inference Time:  0.531984
+Epoch 16: BCE Loss: 0.0170
+KAN Loss: 0.0976, MH-SMoE (SA) Loss: 0.0313
+Val Loss: 0.0325 Val BA-Score:  0.999700 Training Time:  16.578275 Inference Time:  0.516184
+Epoch 17: BCE Loss: 0.0168
+KAN Loss: 0.0947, MH-SMoE (SA) Loss: 0.0313
+Val Loss: 0.0188 Val BA-Score:  0.998969 Training Time:  16.452319 Inference Time:  0.517300
+Epoch 18: BCE Loss: 0.0095
+KAN Loss: 0.0924, MH-SMoE (SA) Loss: 0.0310
+Val Loss: 0.0178 Val BA-Score:  0.983959 Training Time:  16.441654 Inference Time:  0.525713
+Epoch 19: BCE Loss: 0.0111
+KAN Loss: 0.0889, MH-SMoE (SA) Loss: 0.0310
+Val Loss: 0.0451 Val BA-Score:  0.997140 Training Time:  16.394922 Inference Time:  0.517873
+Epoch 20: BCE Loss: 0.0112
+KAN Loss: 0.0845, MH-SMoE (SA) Loss: 0.0308
+Val Loss: 0.0108 Val BA-Score:  0.999700 Training Time:  16.395802 Inference Time:  0.517504
+Epoch 21: BCE Loss: 0.0083
+KAN Loss: 0.0792, MH-SMoE (SA) Loss: 0.0309
+Val Loss: 0.0085 Val BA-Score:  0.999700 Training Time:  16.439178 Inference Time:  0.518495
+Epoch 22: BCE Loss: 0.0088
+KAN Loss: 0.0745, MH-SMoE (SA) Loss: 0.0307
+Val Loss: 0.0079 Val BA-Score:  0.999700 Training Time:  16.368187 Inference Time:  0.516099
+Epoch 23: BCE Loss: 0.0054
+KAN Loss: 0.0694, MH-SMoE (SA) Loss: 0.0307
+Val Loss: 0.0061 Val BA-Score:  0.999700 Training Time:  16.409119 Inference Time:  0.522553
+Epoch 24: BCE Loss: 0.0055
+KAN Loss: 0.0635, MH-SMoE (SA) Loss: 0.0306
+Val Loss: 0.0070 Val BA-Score:  0.999700 Training Time:  16.347701 Inference Time:  0.516954
+Epoch 25: BCE Loss: 0.0055
+KAN Loss: 0.0578, MH-SMoE (SA) Loss: 0.0306
+Val Loss: 0.0063 Val BA-Score:  0.999700 Training Time:  16.367023 Inference Time:  0.516983
+Epoch 26: BCE Loss: 0.0037
+KAN Loss: 0.0518, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0068 Val BA-Score:  0.999700 Training Time:  16.321972 Inference Time:  0.518642
+Epoch 27: BCE Loss: 0.0040
+KAN Loss: 0.0467, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0092 Val BA-Score:  0.999700 Training Time:  16.552496 Inference Time:  0.519095
+Epoch 28: BCE Loss: 0.0039
+KAN Loss: 0.0417, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0136 Val BA-Score:  0.999700 Training Time:  16.448266 Inference Time:  0.525079
+Epoch 29: BCE Loss: 0.0045
+KAN Loss: 0.0361, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0076 Val BA-Score:  0.999700 Training Time:  16.715601 Inference Time:  0.522877
+Epoch 30: BCE Loss: 0.0033
+KAN Loss: 0.0307, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0126 Val BA-Score:  0.999700 Training Time:  16.455689 Inference Time:  0.518301
+Epoch 31: BCE Loss: 0.0026
+KAN Loss: 0.0259, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0112 Val BA-Score:  0.999700 Training Time:  16.756440 Inference Time:  0.519095
+Epoch 32: BCE Loss: 0.0024
+KAN Loss: 0.0222, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0087 Val BA-Score:  0.999700 Training Time:  16.318067 Inference Time:  0.516772
+Epoch 33: BCE Loss: 0.0029
+KAN Loss: 0.0195, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0071 Val BA-Score:  0.999700 Training Time:  16.524236 Inference Time:  0.517389
+Epoch 34: BCE Loss: 0.0023
+KAN Loss: 0.0176, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0071 Val BA-Score:  0.999700 Training Time:  16.363384 Inference Time:  0.518722
+Epoch 35: BCE Loss: 0.0023
+KAN Loss: 0.0166, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0095 Val BA-Score:  0.999700 Training Time:  16.503560 Inference Time:  0.514719
+Baseline_no_gMLP Result:
+High Quality (Post 2020)
+1.0 1.0 1.0 1.0 1.0
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     19599
+           1       1.00      1.00      1.00        18
+           2       1.00      1.00      1.00     27177
+           3       1.00      1.00      1.00        68
+           4       1.00      1.00      1.00      6072
+           5       1.00      1.00      1.00       132
+           6       1.00      1.00      1.00       123
+           7       1.00      1.00      1.00        12
+           8       1.00      1.00      1.00       466
+           9       1.00      1.00      1.00        69
+          10       1.00      1.00      1.00        54
+          11       1.00      1.00      1.00        28
+          12       1.00      1.00      1.00        17
+          15       1.00      1.00      1.00        10
+
+    accuracy                           1.00     53845
+   macro avg       1.00      1.00      1.00     53845
+weighted avg       1.00      1.00      1.00     53845
+
+Low Quality (Post 2020)
+0.9998879928315412 0.9953143416836827 0.9910714285714286 0.9998879928315412 0.9994390393751391
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      1116
+           2       1.00      1.00      1.00      1818
+           4       1.00      1.00      1.00       258
+           5       1.00      1.00      1.00         5
+           8       0.93      1.00      0.96        13
+          10       1.00      1.00      1.00         3
+          12       1.00      1.00      1.00         3
+          15       1.00      1.00      1.00         1
+
+    accuracy                           1.00      3217
+   macro avg       0.99      1.00      1.00      3217
+weighted avg       1.00      1.00      1.00      3217
+
+
+High Quality Post 2020
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      8
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      8
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      8
+
+Low Quality Post 2020
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.932018  0.075939  0.026849      8
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.999655  0.000261  0.000092      8
+                      mean       std      sem  count
+Model                                               
+Baseline_no_gMLP  0.999439  0.000424  0.00015      8
+*************************Fold:  8 **********************************
+
+Using: cuda:0!
+Total Trainable Parameters:  1034511.0
+Total Parameters:  1034511.0
+Epoch 1: BCE Loss: 2.6267
+KAN Loss: 0.0833, MH-SMoE (SA) Loss: 0.1238
+Val Loss: 2.5843 Val BA-Score:  0.142315 Training Time:  16.485129 Inference Time:  0.518168
+Epoch 2: BCE Loss: 1.9543
+KAN Loss: 0.0603, MH-SMoE (SA) Loss: 0.0509
+Val Loss: 1.6392 Val BA-Score:  0.262711 Training Time:  16.282385 Inference Time:  0.516644
+Epoch 3: BCE Loss: 1.1399
+KAN Loss: 0.0563, MH-SMoE (SA) Loss: 0.0442
+Val Loss: 1.1531 Val BA-Score:  0.406399 Training Time:  16.489768 Inference Time:  0.517290
+Epoch 4: BCE Loss: 0.7245
+KAN Loss: 0.0596, MH-SMoE (SA) Loss: 0.0411
+Val Loss: 0.6915 Val BA-Score:  0.683645 Training Time:  16.396352 Inference Time:  0.522019
+Epoch 5: BCE Loss: 0.3977
+KAN Loss: 0.0658, MH-SMoE (SA) Loss: 0.0382
+Val Loss: 0.3147 Val BA-Score:  0.928878 Training Time:  16.619575 Inference Time:  0.527879
+Epoch 6: BCE Loss: 0.2191
+KAN Loss: 0.0729, MH-SMoE (SA) Loss: 0.0366
+Val Loss: 0.2414 Val BA-Score:  0.983827 Training Time:  16.588878 Inference Time:  0.526061
+Epoch 7: BCE Loss: 0.1221
+KAN Loss: 0.0814, MH-SMoE (SA) Loss: 0.0348
+Val Loss: 0.1095 Val BA-Score:  0.996584 Training Time:  16.811999 Inference Time:  0.529974
+Epoch 8: BCE Loss: 0.0816
+KAN Loss: 0.0899, MH-SMoE (SA) Loss: 0.0336
+Val Loss: 0.0723 Val BA-Score:  0.997519 Training Time:  16.717797 Inference Time:  0.525624
+Epoch 9: BCE Loss: 0.0591
+KAN Loss: 0.0958, MH-SMoE (SA) Loss: 0.0329
+Val Loss: 0.0357 Val BA-Score:  0.996788 Training Time:  22.207143 Inference Time:  0.526905
+Epoch 10: BCE Loss: 0.0506
+KAN Loss: 0.0999, MH-SMoE (SA) Loss: 0.0328
+Val Loss: 0.0343 Val BA-Score:  0.998158 Training Time:  16.678158 Inference Time:  0.526670
+Epoch 11: BCE Loss: 0.0327
+KAN Loss: 0.1024, MH-SMoE (SA) Loss: 0.0323
+Val Loss: 0.0165 Val BA-Score:  0.998250 Training Time:  16.736365 Inference Time:  0.526849
+Epoch 12: BCE Loss: 0.0369
+KAN Loss: 0.1029, MH-SMoE (SA) Loss: 0.0318
+Val Loss: 0.0304 Val BA-Score:  0.998250 Training Time:  16.507642 Inference Time:  0.521850
+Epoch 13: BCE Loss: 0.0268
+KAN Loss: 0.1028, MH-SMoE (SA) Loss: 0.0318
+Val Loss: 0.0187 Val BA-Score:  0.998250 Training Time:  16.725714 Inference Time:  0.521209
+Epoch 14: BCE Loss: 0.0221
+KAN Loss: 0.1016, MH-SMoE (SA) Loss: 0.0314
+Val Loss: 0.0190 Val BA-Score:  0.998250 Training Time:  16.548761 Inference Time:  0.517014
+Epoch 15: BCE Loss: 0.0186
+KAN Loss: 0.1000, MH-SMoE (SA) Loss: 0.0312
+Val Loss: 0.0106 Val BA-Score:  0.998250 Training Time:  16.673003 Inference Time:  0.523835
+Epoch 16: BCE Loss: 0.0187
+KAN Loss: 0.0977, MH-SMoE (SA) Loss: 0.0313
+Val Loss: 0.0178 Val BA-Score:  0.996399 Training Time:  16.518775 Inference Time:  0.525171
+Epoch 17: BCE Loss: 0.0132
+KAN Loss: 0.0951, MH-SMoE (SA) Loss: 0.0312
+Val Loss: 0.0125 Val BA-Score:  0.998250 Training Time:  16.616322 Inference Time:  0.520124
+Epoch 18: BCE Loss: 0.0149
+KAN Loss: 0.0927, MH-SMoE (SA) Loss: 0.0310
+Val Loss: 0.0126 Val BA-Score:  0.998250 Training Time:  16.589953 Inference Time:  0.522671
+Epoch 19: BCE Loss: 0.0111
+KAN Loss: 0.0892, MH-SMoE (SA) Loss: 0.0310
+Val Loss: 0.0096 Val BA-Score:  0.998250 Training Time:  16.488455 Inference Time:  0.520060
+Epoch 20: BCE Loss: 0.0086
+KAN Loss: 0.0853, MH-SMoE (SA) Loss: 0.0309
+Val Loss: 0.0113 Val BA-Score:  0.998250 Training Time:  16.449225 Inference Time:  0.518836
+Epoch 21: BCE Loss: 0.0083
+KAN Loss: 0.0802, MH-SMoE (SA) Loss: 0.0308
+Val Loss: 0.0114 Val BA-Score:  0.998250 Training Time:  16.404658 Inference Time:  0.516725
+Epoch 22: BCE Loss: 0.0090
+KAN Loss: 0.0752, MH-SMoE (SA) Loss: 0.0307
+Val Loss: 0.0115 Val BA-Score:  0.998250 Training Time:  16.357054 Inference Time:  0.517774
+Epoch 23: BCE Loss: 0.0082
+KAN Loss: 0.0707, MH-SMoE (SA) Loss: 0.0306
+Val Loss: 0.0134 Val BA-Score:  0.998250 Training Time:  16.521248 Inference Time:  0.517859
+Epoch 24: BCE Loss: 0.0055
+KAN Loss: 0.0647, MH-SMoE (SA) Loss: 0.0306
+Val Loss: 0.0098 Val BA-Score:  0.998250 Training Time:  16.338664 Inference Time:  0.517780
+Epoch 25: BCE Loss: 0.0038
+KAN Loss: 0.0593, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0106 Val BA-Score:  0.998250 Training Time:  16.550842 Inference Time:  0.518673
+Epoch 26: BCE Loss: 0.0046
+KAN Loss: 0.0529, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0099 Val BA-Score:  0.998250 Training Time:  16.337484 Inference Time:  0.518246
+Epoch 27: BCE Loss: 0.0041
+KAN Loss: 0.0470, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0101 Val BA-Score:  0.998250 Training Time:  16.652004 Inference Time:  0.519790
+Epoch 28: BCE Loss: 0.0036
+KAN Loss: 0.0417, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0120 Val BA-Score:  0.998250 Training Time:  16.564957 Inference Time:  0.525079
+Epoch 29: BCE Loss: 0.0033
+KAN Loss: 0.0359, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0091 Val BA-Score:  0.998250 Training Time:  16.693689 Inference Time:  0.521742
+Epoch 30: BCE Loss: 0.0039
+KAN Loss: 0.0304, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0097 Val BA-Score:  0.998250 Training Time:  16.636807 Inference Time:  0.524567
+Epoch 31: BCE Loss: 0.0019
+KAN Loss: 0.0253, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0091 Val BA-Score:  0.998250 Training Time:  16.543390 Inference Time:  0.519130
+Epoch 32: BCE Loss: 0.0026
+KAN Loss: 0.0212, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0099 Val BA-Score:  0.998250 Training Time:  16.583094 Inference Time:  0.520614
+Epoch 33: BCE Loss: 0.0020
+KAN Loss: 0.0183, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0094 Val BA-Score:  0.998250 Training Time:  16.593360 Inference Time:  0.519695
+Epoch 34: BCE Loss: 0.0023
+KAN Loss: 0.0163, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0093 Val BA-Score:  0.998250 Training Time:  16.903241 Inference Time:  0.519136
+Epoch 35: BCE Loss: 0.0020
+KAN Loss: 0.0152, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0109 Val BA-Score:  0.998250 Training Time:  16.589968 Inference Time:  0.521827
+Baseline_no_gMLP Result:
+High Quality (Post 2020)
+1.0 1.0 1.0 1.0 1.0
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     19599
+           1       1.00      1.00      1.00        18
+           2       1.00      1.00      1.00     27177
+           3       1.00      1.00      1.00        68
+           4       1.00      1.00      1.00      6072
+           5       1.00      1.00      1.00       132
+           6       1.00      1.00      1.00       123
+           7       1.00      1.00      1.00        12
+           8       1.00      1.00      1.00       466
+           9       1.00      1.00      1.00        69
+          10       1.00      1.00      1.00        54
+          11       1.00      1.00      1.00        28
+          12       1.00      1.00      1.00        17
+          15       1.00      1.00      1.00        10
+
+    accuracy                           1.00     53845
+   macro avg       1.00      1.00      1.00     53845
+weighted avg       1.00      1.00      1.00     53845
+
+Low Quality (Post 2020)
+1.0 1.0 1.0 1.0 1.0
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      1116
+           2       1.00      1.00      1.00      1818
+           4       1.00      1.00      1.00       258
+           5       1.00      1.00      1.00         5
+           8       1.00      1.00      1.00        13
+          10       1.00      1.00      1.00         3
+          12       1.00      1.00      1.00         3
+          15       1.00      1.00      1.00         1
+
+    accuracy                           1.00      3217
+   macro avg       1.00      1.00      1.00      3217
+weighted avg       1.00      1.00      1.00      3217
+
+
+High Quality Post 2020
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      9
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      9
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0      9
+
+Low Quality Post 2020
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.939571  0.074562  0.024854      9
+                      mean      std      sem  count
+Model                                              
+Baseline_no_gMLP  0.999693  0.00027  0.00009      9
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.999501  0.000439  0.000146      9
+*************************Fold:  9 **********************************
+
+Using: cuda:0!
+Total Trainable Parameters:  1034511.0
+Total Parameters:  1034511.0
+Epoch 1: BCE Loss: 2.5744
+KAN Loss: 0.0836, MH-SMoE (SA) Loss: 0.1318
+Val Loss: 2.6728 Val BA-Score:  0.055556 Training Time:  16.375683 Inference Time:  0.519930
+Epoch 2: BCE Loss: 2.0573
+KAN Loss: 0.0596, MH-SMoE (SA) Loss: 0.0500
+Val Loss: 1.7488 Val BA-Score:  0.273468 Training Time:  16.421329 Inference Time:  0.520023
+Epoch 3: BCE Loss: 1.1696
+KAN Loss: 0.0558, MH-SMoE (SA) Loss: 0.0457
+Val Loss: 1.1305 Val BA-Score:  0.576240 Training Time:  16.356800 Inference Time:  0.525638
+Epoch 4: BCE Loss: 0.6706
+KAN Loss: 0.0585, MH-SMoE (SA) Loss: 0.0405
+Val Loss: 0.6061 Val BA-Score:  0.743827 Training Time:  16.616985 Inference Time:  0.517441
+Epoch 5: BCE Loss: 0.3937
+KAN Loss: 0.0644, MH-SMoE (SA) Loss: 0.0382
+Val Loss: 0.3011 Val BA-Score:  0.901491 Training Time:  16.480497 Inference Time:  0.521856
+Epoch 6: BCE Loss: 0.2291
+KAN Loss: 0.0724, MH-SMoE (SA) Loss: 0.0361
+Val Loss: 0.1630 Val BA-Score:  0.951836 Training Time:  16.660743 Inference Time:  0.522379
+Epoch 7: BCE Loss: 0.1357
+KAN Loss: 0.0809, MH-SMoE (SA) Loss: 0.0344
+Val Loss: 0.0758 Val BA-Score:  0.998775 Training Time:  16.617935 Inference Time:  0.524532
+Epoch 8: BCE Loss: 0.0857
+KAN Loss: 0.0897, MH-SMoE (SA) Loss: 0.0339
+Val Loss: 0.0393 Val BA-Score:  0.998384 Training Time:  16.756600 Inference Time:  0.522026
+Epoch 9: BCE Loss: 0.0562
+KAN Loss: 0.0960, MH-SMoE (SA) Loss: 0.0332
+Val Loss: 0.0767 Val BA-Score:  0.994979 Training Time:  16.452694 Inference Time:  0.520527
+Epoch 10: BCE Loss: 0.0428
+KAN Loss: 0.1003, MH-SMoE (SA) Loss: 0.0328
+Val Loss: 0.0229 Val BA-Score:  0.998775 Training Time:  16.559687 Inference Time:  0.524757
+Epoch 11: BCE Loss: 0.0359
+KAN Loss: 0.1025, MH-SMoE (SA) Loss: 0.0321
+Val Loss: 0.0500 Val BA-Score:  0.998775 Training Time:  16.436470 Inference Time:  0.519953
+Epoch 12: BCE Loss: 0.0280
+KAN Loss: 0.1030, MH-SMoE (SA) Loss: 0.0319
+Val Loss: 0.0115 Val BA-Score:  0.998775 Training Time:  16.681891 Inference Time:  0.521432
+Epoch 13: BCE Loss: 0.0235
+KAN Loss: 0.1029, MH-SMoE (SA) Loss: 0.0320
+Val Loss: 0.0135 Val BA-Score:  0.998775 Training Time:  16.673425 Inference Time:  0.524403
+Epoch 14: BCE Loss: 0.0211
+KAN Loss: 0.1016, MH-SMoE (SA) Loss: 0.0316
+Val Loss: 0.0216 Val BA-Score:  0.998775 Training Time:  16.577625 Inference Time:  0.520758
+Epoch 15: BCE Loss: 0.0190
+KAN Loss: 0.1001, MH-SMoE (SA) Loss: 0.0314
+Val Loss: 0.0082 Val BA-Score:  0.998775 Training Time:  16.703935 Inference Time:  0.512338
+Epoch 16: BCE Loss: 0.0208
+KAN Loss: 0.0979, MH-SMoE (SA) Loss: 0.0314
+Val Loss: 0.0113 Val BA-Score:  0.998775 Training Time:  16.540600 Inference Time:  0.523473
+Epoch 17: BCE Loss: 0.0175
+KAN Loss: 0.0952, MH-SMoE (SA) Loss: 0.0314
+Val Loss: 0.0261 Val BA-Score:  0.998775 Training Time:  16.918119 Inference Time:  0.525979
+Epoch 18: BCE Loss: 0.0108
+KAN Loss: 0.0924, MH-SMoE (SA) Loss: 0.0311
+Val Loss: 0.0207 Val BA-Score:  0.998775 Training Time:  16.641116 Inference Time:  0.522554
+Epoch 19: BCE Loss: 0.0114
+KAN Loss: 0.0889, MH-SMoE (SA) Loss: 0.0311
+Val Loss: 0.0137 Val BA-Score:  0.998775 Training Time:  16.646024 Inference Time:  0.526820
+Epoch 20: BCE Loss: 0.0101
+KAN Loss: 0.0852, MH-SMoE (SA) Loss: 0.0309
+Val Loss: 0.0455 Val BA-Score:  0.997121 Training Time:  16.519525 Inference Time:  0.519633
+Epoch 21: BCE Loss: 0.0092
+KAN Loss: 0.0809, MH-SMoE (SA) Loss: 0.0309
+Val Loss: 0.0152 Val BA-Score:  0.998775 Training Time:  16.452583 Inference Time:  0.515893
+Epoch 22: BCE Loss: 0.0071
+KAN Loss: 0.0762, MH-SMoE (SA) Loss: 0.0308
+Val Loss: 0.0063 Val BA-Score:  0.998775 Training Time:  16.484715 Inference Time:  0.517600
+Epoch 23: BCE Loss: 0.0059
+KAN Loss: 0.0708, MH-SMoE (SA) Loss: 0.0307
+Val Loss: 0.0062 Val BA-Score:  0.998775 Training Time:  16.307657 Inference Time:  0.520002
+Epoch 24: BCE Loss: 0.0058
+KAN Loss: 0.0650, MH-SMoE (SA) Loss: 0.0306
+Val Loss: 0.0063 Val BA-Score:  0.998775 Training Time:  16.624548 Inference Time:  0.517853
+Epoch 25: BCE Loss: 0.0051
+KAN Loss: 0.0588, MH-SMoE (SA) Loss: 0.0306
+Val Loss: 0.0232 Val BA-Score:  0.998775 Training Time:  16.243828 Inference Time:  0.515695
+Epoch 26: BCE Loss: 0.0043
+KAN Loss: 0.0533, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0068 Val BA-Score:  0.998775 Training Time:  16.464013 Inference Time:  0.517397
+Epoch 27: BCE Loss: 0.0038
+KAN Loss: 0.0474, MH-SMoE (SA) Loss: 0.0305
+Val Loss: 0.0079 Val BA-Score:  0.998775 Training Time:  16.415645 Inference Time:  0.521588
+Epoch 28: BCE Loss: 0.0037
+KAN Loss: 0.0425, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0115 Val BA-Score:  0.998775 Training Time:  16.550128 Inference Time:  0.520150
+Epoch 29: BCE Loss: 0.0030
+KAN Loss: 0.0369, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0078 Val BA-Score:  0.998775 Training Time:  16.633950 Inference Time:  0.522937
+Epoch 30: BCE Loss: 0.0033
+KAN Loss: 0.0310, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0138 Val BA-Score:  0.998775 Training Time:  16.504292 Inference Time:  0.519312
+Epoch 31: BCE Loss: 0.0028
+KAN Loss: 0.0255, MH-SMoE (SA) Loss: 0.0304
+Val Loss: 0.0080 Val BA-Score:  0.998775 Training Time:  16.439607 Inference Time:  0.520232
+Epoch 32: BCE Loss: 0.0024
+KAN Loss: 0.0211, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0181 Val BA-Score:  0.998775 Training Time:  16.339585 Inference Time:  0.525449
+Epoch 33: BCE Loss: 0.0024
+KAN Loss: 0.0179, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0066 Val BA-Score:  0.998775 Training Time:  16.695753 Inference Time:  0.521574
+Epoch 34: BCE Loss: 0.0029
+KAN Loss: 0.0158, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0077 Val BA-Score:  0.998775 Training Time:  16.570971 Inference Time:  0.523503
+Epoch 35: BCE Loss: 0.0024
+KAN Loss: 0.0146, MH-SMoE (SA) Loss: 0.0303
+Val Loss: 0.0066 Val BA-Score:  0.998775 Training Time:  16.488922 Inference Time:  0.520840
+Baseline_no_gMLP Result:
+High Quality (Post 2020)
+1.0 1.0 1.0 1.0 1.0
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00     19599
+           1       1.00      1.00      1.00        18
+           2       1.00      1.00      1.00     27177
+           3       1.00      1.00      1.00        68
+           4       1.00      1.00      1.00      6072
+           5       1.00      1.00      1.00       132
+           6       1.00      1.00      1.00       123
+           7       1.00      1.00      1.00        12
+           8       1.00      1.00      1.00       466
+           9       1.00      1.00      1.00        69
+          10       1.00      1.00      1.00        54
+          11       1.00      1.00      1.00        28
+          12       1.00      1.00      1.00        17
+          15       1.00      1.00      1.00        10
+
+    accuracy                           1.00     53845
+   macro avg       1.00      1.00      1.00     53845
+weighted avg       1.00      1.00      1.00     53845
+
+Low Quality (Post 2020)
+0.999515503875969 0.888673139158576 0.8888888888888888 0.888458225667528 0.9994389392160742
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      1116
+           2       1.00      1.00      1.00      1818
+           4       1.00      1.00      1.00       258
+           5       1.00      1.00      1.00         5
+           7       0.00       nan      0.00         0
+           8       1.00      1.00      1.00        13
+          10       1.00      1.00      1.00         3
+          12       1.00      1.00      1.00         3
+          15       1.00      1.00      1.00         1
+
+    accuracy                           1.00      3217
+   macro avg       0.89      1.00      0.89      3217
+weighted avg       1.00      1.00      1.00      3217
+
+
+High Quality Post 2020
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0     10
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0     10
+                  mean  std  sem  count
+Model                                  
+Baseline_no_gMLP   1.0  0.0  0.0     10
+
+Low Quality Post 2020
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.934482  0.072117  0.022805     10
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.999676  0.000261  0.000082     10
+                      mean       std       sem  count
+Model                                                
+Baseline_no_gMLP  0.999495  0.000414  0.000131     10
