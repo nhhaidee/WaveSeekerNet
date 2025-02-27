@@ -20,6 +20,7 @@ This repository contains the source code and data used to train WaveSeekerNet. T
 
 1. Metadata for the datasets used in the paper can be found in the `data` directory.
 2. IAV HA and NA RNA/Protein sequences can be downloaded from EpiFLu GISAID database (https://www.gisaid.org/).
+3. Source code for model training and evaluation can be found in the `src` directory. The experimental results and training logs are alo available in the `src` directory with extension `.csv` and `.out` respectively.
 
 
 [Pytorch Wavelet package]: https://github.com/fbcotter/pytorch_wavelets
