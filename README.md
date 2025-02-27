@@ -10,10 +10,10 @@ We introduce WaveSeekerNet, a novel deep learning model for accurate and rapid p
 This repository contains the source code and data used to train WaveSeekerNet. The paper is under review and will be made available upon acceptance.
 ## Requirements
 
-1. Pytorch 2.4.0 or higher
-2. [Pytorch Wavelet package] 3.1.0
-3. [Pytorch Optimizer] 1.3.1
-4. Other requirements: Python 3.12+, complexcgr 0.8.0, scikit-learn 1.5.1, seaborn 0.13.2, pyfastx 2.1.0, pandas 2.2.2, numpy 1.26.4.
+1. Pytorch 2.4.1
+2. [Pytorch Wavelet package] 1.3.0
+3. [Pytorch Optimizer] 3.1.1
+4. Other requirements: Python 3.12+, scikit-learn 1.5.1, complexcgr 0.8.0, seaborn 0.13.2, matplotlib 3.9.1, pyfastx 2.1.0, pandas 2.2.2, numpy 1.26.4, biopython 1.84, baycomp 1.0.3.
 
 
 ## Data
@@ -22,6 +22,5 @@ This repository contains the source code and data used to train WaveSeekerNet. T
 2. IAV HA and NA RNA/Protein sequences can be downloaded from EpiFLu GISAID database (https://www.gisaid.org/).
 
 
-
 [Pytorch Wavelet package]: https://github.com/fbcotter/pytorch_wavelets
-[Pytorch Optimizer]:pytorch_optimizer
+[Pytorch Optimizer]:https://github.com/kozistr/pytorch_optimizer
