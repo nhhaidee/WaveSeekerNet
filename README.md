@@ -16,7 +16,7 @@ This repository contains the source code and data used to train WaveSeekerNet. T
 4. Other requirements: Python 3.12+, scikit-learn 1.5.1, complexcgr 0.8.0, seaborn 0.13.2, matplotlib 3.9.1, pyfastx 2.1.0, pandas 2.2.2, numpy 1.26.4, biopython 1.84, baycomp 1.0.3.
 
 
-## Data
+## Data and Source Code
 
 1. Metadata for the datasets used in the paper can be found in the `data` directory.
 2. IAV HA and NA RNA/Protein sequences can be downloaded from EpiFLu GISAID database (https://www.gisaid.org/).
