@@ -11,8 +11,10 @@ This repository contains the source code and data used to train WaveSeekerNet. T
 ## Requirements
 
 1. Pytorch 2.4.0 or higher
-2. [Pytorch Wavelet package]
-3. [Pytorch Optimizer]
+2. [Pytorch Wavelet package] 3.1.0
+3. [Pytorch Optimizer] 1.3.1
+4. Other requirements: Python 3.12+, complexcgr 0.8.0, scikit-learn 1.5.1, seaborn 0.13.2, pyfastx 2.1.0, pandas 2.2.2, numpy 1.26.4.
+
 
 ## Data
 
