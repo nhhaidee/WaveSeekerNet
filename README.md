@@ -24,7 +24,7 @@ This repository contains the source code and data used to train WaveSeekerNet. T
 
 ## Contributors and Maintainers
 
-* [Hai Nguyen](https://github.com/nhhaidee) ([CFIA-NCFAD](https://github.com/CFIA-NCFAD), Department of Computer Science, University of Manitoba)) - designed the models, wrote the code/manuscript, prepared data, trained models, performed experiments and completed the data analysis.
+* [Hai Nguyen](https://github.com/nhhaidee) ([CFIA-NCFAD](https://github.com/CFIA-NCFAD), Department of Computer Science, University of Manitoba) - designed the models, wrote the code/manuscript, prepared data, trained models, performed experiments and completed the data analysis.
 * [Josip Rudar](https://github.com/jrudar) ([CFIA-NCFAD](https://github.com/CFIA-NCFAD), Department of Integrative Biology & Centre for Biodiversity Genomics, University of Guelph) - designed models, wrote the code, reviewed/edited the manuscript, provided guidance on the project, and provided feedback on the experiments.
 
 
