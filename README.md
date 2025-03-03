@@ -7,7 +7,7 @@ Influenza A virus (IAV) poses a significant threat to animal health globally, wi
 
 We introduce WaveSeekerNet, a novel deep learning model for accurate and rapid prediction of IAV subtypes and host source. The model leverages attention-based mechanisms and efficient token mixing schemes, including the Fast Fourier Transform and the Wavelet Transform, to capture intricate patterns within viral RNA and protein sequences. Extensive experiments on diverse datasets demonstrate WaveSeekerNet's superior performance compared to existing Transformer-only models. Notably, WaveSeekerNet achieves scores of up to the maximum 1.0 across all evaluation metrics, including F1-score (Macro Average), Balanced Accuracy and Matthews Correlation Coefficient (MCC), in subtype prediction, even for rare subtypes. Furthermore, WaveSeekerNet exhibits remarkable accuracy in distinguishing between human, avian, and other mammalian hosts. The ability of WaveSeekerNet to flag potential cross-species transmission events underscores its significant value for real-time surveillance and proactive pandemic preparedness efforts.
 
-This repository contains the source code and data used to train WaveSeekerNet. The paper is under review and will be made available upon acceptance.
+This repository contains the source code and data used to train WaveSeekerNet. The preprint of WaveSeekerNet is now available on bioRxiv (https://www.biorxiv.org/content/10.1101/2025.02.25.639900v1).
 ## Requirements
 
 1. Pytorch 2.4.1
@@ -21,6 +21,11 @@ This repository contains the source code and data used to train WaveSeekerNet. T
 1. Metadata for the datasets used in the paper can be found in the `data` directory.
 2. IAV HA and NA RNA/Protein sequences can be downloaded from EpiFLu GISAID database (https://www.gisaid.org/).
 3. Source code for model training and evaluation can be found in the `src` directory. The experimental results and training logs are also available in the `src` directory with extension `.csv` and `.out` respectively.
+
+## Contributors and Maintainers
+
+* [Hai Nguyen](https://github.com/nhhaidee) ([CFIA-NCFAD](https://github.com/CFIA-NCFAD), Department of Computer Science, University of Manitoba)) - designed the models, wrote the code/manuscript, prepared data, trained models, performed experiments and completed the data analysis.
+* [Josip Rudar](https://github.com/jrudar) ([CFIA-NCFAD](https://github.com/CFIA-NCFAD), Department of Integrative Biology & Centre for Biodiversity Genomics, University of Guelph) - designed models, wrote the code, reviewed/edited the manuscript, provided guidance on the project, and provided feedback on the experiments.
 
 
 [Pytorch Wavelet package]: https://github.com/fbcotter/pytorch_wavelets
