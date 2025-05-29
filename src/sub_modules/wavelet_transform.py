@@ -116,12 +116,12 @@ class WaveNETHead(nn.Module):
         x = self.details_out(x) + x
         x = self.shrinkage(x)
 
-        x = x_in.view(
+        x = x.view(
             [
-                x_in.shape[0],
+                x.shape[0],
                 self.n_heads,
-                x_in.shape[2],
-                x_in.shape[3],
+                x.shape[1]//self.n_heads,
+                x.shape[2],
                 self.w_in_d
             ]
         )
