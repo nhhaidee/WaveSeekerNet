@@ -53,6 +53,7 @@ Parameters for Protein dataset
 ```  
 X_train Shape: (B, 21, seq_len) where B is the number of samples
 n_out = len(np.unique(y_train))
+n_channels= 1
 seq_len = seq_len
 res_len = 21
 patch_size = (3, res_len)
