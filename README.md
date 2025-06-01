@@ -36,7 +36,7 @@ Load dataset
 ```
 Parameters for RNA dataset
 ```  
-X_train Shape: (B, 2**D, 2**D) where B is the number of samples, D is the depth of FCGR
+X_train Shape: (N, 2**D, 2**D) where N is the number of samples, D is the depth of FCGR
 D = 6
 n_out = len(np.unique(y_train))
 n_channels= 1
@@ -51,7 +51,7 @@ final_hidden_size = 24
 Parameters for Protein dataset
 
 ```  
-X_train Shape: (B, 21, seq_len) where B is the number of samples
+X_train Shape: (N, 21, seq_len) where N is the number of samples
 n_out = len(np.unique(y_train))
 n_channels= 1
 seq_len = seq_len
