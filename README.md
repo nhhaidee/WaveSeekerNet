@@ -21,18 +21,18 @@ This repository contains the source code and data used to train WaveSeekerNet. T
 1. Metadata for the datasets used in the paper can be found in the `data` directory.
 2. IAV HA and NA RNA/Protein sequences can be downloaded from EpiFLu GISAID database (https://www.gisaid.org/).
 3. Source code for model training and evaluation can be found in the `src` directory:
-    - `src/WaveSeekerNet`: Contains the WaveSeekerNet
-    - `src/Transformer`: Contains the Transformer-only model and the pre-trained ESM-2
+    - `src/WaveSeekerNet`: Contains the WaveSeekerNet code
+    - `src/Transformer`: Contains the Transformer-only model and the pre-trained ESM-2 code
 
 ## How to Train WaveSeekerNet
 To train WaveSeekerNet, follow these steps:
 
-Load dataset in numpy format
+Load dataset
 ```   
-    X_train = np.load(path + 'X_train.npy')
-    y_train = np.load(path + 'y_train.npy')
-    X_test  = np.load(path + 'X_test.npy')
-    y_test  = np.load(path + 'y_test.npy')
+ X_train = np.load(path + 'X_train.npy')
+ y_train = np.load(path + 'y_train.npy')
+ X_test  = np.load(path + 'X_test.npy')
+ y_test  = np.load(path + 'y_test.npy')
 ```
 Parameters for RNA dataset
 ```  
