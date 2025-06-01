@@ -20,7 +20,82 @@ This repository contains the source code and data used to train WaveSeekerNet. T
 
 1. Metadata for the datasets used in the paper can be found in the `data` directory.
 2. IAV HA and NA RNA/Protein sequences can be downloaded from EpiFLu GISAID database (https://www.gisaid.org/).
-3. Source code for model training and evaluation can be found in the `src` directory. The experimental results and training logs are also available in the `src` directory with extension `.csv` and `.out` respectively.
+3. Source code for model training and evaluation can be found in the `src` directory:
+    - `src/WaveSeekerNet`: Contains the WaveSeekerNet
+    - `src/Transformer`: Contains the Transformer-only model and the pre-trained ESM-2
+
+## How to Train WaveSeekerNet
+To train WaveSeekerNet, follow these steps:
+
+Load dataset in numpy format
+```   
+    X_train = np.load(path + 'X_train.npy')
+    y_train = np.load(path + 'y_train.npy')
+    X_test  = np.load(path + 'X_test.npy')
+    y_test  = np.load(path + 'y_test.npy')
+```
+Parameters for RNA dataset
+```  
+X_train Shape: (B, 2**D, 2**D) where B is the number of samples, D is the depth of FCGR
+D = 6
+n_out = len(np.unique(y_train))
+n_channels= 1
+seq_len = 2**D
+res_len = 2**D  
+patch_size = (4, 4)
+epochs = 35
+batch_size = 256
+emb_dim = 64
+final_hidden_size = 24
+ ```  
+Parameters for Protein dataset
+
+```  
+X_train Shape: (B, 21, seq_len) where B is the number of samples
+n_out = len(np.unique(y_train))
+seq_len = seq_len
+res_len = 21
+patch_size = (3, res_len)
+epochs = 35
+batch_size = 256
+emb_dim = 64
+final_hidden_size = 24
+ ```   
+WaveSeekerNet Hyperparameters
+```     
+params_dict = {"use_fft": False,  # default True
+               "use_wavelets": False,  # default True
+               "use_gmlp": False,  # default True
+               "activation_mish": torch.nn.Mish,  # default ErMish
+               "activation_gelu": torch.nn.GELU,
+               "activation_relu": torch.nn.ReLU,
+               "use_kan": False,  # default True
+               "use_smoe": False,  # default True
+               "use_gc": False,  # default True
+               "use_lookahead": False,  # default True
+               }
+```
+Train and predict with WaveSeekerClassifier
+```     
+clf = WaveSeekerClassifier(
+        n_channels=n_channels,
+        seq_L=seq_len,
+        res_L=res_len,
+        patch_size=patch_size,
+        n_out=n_out,
+        batch_size=batch_size,
+        emb_dim=emb_dim,
+        final_hidden_size=final_hidden_size,
+        epochs=epochs,
+        patch_mode="patch",
+        wavelet_names=["sym4"],
+        n_blocks=1,
+        lr=0.0025)
+clf.fit(X_train, y_train, X_val, y_val)
+clf.predict(X_test)
+```
+
+
 
 ## Contributors and Maintainers
 
