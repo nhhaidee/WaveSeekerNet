@@ -1,0 +1,2438 @@
+warning: refusing to reload ordenv; ORDENV_SETUP already set
+CUDA_VISIBLE_DEVICES=0
+Wed Apr 23 13:07:38 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 550.127.08             Driver Version: 550.127.08     CUDA Version: 12.4     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-40GB          Off |   00000000:B7:00.0 Off |                    0 |
+| N/A   28C    P0             51W /  400W |       1MiB /  40960MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+INFO:root:Fold: 0
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:70: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model_data = torch.load(str(model_location), map_location="cpu")
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:74: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  regression_data = torch.load(regression_location, map_location="cpu")
+INFO:root:Start Training Model
+INFO:root:Train epoch 1 in 331.092193 seconds
+INFO:root:Train epoch 2 in 330.614192 seconds
+INFO:root:Train epoch 3 in 330.572445 seconds
+INFO:root:Train epoch 4 in 330.528604 seconds
+INFO:root:Train epoch 5 in 330.602517 seconds
+INFO:root:Train epoch 6 in 330.602333 seconds
+INFO:root:Train epoch 7 in 330.590911 seconds
+INFO:root:Train epoch 8 in 330.586923 seconds
+INFO:root:Train epoch 9 in 330.588175 seconds
+INFO:root:Train epoch 10 in 330.627361 seconds
+INFO:root:Train epoch 11 in 330.683316 seconds
+INFO:root:Train epoch 12 in 330.636022 seconds
+INFO:root:Train epoch 13 in 330.657873 seconds
+INFO:root:Train epoch 14 in 330.620890 seconds
+INFO:root:Train epoch 15 in 330.637290 seconds
+INFO:root:Train epoch 16 in 330.686352 seconds
+INFO:root:Train epoch 17 in 330.804654 seconds
+INFO:root:Train epoch 18 in 330.621117 seconds
+INFO:root:Train epoch 19 in 330.562869 seconds
+INFO:root:Train epoch 20 in 330.495000 seconds
+INFO:root:Train epoch 21 in 331.208580 seconds
+INFO:root:Train epoch 22 in 330.904954 seconds
+INFO:root:Train epoch 23 in 330.976128 seconds
+INFO:root:Train epoch 24 in 330.922959 seconds
+INFO:root:Train epoch 25 in 330.935326 seconds
+INFO:root:Train epoch 26 in 331.045388 seconds
+INFO:root:Train epoch 27 in 331.221527 seconds
+INFO:root:Train epoch 28 in 331.103765 seconds
+INFO:root:Train epoch 29 in 331.061515 seconds
+INFO:root:Finish training and load weight for prediction:/gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_0.pt
+INFO:root:Fold: 1
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:70: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model_data = torch.load(str(model_location), map_location="cpu")
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:74: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  regression_data = torch.load(regression_location, map_location="cpu")
+INFO:root:Start Training Model
+INFO:root:Train epoch 1 in 331.137424 seconds
+INFO:root:Train epoch 2 in 331.292905 seconds
+INFO:root:Train epoch 3 in 331.288777 seconds
+INFO:root:Train epoch 4 in 331.239734 seconds
+INFO:root:Train epoch 5 in 331.566373 seconds
+INFO:root:Train epoch 6 in 331.294927 seconds
+INFO:root:Train epoch 7 in 331.220471 seconds
+INFO:root:Train epoch 8 in 331.310509 seconds
+INFO:root:Train epoch 9 in 331.104111 seconds
+INFO:root:Train epoch 10 in 331.140683 seconds
+INFO:root:Train epoch 11 in 331.347870 seconds
+INFO:root:Train epoch 12 in 331.137601 seconds
+INFO:root:Train epoch 13 in 331.195693 seconds
+INFO:root:Train epoch 14 in 331.202833 seconds
+INFO:root:Train epoch 15 in 331.072067 seconds
+INFO:root:Finish training and load weight for prediction:/gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_1.pt
+INFO:root:Fold: 2
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:70: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model_data = torch.load(str(model_location), map_location="cpu")
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:74: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  regression_data = torch.load(regression_location, map_location="cpu")
+INFO:root:Start Training Model
+INFO:root:Train epoch 1 in 331.173898 seconds
+INFO:root:Train epoch 2 in 331.096277 seconds
+INFO:root:Train epoch 3 in 331.205956 seconds
+INFO:root:Train epoch 4 in 331.115968 seconds
+INFO:root:Train epoch 5 in 331.187954 seconds
+INFO:root:Train epoch 6 in 331.173326 seconds
+INFO:root:Train epoch 7 in 331.222467 seconds
+INFO:root:Train epoch 8 in 331.109652 seconds
+INFO:root:Train epoch 9 in 331.109187 seconds
+INFO:root:Train epoch 10 in 331.177520 seconds
+INFO:root:Train epoch 11 in 331.140127 seconds
+INFO:root:Train epoch 12 in 331.129415 seconds
+INFO:root:Train epoch 13 in 331.183353 seconds
+INFO:root:Train epoch 14 in 331.174282 seconds
+INFO:root:Train epoch 15 in 331.161936 seconds
+INFO:root:Train epoch 16 in 331.093747 seconds
+INFO:root:Train epoch 17 in 331.237783 seconds
+INFO:root:Train epoch 18 in 331.095249 seconds
+INFO:root:Train epoch 19 in 331.090062 seconds
+INFO:root:Train epoch 20 in 331.134986 seconds
+INFO:root:Train epoch 21 in 331.200088 seconds
+INFO:root:Train epoch 22 in 331.176134 seconds
+INFO:root:Train epoch 23 in 331.261584 seconds
+INFO:root:Train epoch 24 in 331.272856 seconds
+INFO:root:Train epoch 25 in 331.168572 seconds
+INFO:root:Train epoch 26 in 331.151267 seconds
+INFO:root:Train epoch 27 in 331.128759 seconds
+INFO:root:Train epoch 28 in 331.146143 seconds
+INFO:root:Train epoch 29 in 331.100664 seconds
+INFO:root:Train epoch 30 in 331.109654 seconds
+INFO:root:Train epoch 31 in 331.140232 seconds
+INFO:root:Train epoch 32 in 331.230778 seconds
+INFO:root:Train epoch 33 in 331.177490 seconds
+INFO:root:Train epoch 34 in 331.159572 seconds
+INFO:root:Train epoch 35 in 331.229469 seconds
+INFO:root:Finish training and load weight for prediction:/gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_2.pt
+INFO:root:Fold: 3
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:70: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model_data = torch.load(str(model_location), map_location="cpu")
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:74: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  regression_data = torch.load(regression_location, map_location="cpu")
+INFO:root:Start Training Model
+INFO:root:Train epoch 1 in 331.168008 seconds
+INFO:root:Train epoch 2 in 331.122168 seconds
+INFO:root:Train epoch 3 in 331.154750 seconds
+INFO:root:Train epoch 4 in 331.206527 seconds
+INFO:root:Train epoch 5 in 331.247337 seconds
+INFO:root:Train epoch 6 in 331.206356 seconds
+INFO:root:Train epoch 7 in 331.224126 seconds
+INFO:root:Train epoch 8 in 331.249647 seconds
+INFO:root:Train epoch 9 in 331.230553 seconds
+INFO:root:Train epoch 10 in 331.252586 seconds
+INFO:root:Train epoch 11 in 331.221572 seconds
+INFO:root:Train epoch 12 in 331.284518 seconds
+INFO:root:Train epoch 13 in 331.285366 seconds
+INFO:root:Train epoch 14 in 331.321243 seconds
+INFO:root:Train epoch 15 in 331.180437 seconds
+INFO:root:Train epoch 16 in 331.331983 seconds
+INFO:root:Train epoch 17 in 331.240205 seconds
+INFO:root:Train epoch 18 in 331.284853 seconds
+INFO:root:Train epoch 19 in 331.202706 seconds
+INFO:root:Train epoch 20 in 331.290960 seconds
+INFO:root:Train epoch 21 in 331.166110 seconds
+INFO:root:Train epoch 22 in 331.208140 seconds
+INFO:root:Finish training and load weight for prediction:/gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_3.pt
+INFO:root:Fold: 4
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:70: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model_data = torch.load(str(model_location), map_location="cpu")
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:74: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  regression_data = torch.load(regression_location, map_location="cpu")
+INFO:root:Start Training Model
+INFO:root:Train epoch 1 in 331.182864 seconds
+INFO:root:Train epoch 2 in 331.119092 seconds
+INFO:root:Train epoch 3 in 331.155302 seconds
+INFO:root:Train epoch 4 in 331.232684 seconds
+INFO:root:Train epoch 5 in 331.219438 seconds
+INFO:root:Train epoch 6 in 331.225472 seconds
+INFO:root:Train epoch 7 in 331.236691 seconds
+INFO:root:Train epoch 8 in 331.257237 seconds
+INFO:root:Train epoch 9 in 331.278750 seconds
+INFO:root:Train epoch 10 in 331.327887 seconds
+INFO:root:Train epoch 11 in 331.223490 seconds
+INFO:root:Train epoch 12 in 331.241209 seconds
+INFO:root:Train epoch 13 in 331.207538 seconds
+INFO:root:Train epoch 14 in 331.190206 seconds
+INFO:root:Train epoch 15 in 331.177205 seconds
+INFO:root:Train epoch 16 in 331.198697 seconds
+INFO:root:Train epoch 17 in 331.296306 seconds
+INFO:root:Train epoch 18 in 331.189730 seconds
+INFO:root:Train epoch 19 in 331.197881 seconds
+INFO:root:Train epoch 20 in 331.198394 seconds
+INFO:root:Train epoch 21 in 331.162767 seconds
+INFO:root:Train epoch 22 in 331.214796 seconds
+INFO:root:Train epoch 23 in 331.193462 seconds
+INFO:root:Train epoch 24 in 331.270793 seconds
+INFO:root:Train epoch 25 in 331.172931 seconds
+INFO:root:Train epoch 26 in 331.224163 seconds
+INFO:root:Train epoch 27 in 331.225538 seconds
+INFO:root:Finish training and load weight for prediction:/gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_4.pt
+INFO:root:Fold: 5
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:70: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model_data = torch.load(str(model_location), map_location="cpu")
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:74: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  regression_data = torch.load(regression_location, map_location="cpu")
+INFO:root:Start Training Model
+INFO:root:Train epoch 1 in 331.050515 seconds
+INFO:root:Train epoch 2 in 331.147639 seconds
+INFO:root:Train epoch 3 in 331.173020 seconds
+INFO:root:Train epoch 4 in 331.210132 seconds
+INFO:root:Train epoch 5 in 331.230452 seconds
+INFO:root:Train epoch 6 in 331.239238 seconds
+INFO:root:Train epoch 7 in 331.203534 seconds
+INFO:root:Train epoch 8 in 331.204493 seconds
+INFO:root:Train epoch 9 in 331.214203 seconds
+INFO:root:Train epoch 10 in 331.327168 seconds
+INFO:root:Train epoch 11 in 331.225605 seconds
+INFO:root:Train epoch 12 in 331.200062 seconds
+INFO:root:Train epoch 13 in 331.250304 seconds
+INFO:root:Train epoch 14 in 331.186634 seconds
+INFO:root:Train epoch 15 in 331.215270 seconds
+INFO:root:Train epoch 16 in 331.219935 seconds
+INFO:root:Train epoch 17 in 331.210856 seconds
+INFO:root:Train epoch 18 in 331.139671 seconds
+INFO:root:Train epoch 19 in 331.152589 seconds
+INFO:root:Train epoch 20 in 331.173603 seconds
+INFO:root:Train epoch 21 in 331.169492 seconds
+INFO:root:Finish training and load weight for prediction:/gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_5.pt
+INFO:root:Fold: 6
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:70: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model_data = torch.load(str(model_location), map_location="cpu")
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:74: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  regression_data = torch.load(regression_location, map_location="cpu")
+INFO:root:Start Training Model
+INFO:root:Train epoch 1 in 331.164998 seconds
+INFO:root:Train epoch 2 in 331.085129 seconds
+INFO:root:Train epoch 3 in 331.144247 seconds
+INFO:root:Train epoch 4 in 331.163133 seconds
+INFO:root:Train epoch 5 in 331.203918 seconds
+INFO:root:Train epoch 6 in 331.110376 seconds
+INFO:root:Train epoch 7 in 331.165052 seconds
+INFO:root:Train epoch 8 in 331.116666 seconds
+INFO:root:Train epoch 9 in 331.127354 seconds
+INFO:root:Train epoch 10 in 331.207814 seconds
+INFO:root:Train epoch 11 in 331.211931 seconds
+INFO:root:Train epoch 12 in 331.179492 seconds
+INFO:root:Train epoch 13 in 331.204064 seconds
+INFO:root:Train epoch 14 in 331.186446 seconds
+INFO:root:Train epoch 15 in 331.177732 seconds
+INFO:root:Train epoch 16 in 331.194591 seconds
+INFO:root:Train epoch 17 in 331.207415 seconds
+INFO:root:Finish training and load weight for prediction:/gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_6.pt
+INFO:root:Fold: 7
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:70: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model_data = torch.load(str(model_location), map_location="cpu")
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:74: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  regression_data = torch.load(regression_location, map_location="cpu")
+INFO:root:Start Training Model
+INFO:root:Train epoch 1 in 331.133330 seconds
+INFO:root:Train epoch 2 in 331.127022 seconds
+INFO:root:Train epoch 3 in 331.117576 seconds
+INFO:root:Train epoch 4 in 331.141517 seconds
+INFO:root:Train epoch 5 in 331.207405 seconds
+INFO:root:Train epoch 6 in 331.249397 seconds
+INFO:root:Train epoch 7 in 331.179804 seconds
+INFO:root:Train epoch 8 in 331.181217 seconds
+INFO:root:Train epoch 9 in 331.174875 seconds
+INFO:root:Train epoch 10 in 331.254403 seconds
+INFO:root:Train epoch 11 in 331.142464 seconds
+INFO:root:Train epoch 12 in 331.204799 seconds
+INFO:root:Train epoch 13 in 331.261804 seconds
+INFO:root:Train epoch 14 in 331.216565 seconds
+INFO:root:Train epoch 15 in 331.171634 seconds
+INFO:root:Train epoch 16 in 331.249584 seconds
+INFO:root:Train epoch 17 in 331.190416 seconds
+INFO:root:Train epoch 18 in 331.190754 seconds
+INFO:root:Train epoch 19 in 331.193486 seconds
+INFO:root:Train epoch 20 in 331.229973 seconds
+INFO:root:Train epoch 21 in 331.189787 seconds
+INFO:root:Train epoch 22 in 331.273823 seconds
+INFO:root:Train epoch 23 in 331.207694 seconds
+INFO:root:Train epoch 24 in 331.146843 seconds
+INFO:root:Train epoch 25 in 331.179404 seconds
+INFO:root:Train epoch 26 in 331.217524 seconds
+INFO:root:Train epoch 27 in 331.206284 seconds
+INFO:root:Finish training and load weight for prediction:/gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_7.pt
+INFO:root:Fold: 8
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:70: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model_data = torch.load(str(model_location), map_location="cpu")
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:74: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  regression_data = torch.load(regression_location, map_location="cpu")
+INFO:root:Start Training Model
+INFO:root:Train epoch 1 in 331.197903 seconds
+Training data shape: (66636, 497) (66636,)
+Test High-quality Data Shape: (28219, 497) (28219,)
+Test Low-quality Data Shape (Post 2020): (720, 497) (720,)
+Number of classes: 3
+Fold: 0
+Data Shape Before Sampling:  (59972, 497) (59972,)
+Subtype/Host: 0 ,count:  34602 ,index count: (array([False,  True]), array([25370, 34602])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 1 ,count:  16398 ,index count: (array([False,  True]), array([43574, 16398])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 2 ,count:  8972 ,index count: (array([False,  True]), array([51000,  8972])) ,keep:  (8972, 497) (8972,)
+CV Train Shape (40972, 497) (40972,)
+CV Val Shape (6664, 497) (6664,)
+Total Trainable Parameters:  33562837
+Total Parameters:  33562837
+----Epoch:1----
+Training Time : 331.09219312667847
+Val Infer Time: 23.18706727027893
+BAS Score on Validation Data: 0.9424637186697041
+Loss on Validation Data: 0.17299861999219684
+Validation loss decreased (inf --> 0.172999).  Saving model ...
+----Epoch:2----
+Training Time : 330.61419200897217
+Val Infer Time: 23.177990674972534
+BAS Score on Validation Data: 0.9469063475860596
+Loss on Validation Data: 0.1479346398531535
+Validation loss decreased (0.172999 --> 0.147935).  Saving model ...
+----Epoch:3----
+Training Time : 330.57244539260864
+Val Infer Time: 23.182217121124268
+BAS Score on Validation Data: 0.9449372847843036
+Loss on Validation Data: 0.14650850204759808
+Validation loss decreased (0.147935 --> 0.146509).  Saving model ...
+----Epoch:4----
+Training Time : 330.52860379219055
+Val Infer Time: 23.185887575149536
+BAS Score on Validation Data: 0.9477235369086872
+Loss on Validation Data: 0.15373597304786793
+EarlyStopping counter: 1 out of 7
+----Epoch:5----
+Training Time : 330.6025171279907
+Val Infer Time: 23.18733239173889
+BAS Score on Validation Data: 0.9541874887990353
+Loss on Validation Data: 0.12151422626093815
+Validation loss decreased (0.146509 --> 0.121514).  Saving model ...
+----Epoch:6----
+Training Time : 330.60233306884766
+Val Infer Time: 23.17708396911621
+BAS Score on Validation Data: 0.9603320614527129
+Loss on Validation Data: 0.12260399880021383
+EarlyStopping counter: 1 out of 7
+----Epoch:7----
+Training Time : 330.5909113883972
+Val Infer Time: 23.187429189682007
+BAS Score on Validation Data: 0.9549552885137408
+Loss on Validation Data: 0.11081506589953409
+Validation loss decreased (0.121514 --> 0.110815).  Saving model ...
+----Epoch:8----
+Training Time : 330.586923122406
+Val Infer Time: 23.184519290924072
+BAS Score on Validation Data: 0.9623970329059985
+Loss on Validation Data: 0.10673311965887626
+Validation loss decreased (0.110815 --> 0.106733).  Saving model ...
+----Epoch:9----
+Training Time : 330.5881748199463
+Val Infer Time: 23.170799016952515
+BAS Score on Validation Data: 0.960666049980933
+Loss on Validation Data: 0.1287348806572873
+EarlyStopping counter: 1 out of 7
+----Epoch:10----
+Training Time : 330.62736105918884
+Val Infer Time: 23.171814680099487
+BAS Score on Validation Data: 0.963807336681996
+Loss on Validation Data: 0.10833814668883547
+EarlyStopping counter: 2 out of 7
+----Epoch:11----
+Training Time : 330.6833155155182
+Val Infer Time: 23.176979064941406
+BAS Score on Validation Data: 0.9611865538418872
+Loss on Validation Data: 0.1150268076709583
+EarlyStopping counter: 3 out of 7
+----Epoch:12----
+Training Time : 330.63602209091187
+Val Infer Time: 23.193897008895874
+BAS Score on Validation Data: 0.9615322810973425
+Loss on Validation Data: 0.12613747137014947
+EarlyStopping counter: 4 out of 7
+----Epoch:13----
+Training Time : 330.65787291526794
+Val Infer Time: 23.18523645401001
+BAS Score on Validation Data: 0.9600225938213837
+Loss on Validation Data: 0.10007466482773922
+Validation loss decreased (0.106733 --> 0.100075).  Saving model ...
+----Epoch:14----
+Training Time : 330.620890378952
+Val Infer Time: 23.184361219406128
+BAS Score on Validation Data: 0.9646813044677128
+Loss on Validation Data: 0.09970777513878197
+EarlyStopping counter: 1 out of 7
+----Epoch:15----
+Training Time : 330.6372904777527
+Val Infer Time: 23.18087601661682
+BAS Score on Validation Data: 0.9647526922223517
+Loss on Validation Data: 0.10030418491819829
+EarlyStopping counter: 2 out of 7
+----Epoch:16----
+Training Time : 330.68635177612305
+Val Infer Time: 23.186196327209473
+BAS Score on Validation Data: 0.9652852826246813
+Loss on Validation Data: 0.09639303992239483
+Validation loss decreased (0.100075 --> 0.096393).  Saving model ...
+----Epoch:17----
+Training Time : 330.8046543598175
+Val Infer Time: 23.16134786605835
+BAS Score on Validation Data: 0.9644304424213667
+Loss on Validation Data: 0.10893956582512011
+EarlyStopping counter: 1 out of 7
+----Epoch:18----
+Training Time : 330.62111735343933
+Val Infer Time: 23.189054250717163
+BAS Score on Validation Data: 0.9564755882729861
+Loss on Validation Data: 0.13601295543059208
+EarlyStopping counter: 2 out of 7
+----Epoch:19----
+Training Time : 330.5628685951233
+Val Infer Time: 23.196962356567383
+BAS Score on Validation Data: 0.9649538168466355
+Loss on Validation Data: 0.09502719549471111
+Validation loss decreased (0.096393 --> 0.095027).  Saving model ...
+----Epoch:20----
+Training Time : 330.49500012397766
+Val Infer Time: 23.236400365829468
+BAS Score on Validation Data: 0.9669616905617772
+Loss on Validation Data: 0.0954059008776286
+EarlyStopping counter: 1 out of 7
+----Epoch:21----
+Training Time : 331.2085802555084
+Val Infer Time: 23.20637845993042
+BAS Score on Validation Data: 0.9663160309271084
+Loss on Validation Data: 0.09541624442241979
+EarlyStopping counter: 2 out of 7
+----Epoch:22----
+Training Time : 330.904953956604
+Val Infer Time: 23.208390474319458
+BAS Score on Validation Data: 0.9679504095723637
+Loss on Validation Data: 0.09323414689616154
+Validation loss decreased (0.095027 --> 0.093234).  Saving model ...
+----Epoch:23----
+Training Time : 330.9761281013489
+Val Infer Time: 23.194645881652832
+BAS Score on Validation Data: 0.9671389613783652
+Loss on Validation Data: 0.09269843289726659
+EarlyStopping counter: 1 out of 7
+----Epoch:24----
+Training Time : 330.922958612442
+Val Infer Time: 23.193687438964844
+BAS Score on Validation Data: 0.9672998495667096
+Loss on Validation Data: 0.09896326549885946
+EarlyStopping counter: 2 out of 7
+----Epoch:25----
+Training Time : 330.93532609939575
+Val Infer Time: 23.21247148513794
+BAS Score on Validation Data: 0.9643842711918994
+Loss on Validation Data: 0.10009032352404161
+EarlyStopping counter: 3 out of 7
+----Epoch:26----
+Training Time : 331.0453884601593
+Val Infer Time: 23.23869514465332
+BAS Score on Validation Data: 0.9665110666086227
+Loss on Validation Data: 0.105775127927082
+EarlyStopping counter: 4 out of 7
+----Epoch:27----
+Training Time : 331.22152733802795
+Val Infer Time: 23.20917320251465
+BAS Score on Validation Data: 0.9682206071355534
+Loss on Validation Data: 0.09332902223299565
+EarlyStopping counter: 5 out of 7
+----Epoch:28----
+Training Time : 331.1037654876709
+Val Infer Time: 23.205170392990112
+BAS Score on Validation Data: 0.967316169389875
+Loss on Validation Data: 0.10177056926289244
+EarlyStopping counter: 6 out of 7
+----Epoch:29----
+Training Time : 331.0615146160126
+Val Infer Time: 23.206061840057373
+BAS Score on Validation Data: 0.9668511440796124
+Loss on Validation Data: 0.09739401779676739
+EarlyStopping counter: 7 out of 7
+Early Stop
+Load the best weight after training: /gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_0.pt
+Inference Test Time: 98.07228541374207
+Inference Test Time: 2.5221104621887207
+High Quality
+0.9712160508556424 0.976586331282349 0.9825529438657062 0.9712160508556424 0.9717685426367162
+              precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99     19588
+           1       0.98      1.00      0.99      5531
+           2       0.98      0.92      0.95      3100
+
+    accuracy                           0.99     28219
+   macro avg       0.98      0.97      0.98     28219
+weighted avg       0.99      0.99      0.99     28219
+
+Low Quality
+0.9119422572178477 0.9049454807766829 0.8995391452025997 0.9119422572178477 0.9115982043579797
+              precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99       635
+           1       0.92      1.00      0.96        65
+           2       0.79      0.75      0.77        20
+
+    accuracy                           0.98       720
+   macro avg       0.90      0.91      0.90       720
+weighted avg       0.98      0.98      0.98       720
+
+
+High Quality Post 2020
+                     mean  std  sem  count
+Model                                     
+transformer_esm  0.976586  NaN  NaN      1
+                     mean  std  sem  count
+Model                                     
+transformer_esm  0.971216  NaN  NaN      1
+                     mean  std  sem  count
+Model                                     
+transformer_esm  0.971769  NaN  NaN      1
+
+Low Quality Post 2020
+                     mean  std  sem  count
+Model                                     
+transformer_esm  0.904945  NaN  NaN      1
+                     mean  std  sem  count
+Model                                     
+transformer_esm  0.911942  NaN  NaN      1
+                     mean  std  sem  count
+Model                                     
+transformer_esm  0.911598  NaN  NaN      1
+Saving Results
+Fold: 1
+Data Shape Before Sampling:  (59972, 497) (59972,)
+Subtype/Host: 0 ,count:  34602 ,index count: (array([False,  True]), array([25370, 34602])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 1 ,count:  16398 ,index count: (array([False,  True]), array([43574, 16398])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 2 ,count:  8972 ,index count: (array([False,  True]), array([51000,  8972])) ,keep:  (8972, 497) (8972,)
+CV Train Shape (40972, 497) (40972,)
+CV Val Shape (6664, 497) (6664,)
+Total Trainable Parameters:  33562837
+Total Parameters:  33562837
+----Epoch:1----
+Training Time : 331.13742423057556
+Val Infer Time: 23.208991765975952
+BAS Score on Validation Data: 0.9565399297369335
+Loss on Validation Data: 0.16047582671973123
+Validation loss decreased (inf --> 0.160476).  Saving model ...
+----Epoch:2----
+Training Time : 331.2929050922394
+Val Infer Time: 23.202815294265747
+BAS Score on Validation Data: 0.9602897128858174
+Loss on Validation Data: 0.12163867448505603
+Validation loss decreased (0.160476 --> 0.121639).  Saving model ...
+----Epoch:3----
+Training Time : 331.2887771129608
+Val Infer Time: 23.216532707214355
+BAS Score on Validation Data: 0.9640786262231419
+Loss on Validation Data: 0.10414272061945719
+Validation loss decreased (0.121639 --> 0.104143).  Saving model ...
+----Epoch:4----
+Training Time : 331.2397344112396
+Val Infer Time: 23.20934748649597
+BAS Score on Validation Data: 0.9668279230951189
+Loss on Validation Data: 0.09512602085131777
+Validation loss decreased (0.104143 --> 0.095126).  Saving model ...
+----Epoch:5----
+Training Time : 331.5663728713989
+Val Infer Time: 23.247084617614746
+BAS Score on Validation Data: 0.9706097953914167
+Loss on Validation Data: 0.10140793175218207
+EarlyStopping counter: 1 out of 7
+----Epoch:6----
+Training Time : 331.2949266433716
+Val Infer Time: 23.201247930526733
+BAS Score on Validation Data: 0.9664068940782896
+Loss on Validation Data: 0.08643471909481942
+Validation loss decreased (0.095126 --> 0.086435).  Saving model ...
+----Epoch:7----
+Training Time : 331.2204706668854
+Val Infer Time: 23.20001745223999
+BAS Score on Validation Data: 0.9691837132712927
+Loss on Validation Data: 0.09411348566484223
+EarlyStopping counter: 1 out of 7
+----Epoch:8----
+Training Time : 331.3105094432831
+Val Infer Time: 23.20538640022278
+BAS Score on Validation Data: 0.9674099031053708
+Loss on Validation Data: 0.08415888599231483
+Validation loss decreased (0.086435 --> 0.084159).  Saving model ...
+----Epoch:9----
+Training Time : 331.104110956192
+Val Infer Time: 23.20838165283203
+BAS Score on Validation Data: 0.9715086318881648
+Loss on Validation Data: 0.08386099167417681
+EarlyStopping counter: 1 out of 7
+----Epoch:10----
+Training Time : 331.1406829357147
+Val Infer Time: 23.204148292541504
+BAS Score on Validation Data: 0.973489781231296
+Loss on Validation Data: 0.09386689469004361
+EarlyStopping counter: 2 out of 7
+----Epoch:11----
+Training Time : 331.34787011146545
+Val Infer Time: 23.216195344924927
+BAS Score on Validation Data: 0.9701833730600985
+Loss on Validation Data: 0.09033273852042605
+EarlyStopping counter: 3 out of 7
+----Epoch:12----
+Training Time : 331.1376008987427
+Val Infer Time: 23.216962575912476
+BAS Score on Validation Data: 0.9728829325100129
+Loss on Validation Data: 0.08360371578253056
+EarlyStopping counter: 4 out of 7
+----Epoch:13----
+Training Time : 331.1956934928894
+Val Infer Time: 23.19055438041687
+BAS Score on Validation Data: 0.9727124177253895
+Loss on Validation Data: 0.08490068547463303
+EarlyStopping counter: 5 out of 7
+----Epoch:14----
+Training Time : 331.2028331756592
+Val Infer Time: 23.206037044525146
+BAS Score on Validation Data: 0.9716800359659675
+Loss on Validation Data: 0.08427397143897827
+EarlyStopping counter: 6 out of 7
+----Epoch:15----
+Training Time : 331.0720670223236
+Val Infer Time: 23.23678708076477
+BAS Score on Validation Data: 0.9714932641632564
+Loss on Validation Data: 0.08751620573290227
+EarlyStopping counter: 7 out of 7
+Early Stop
+Load the best weight after training: /gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_1.pt
+Inference Test Time: 98.10121607780457
+Inference Test Time: 2.5178425312042236
+High Quality
+0.9663270411534568 0.9739292157549716 0.9826219256150474 0.9663270411534568 0.968414790390907
+              precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99     19588
+           1       0.98      1.00      0.99      5531
+           2       0.98      0.91      0.94      3100
+
+    accuracy                           0.99     28219
+   macro avg       0.98      0.97      0.97     28219
+weighted avg       0.99      0.99      0.99     28219
+
+Low Quality
+0.84251968503937 0.7647083145004568 0.7220213104678974 0.84251968503937 0.7367585577348884
+              precision    recall  f1-score   support
+
+           0       1.00      0.93      0.96       635
+           1       0.60      1.00      0.75        65
+           2       0.57      0.60      0.59        20
+
+    accuracy                           0.93       720
+   macro avg       0.72      0.84      0.76       720
+weighted avg       0.95      0.93      0.93       720
+
+
+High Quality Post 2020
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.975258  0.001879  0.001329      2
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.968772  0.003457  0.002445      2
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.970092  0.002371  0.001677      2
+
+Low Quality Post 2020
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.834827  0.099163  0.070119      2
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.877231  0.049089  0.034711      2
+                     mean      std      sem  count
+Model                                             
+transformer_esm  0.824178  0.12363  0.08742      2
+Saving Results
+Fold: 2
+Data Shape Before Sampling:  (59972, 497) (59972,)
+Subtype/Host: 0 ,count:  34602 ,index count: (array([False,  True]), array([25370, 34602])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 1 ,count:  16398 ,index count: (array([False,  True]), array([43574, 16398])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 2 ,count:  8972 ,index count: (array([False,  True]), array([51000,  8972])) ,keep:  (8972, 497) (8972,)
+CV Train Shape (40972, 497) (40972,)
+CV Val Shape (6664, 497) (6664,)
+Total Trainable Parameters:  33562837
+Total Parameters:  33562837
+----Epoch:1----
+Training Time : 331.1738975048065
+Val Infer Time: 23.208844661712646
+BAS Score on Validation Data: 0.9581714378178742
+Loss on Validation Data: 0.16298131623336573
+Validation loss decreased (inf --> 0.162981).  Saving model ...
+----Epoch:2----
+Training Time : 331.0962772369385
+Val Infer Time: 23.242693185806274
+BAS Score on Validation Data: 0.9572309483825112
+Loss on Validation Data: 0.11896570789756958
+Validation loss decreased (0.162981 --> 0.118966).  Saving model ...
+----Epoch:3----
+Training Time : 331.20595598220825
+Val Infer Time: 23.207449197769165
+BAS Score on Validation Data: 0.9644897436346301
+Loss on Validation Data: 0.11789918059937692
+Validation loss decreased (0.118966 --> 0.117899).  Saving model ...
+----Epoch:4----
+Training Time : 331.11596846580505
+Val Infer Time: 23.209677934646606
+BAS Score on Validation Data: 0.9714091570440399
+Loss on Validation Data: 0.10283277023351933
+Validation loss decreased (0.117899 --> 0.102833).  Saving model ...
+----Epoch:5----
+Training Time : 331.1879541873932
+Val Infer Time: 23.20783281326294
+BAS Score on Validation Data: 0.9701215490966607
+Loss on Validation Data: 0.08968714777932783
+Validation loss decreased (0.102833 --> 0.089687).  Saving model ...
+----Epoch:6----
+Training Time : 331.17332577705383
+Val Infer Time: 23.239596843719482
+BAS Score on Validation Data: 0.9693167941295485
+Loss on Validation Data: 0.0922541404454902
+EarlyStopping counter: 1 out of 7
+----Epoch:7----
+Training Time : 331.2224669456482
+Val Infer Time: 23.201751232147217
+BAS Score on Validation Data: 0.9654149281501628
+Loss on Validation Data: 0.1299229318445379
+EarlyStopping counter: 2 out of 7
+----Epoch:8----
+Training Time : 331.1096520423889
+Val Infer Time: 23.204488039016724
+BAS Score on Validation Data: 0.9733903063871711
+Loss on Validation Data: 0.10432931937669453
+EarlyStopping counter: 3 out of 7
+----Epoch:9----
+Training Time : 331.1091868877411
+Val Infer Time: 23.20562505722046
+BAS Score on Validation Data: 0.9727120699112493
+Loss on Validation Data: 0.09712432018307407
+EarlyStopping counter: 4 out of 7
+----Epoch:10----
+Training Time : 331.1775197982788
+Val Infer Time: 23.190046548843384
+BAS Score on Validation Data: 0.9718550547719005
+Loss on Validation Data: 0.08948760739924234
+EarlyStopping counter: 5 out of 7
+----Epoch:11----
+Training Time : 331.14012718200684
+Val Infer Time: 23.19878387451172
+BAS Score on Validation Data: 0.971644714170556
+Loss on Validation Data: 0.08257686635523892
+Validation loss decreased (0.089687 --> 0.082577).  Saving model ...
+----Epoch:12----
+Training Time : 331.1294150352478
+Val Infer Time: 23.21619415283203
+BAS Score on Validation Data: 0.9705454486778047
+Loss on Validation Data: 0.08560946369855597
+EarlyStopping counter: 1 out of 7
+----Epoch:13----
+Training Time : 331.1833529472351
+Val Infer Time: 23.208882808685303
+BAS Score on Validation Data: 0.9745794829328464
+Loss on Validation Data: 0.07874540136191263
+Validation loss decreased (0.082577 --> 0.078745).  Saving model ...
+----Epoch:14----
+Training Time : 331.17428159713745
+Val Infer Time: 23.207582235336304
+BAS Score on Validation Data: 0.9743194049094392
+Loss on Validation Data: 0.08430662622862456
+EarlyStopping counter: 1 out of 7
+----Epoch:15----
+Training Time : 331.161936044693
+Val Infer Time: 23.205180168151855
+BAS Score on Validation Data: 0.9734992679478762
+Loss on Validation Data: 0.09455164539756958
+EarlyStopping counter: 2 out of 7
+----Epoch:16----
+Training Time : 331.09374713897705
+Val Infer Time: 23.2127206325531
+BAS Score on Validation Data: 0.9719620978665482
+Loss on Validation Data: 0.0959306198158903
+EarlyStopping counter: 3 out of 7
+----Epoch:17----
+Training Time : 331.2377829551697
+Val Infer Time: 23.20883870124817
+BAS Score on Validation Data: 0.9736756009357497
+Loss on Validation Data: 0.0787763817316037
+EarlyStopping counter: 4 out of 7
+----Epoch:18----
+Training Time : 331.0952489376068
+Val Infer Time: 23.213242769241333
+BAS Score on Validation Data: 0.9743302058079598
+Loss on Validation Data: 0.07991576251801122
+EarlyStopping counter: 5 out of 7
+----Epoch:19----
+Training Time : 331.0900616645813
+Val Infer Time: 23.200306177139282
+BAS Score on Validation Data: 0.9735018677726712
+Loss on Validation Data: 0.08681768157550593
+EarlyStopping counter: 6 out of 7
+----Epoch:20----
+Training Time : 331.13498616218567
+Val Infer Time: 23.221755504608154
+BAS Score on Validation Data: 0.9751266968962683
+Loss on Validation Data: 0.07770313254811546
+Validation loss decreased (0.078745 --> 0.077703).  Saving model ...
+----Epoch:21----
+Training Time : 331.2000877857208
+Val Infer Time: 23.201432466506958
+BAS Score on Validation Data: 0.9762163843282758
+Loss on Validation Data: 0.09211234170854377
+EarlyStopping counter: 1 out of 7
+----Epoch:22----
+Training Time : 331.17613410949707
+Val Infer Time: 23.205545902252197
+BAS Score on Validation Data: 0.9753125023311792
+Loss on Validation Data: 0.08863449102026995
+EarlyStopping counter: 2 out of 7
+----Epoch:23----
+Training Time : 331.26158356666565
+Val Infer Time: 23.23157835006714
+BAS Score on Validation Data: 0.9733640892282072
+Loss on Validation Data: 0.08685130205308421
+EarlyStopping counter: 3 out of 7
+----Epoch:24----
+Training Time : 331.27285599708557
+Val Infer Time: 23.208338975906372
+BAS Score on Validation Data: 0.9731911144984874
+Loss on Validation Data: 0.07521336126413071
+Validation loss decreased (0.077703 --> 0.075213).  Saving model ...
+----Epoch:25----
+Training Time : 331.1685724258423
+Val Infer Time: 23.195948123931885
+BAS Score on Validation Data: 0.9748137401469648
+Loss on Validation Data: 0.08268494961079229
+EarlyStopping counter: 1 out of 7
+----Epoch:26----
+Training Time : 331.15126729011536
+Val Infer Time: 23.20601487159729
+BAS Score on Validation Data: 0.9734278801932374
+Loss on Validation Data: 0.09142529226518704
+EarlyStopping counter: 2 out of 7
+----Epoch:27----
+Training Time : 331.1287593841553
+Val Infer Time: 23.183210372924805
+BAS Score on Validation Data: 0.975527979777036
+Loss on Validation Data: 0.07533147250208558
+EarlyStopping counter: 3 out of 7
+----Epoch:28----
+Training Time : 331.1461429595947
+Val Infer Time: 23.204331159591675
+BAS Score on Validation Data: 0.975460414684969
+Loss on Validation Data: 0.08116399329244806
+EarlyStopping counter: 4 out of 7
+----Epoch:29----
+Training Time : 331.1006636619568
+Val Infer Time: 23.207281589508057
+BAS Score on Validation Data: 0.9739690822885109
+Loss on Validation Data: 0.09046875350355532
+EarlyStopping counter: 5 out of 7
+----Epoch:30----
+Training Time : 331.1096541881561
+Val Infer Time: 23.204457759857178
+BAS Score on Validation Data: 0.9778342494854669
+Loss on Validation Data: 0.07345160825899913
+Validation loss decreased (0.075213 --> 0.073452).  Saving model ...
+----Epoch:31----
+Training Time : 331.1402323246002
+Val Infer Time: 23.211095809936523
+BAS Score on Validation Data: 0.9686156074086529
+Loss on Validation Data: 0.07990704346715548
+EarlyStopping counter: 1 out of 7
+----Epoch:32----
+Training Time : 331.23077750205994
+Val Infer Time: 23.217461585998535
+BAS Score on Validation Data: 0.975667884721999
+Loss on Validation Data: 0.08840993757952344
+EarlyStopping counter: 2 out of 7
+----Epoch:33----
+Training Time : 331.177490234375
+Val Infer Time: 23.202691555023193
+BAS Score on Validation Data: 0.9738533646958413
+Loss on Validation Data: 0.08013866303497524
+EarlyStopping counter: 3 out of 7
+----Epoch:34----
+Training Time : 331.1595723628998
+Val Infer Time: 23.204562425613403
+BAS Score on Validation Data: 0.9764643758103074
+Loss on Validation Data: 0.08889556656542577
+EarlyStopping counter: 4 out of 7
+----Epoch:35----
+Training Time : 331.2294690608978
+Val Infer Time: 23.203249216079712
+BAS Score on Validation Data: 0.977676773340476
+Loss on Validation Data: 0.07946581088683823
+EarlyStopping counter: 5 out of 7
+Load the best weight after training: /gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_2.pt
+Inference Test Time: 98.07459855079651
+Inference Test Time: 2.518979072570801
+High Quality
+0.9732744515141043 0.9778537844122154 0.9829637031466741 0.9732744515141043 0.9730035188869528
+              precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99     19588
+           1       0.98      1.00      0.99      5531
+           2       0.98      0.93      0.95      3100
+
+    accuracy                           0.99     28219
+   macro avg       0.98      0.97      0.98     28219
+weighted avg       0.99      0.99      0.99     28219
+
+Low Quality
+0.8566929133858268 0.8184912317111134 0.7869215522177685 0.8566929133858268 0.8381208183023464
+              precision    recall  f1-score   support
+
+           0       0.99      0.97      0.98       635
+           1       0.89      1.00      0.94        65
+           2       0.48      0.60      0.53        20
+
+    accuracy                           0.96       720
+   macro avg       0.79      0.86      0.82       720
+weighted avg       0.97      0.96      0.96       720
+
+
+High Quality Post 2020
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.976123  0.002003  0.001156      3
+                     mean       std      sem  count
+Model                                              
+transformer_esm  0.970273  0.003569  0.00206      3
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.971062  0.002374  0.001371      3
+
+Low Quality Post 2020
+                     mean      std       sem  count
+Model                                              
+transformer_esm  0.829382  0.07075  0.040848      3
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.870385  0.036681  0.021178      3
+                     mean      std       sem  count
+Model                                              
+transformer_esm  0.828826  0.08779  0.050685      3
+Saving Results
+Fold: 3
+Data Shape Before Sampling:  (59972, 497) (59972,)
+Subtype/Host: 0 ,count:  34602 ,index count: (array([False,  True]), array([25370, 34602])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 1 ,count:  16398 ,index count: (array([False,  True]), array([43574, 16398])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 2 ,count:  8972 ,index count: (array([False,  True]), array([51000,  8972])) ,keep:  (8972, 497) (8972,)
+CV Train Shape (40972, 497) (40972,)
+CV Val Shape (6664, 497) (6664,)
+Total Trainable Parameters:  33562837
+Total Parameters:  33562837
+----Epoch:1----
+Training Time : 331.16800808906555
+Val Infer Time: 23.20803689956665
+BAS Score on Validation Data: 0.9460384687431121
+Loss on Validation Data: 0.14719529129101327
+Validation loss decreased (inf --> 0.147195).  Saving model ...
+----Epoch:2----
+Training Time : 331.1221675872803
+Val Infer Time: 23.214106559753418
+BAS Score on Validation Data: 0.9478930995950533
+Loss on Validation Data: 0.1351065407529402
+Validation loss decreased (0.147195 --> 0.135107).  Saving model ...
+----Epoch:3----
+Training Time : 331.15475034713745
+Val Infer Time: 23.21072745323181
+BAS Score on Validation Data: 0.9521763481699034
+Loss on Validation Data: 0.11975733971481688
+Validation loss decreased (0.135107 --> 0.119757).  Saving model ...
+----Epoch:4----
+Training Time : 331.20652651786804
+Val Infer Time: 23.19401741027832
+BAS Score on Validation Data: 0.9589411559986369
+Loss on Validation Data: 0.12243237221640263
+EarlyStopping counter: 1 out of 7
+----Epoch:5----
+Training Time : 331.24733710289
+Val Infer Time: 23.209110021591187
+BAS Score on Validation Data: 0.9583333551790966
+Loss on Validation Data: 0.12200474853150582
+EarlyStopping counter: 2 out of 7
+----Epoch:6----
+Training Time : 331.206356048584
+Val Infer Time: 23.203716278076172
+BAS Score on Validation Data: 0.9629283233959306
+Loss on Validation Data: 0.11769297704742286
+Validation loss decreased (0.119757 --> 0.117693).  Saving model ...
+----Epoch:7----
+Training Time : 331.22412633895874
+Val Infer Time: 23.206332445144653
+BAS Score on Validation Data: 0.9627759840954521
+Loss on Validation Data: 0.10855008198313736
+Validation loss decreased (0.117693 --> 0.108550).  Saving model ...
+----Epoch:8----
+Training Time : 331.24964666366577
+Val Infer Time: 23.21093773841858
+BAS Score on Validation Data: 0.9657390964172051
+Loss on Validation Data: 0.11630321860883795
+EarlyStopping counter: 1 out of 7
+----Epoch:9----
+Training Time : 331.23055267333984
+Val Infer Time: 23.219916105270386
+BAS Score on Validation Data: 0.9676195623479776
+Loss on Validation Data: 0.10890112254037812
+EarlyStopping counter: 2 out of 7
+----Epoch:10----
+Training Time : 331.25258564949036
+Val Infer Time: 23.207892656326294
+BAS Score on Validation Data: 0.9648106935232176
+Loss on Validation Data: 0.11384989257064163
+EarlyStopping counter: 3 out of 7
+----Epoch:11----
+Training Time : 331.2215723991394
+Val Infer Time: 23.201972246170044
+BAS Score on Validation Data: 0.9639288096728377
+Loss on Validation Data: 0.10906235367487492
+EarlyStopping counter: 4 out of 7
+----Epoch:12----
+Training Time : 331.2845175266266
+Val Infer Time: 23.250152826309204
+BAS Score on Validation Data: 0.9625296403399582
+Loss on Validation Data: 0.10207044108632649
+Validation loss decreased (0.108550 --> 0.102070).  Saving model ...
+----Epoch:13----
+Training Time : 331.28536581993103
+Val Infer Time: 23.216463804244995
+BAS Score on Validation Data: 0.9638915066062906
+Loss on Validation Data: 0.10289343892102036
+EarlyStopping counter: 1 out of 7
+----Epoch:14----
+Training Time : 331.32124304771423
+Val Infer Time: 23.205260515213013
+BAS Score on Validation Data: 0.9611056022960476
+Loss on Validation Data: 0.0954922866878327
+Validation loss decreased (0.102070 --> 0.095492).  Saving model ...
+----Epoch:15----
+Training Time : 331.1804373264313
+Val Infer Time: 23.242483615875244
+BAS Score on Validation Data: 0.9655756226736084
+Loss on Validation Data: 0.09447276314194693
+Validation loss decreased (0.095492 --> 0.094473).  Saving model ...
+----Epoch:16----
+Training Time : 331.3319833278656
+Val Infer Time: 23.20964479446411
+BAS Score on Validation Data: 0.9655880570291241
+Loss on Validation Data: 0.10308108696241698
+EarlyStopping counter: 1 out of 7
+----Epoch:17----
+Training Time : 331.2402045726776
+Val Infer Time: 23.212453365325928
+BAS Score on Validation Data: 0.9580965752148037
+Loss on Validation Data: 0.09943626942246725
+EarlyStopping counter: 2 out of 7
+----Epoch:18----
+Training Time : 331.28485345840454
+Val Infer Time: 23.216617822647095
+BAS Score on Validation Data: 0.965352499902608
+Loss on Validation Data: 0.10976762139198312
+EarlyStopping counter: 3 out of 7
+----Epoch:19----
+Training Time : 331.2027063369751
+Val Infer Time: 23.206941843032837
+BAS Score on Validation Data: 0.9640897606662601
+Loss on Validation Data: 0.10247647682088984
+EarlyStopping counter: 4 out of 7
+----Epoch:20----
+Training Time : 331.2909595966339
+Val Infer Time: 23.20887565612793
+BAS Score on Validation Data: 0.9679064132789303
+Loss on Validation Data: 0.10566834809534857
+EarlyStopping counter: 5 out of 7
+----Epoch:21----
+Training Time : 331.1661102771759
+Val Infer Time: 23.189717769622803
+BAS Score on Validation Data: 0.9646468719654807
+Loss on Validation Data: 0.10362296095162488
+EarlyStopping counter: 6 out of 7
+----Epoch:22----
+Training Time : 331.20813965797424
+Val Infer Time: 23.209113359451294
+BAS Score on Validation Data: 0.9653582410312372
+Loss on Validation Data: 0.11244065385828748
+EarlyStopping counter: 7 out of 7
+Early Stop
+Load the best weight after training: /gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_3.pt
+Inference Test Time: 98.06456637382507
+Inference Test Time: 2.516770362854004
+High Quality
+0.9735575741632575 0.9782310451978077 0.9834474405461752 0.9735575741632575 0.9734585883962537
+              precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99     19588
+           1       0.98      1.00      0.99      5531
+           2       0.98      0.93      0.95      3100
+
+    accuracy                           0.99     28219
+   macro avg       0.98      0.97      0.98     28219
+weighted avg       0.99      0.99      0.99     28219
+
+Low Quality
+0.8238845144356955 0.7912831960324915 0.7647121922132131 0.8238845144356955 0.8343439287252236
+              precision    recall  f1-score   support
+
+           0       1.00      0.97      0.98       635
+           1       0.82      1.00      0.90        65
+           2       0.48      0.50      0.49        20
+
+    accuracy                           0.96       720
+   macro avg       0.76      0.82      0.79       720
+weighted avg       0.97      0.96      0.96       720
+
+
+High Quality Post 2020
+                    mean       std       sem  count
+Model                                              
+transformer_esm  0.97665  0.001946  0.000973      4
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.971094  0.003345  0.001672      4
+                     mean       std      sem  count
+Model                                              
+transformer_esm  0.971661  0.002279  0.00114      4
+
+Low Quality Post 2020
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.819857  0.060827  0.030413      4
+                    mean       std       sem  count
+Model                                              
+transformer_esm  0.85876  0.037915  0.018958      4
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.830205  0.071733  0.035867      4
+Saving Results
+Fold: 4
+Data Shape Before Sampling:  (59972, 497) (59972,)
+Subtype/Host: 0 ,count:  34602 ,index count: (array([False,  True]), array([25370, 34602])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 1 ,count:  16398 ,index count: (array([False,  True]), array([43574, 16398])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 2 ,count:  8972 ,index count: (array([False,  True]), array([51000,  8972])) ,keep:  (8972, 497) (8972,)
+CV Train Shape (40972, 497) (40972,)
+CV Val Shape (6664, 497) (6664,)
+Total Trainable Parameters:  33562837
+Total Parameters:  33562837
+----Epoch:1----
+Training Time : 331.1828644275665
+Val Infer Time: 23.213470697402954
+BAS Score on Validation Data: 0.9499306795871334
+Loss on Validation Data: 0.14920760341808556
+Validation loss decreased (inf --> 0.149208).  Saving model ...
+----Epoch:2----
+Training Time : 331.11909222602844
+Val Infer Time: 23.213326454162598
+BAS Score on Validation Data: 0.9528256225327026
+Loss on Validation Data: 0.1314067338642321
+Validation loss decreased (0.149208 --> 0.131407).  Saving model ...
+----Epoch:3----
+Training Time : 331.1553018093109
+Val Infer Time: 23.212124347686768
+BAS Score on Validation Data: 0.9652578911634758
+Loss on Validation Data: 0.11091610575406745
+Validation loss decreased (0.131407 --> 0.110916).  Saving model ...
+----Epoch:4----
+Training Time : 331.23268389701843
+Val Infer Time: 23.216467142105103
+BAS Score on Validation Data: 0.9654437108679295
+Loss on Validation Data: 0.10675961663278095
+Validation loss decreased (0.110916 --> 0.106760).  Saving model ...
+----Epoch:5----
+Training Time : 331.21943831443787
+Val Infer Time: 23.208099603652954
+BAS Score on Validation Data: 0.9640321071795345
+Loss on Validation Data: 0.09807009674145274
+Validation loss decreased (0.106760 --> 0.098070).  Saving model ...
+----Epoch:6----
+Training Time : 331.2254717350006
+Val Infer Time: 23.204912424087524
+BAS Score on Validation Data: 0.9677123296956732
+Loss on Validation Data: 0.10766416987733977
+EarlyStopping counter: 1 out of 7
+----Epoch:7----
+Training Time : 331.2366909980774
+Val Infer Time: 23.205180406570435
+BAS Score on Validation Data: 0.9658896085957901
+Loss on Validation Data: 0.09113774801555433
+Validation loss decreased (0.098070 --> 0.091138).  Saving model ...
+----Epoch:8----
+Training Time : 331.25723695755005
+Val Infer Time: 23.209816455841064
+BAS Score on Validation Data: 0.969926165601006
+Loss on Validation Data: 0.08688912836558511
+Validation loss decreased (0.091138 --> 0.086889).  Saving model ...
+----Epoch:9----
+Training Time : 331.2787504196167
+Val Infer Time: 23.216413021087646
+BAS Score on Validation Data: 0.9685945613601934
+Loss on Validation Data: 0.0908598489168158
+EarlyStopping counter: 1 out of 7
+----Epoch:10----
+Training Time : 331.3278868198395
+Val Infer Time: 23.208937883377075
+BAS Score on Validation Data: 0.9713132483925101
+Loss on Validation Data: 0.08716564999813098
+EarlyStopping counter: 2 out of 7
+----Epoch:11----
+Training Time : 331.2234902381897
+Val Infer Time: 23.211491107940674
+BAS Score on Validation Data: 0.9712759453259633
+Loss on Validation Data: 0.08676118428627269
+EarlyStopping counter: 3 out of 7
+----Epoch:12----
+Training Time : 331.2412085533142
+Val Infer Time: 23.22440528869629
+BAS Score on Validation Data: 0.9705081456112579
+Loss on Validation Data: 0.08163182416030665
+Validation loss decreased (0.086889 --> 0.081632).  Saving model ...
+----Epoch:13----
+Training Time : 331.207537651062
+Val Infer Time: 23.219555854797363
+BAS Score on Validation Data: 0.9690270726342813
+Loss on Validation Data: 0.07851588013069481
+Validation loss decreased (0.081632 --> 0.078516).  Saving model ...
+----Epoch:14----
+Training Time : 331.19020557403564
+Val Infer Time: 23.211243629455566
+BAS Score on Validation Data: 0.9708577868734484
+Loss on Validation Data: 0.07995798556428206
+EarlyStopping counter: 1 out of 7
+----Epoch:15----
+Training Time : 331.177205324173
+Val Infer Time: 23.20913529396057
+BAS Score on Validation Data: 0.9684192090096629
+Loss on Validation Data: 0.07530937326011475
+Validation loss decreased (0.078516 --> 0.075309).  Saving model ...
+----Epoch:16----
+Training Time : 331.19869685173035
+Val Infer Time: 23.235891819000244
+BAS Score on Validation Data: 0.9698783466450008
+Loss on Validation Data: 0.08358108512522501
+EarlyStopping counter: 1 out of 7
+----Epoch:17----
+Training Time : 331.2963056564331
+Val Infer Time: 23.212363958358765
+BAS Score on Validation Data: 0.9721084395684211
+Loss on Validation Data: 0.08597855405374007
+EarlyStopping counter: 2 out of 7
+----Epoch:18----
+Training Time : 331.1897301673889
+Val Infer Time: 23.21097755432129
+BAS Score on Validation Data: 0.9740928072900071
+Loss on Validation Data: 0.07501348354029314
+EarlyStopping counter: 3 out of 7
+----Epoch:19----
+Training Time : 331.1978805065155
+Val Infer Time: 23.213680744171143
+BAS Score on Validation Data: 0.9715274259259693
+Loss on Validation Data: 0.07668631612969358
+EarlyStopping counter: 4 out of 7
+----Epoch:20----
+Training Time : 331.19839358329773
+Val Infer Time: 23.20399761199951
+BAS Score on Validation Data: 0.9729485934055653
+Loss on Validation Data: 0.07239072873261557
+Validation loss decreased (0.075309 --> 0.072391).  Saving model ...
+----Epoch:21----
+Training Time : 331.16276693344116
+Val Infer Time: 23.210941076278687
+BAS Score on Validation Data: 0.9719082813119373
+Loss on Validation Data: 0.0824838992939041
+EarlyStopping counter: 1 out of 7
+----Epoch:22----
+Training Time : 331.2147960662842
+Val Infer Time: 23.18667435646057
+BAS Score on Validation Data: 0.9706891905548823
+Loss on Validation Data: 0.07877686462904278
+EarlyStopping counter: 2 out of 7
+----Epoch:23----
+Training Time : 331.193461894989
+Val Infer Time: 23.204156637191772
+BAS Score on Validation Data: 0.9738974237943525
+Loss on Validation Data: 0.08481431684710762
+EarlyStopping counter: 3 out of 7
+----Epoch:24----
+Training Time : 331.27079343795776
+Val Infer Time: 23.20251750946045
+BAS Score on Validation Data: 0.9750221765517949
+Loss on Validation Data: 0.0754851740227932
+EarlyStopping counter: 4 out of 7
+----Epoch:25----
+Training Time : 331.1729311943054
+Val Infer Time: 23.199385166168213
+BAS Score on Validation Data: 0.9748487912028567
+Loss on Validation Data: 0.07718953351227291
+EarlyStopping counter: 5 out of 7
+----Epoch:26----
+Training Time : 331.2241632938385
+Val Infer Time: 23.209793090820312
+BAS Score on Validation Data: 0.9731331131976214
+Loss on Validation Data: 0.0763770510491572
+EarlyStopping counter: 6 out of 7
+----Epoch:27----
+Training Time : 331.225537776947
+Val Infer Time: 23.212381601333618
+BAS Score on Validation Data: 0.9736392642370029
+Loss on Validation Data: 0.08371187186840048
+EarlyStopping counter: 7 out of 7
+Early Stop
+Load the best weight after training: /gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_4.pt
+Inference Test Time: 98.11800074577332
+Inference Test Time: 2.53959584236145
+High Quality
+0.9673991844535164 0.9732024077019115 0.9797378094572734 0.9673991844535164 0.967359802089071
+              precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99     19588
+           1       0.98      1.00      0.99      5531
+           2       0.97      0.91      0.94      3100
+
+    accuracy                           0.98     28219
+   macro avg       0.98      0.97      0.97     28219
+weighted avg       0.98      0.98      0.98     28219
+
+Low Quality
+0.8196850393700789 0.7648185413249045 0.7295840341203438 0.8196850393700789 0.7957032072193669
+              precision    recall  f1-score   support
+
+           0       0.99      0.96      0.98       635
+           1       0.90      1.00      0.95        65
+           2       0.29      0.50      0.37        20
+
+    accuracy                           0.95       720
+   macro avg       0.73      0.82      0.76       720
+weighted avg       0.96      0.95      0.96       720
+
+
+High Quality Post 2020
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.975961  0.002284  0.001021      5
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.970355  0.003335  0.001491      5
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.970801  0.002756  0.001233      5
+
+Low Quality Post 2020
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.808849  0.058145  0.026003      5
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.850945  0.037196  0.016635      5
+                     mean      std       sem  count
+Model                                              
+transformer_esm  0.823305  0.06401  0.028626      5
+Saving Results
+Fold: 5
+Data Shape Before Sampling:  (59972, 497) (59972,)
+Subtype/Host: 0 ,count:  34602 ,index count: (array([False,  True]), array([25370, 34602])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 1 ,count:  16398 ,index count: (array([False,  True]), array([43574, 16398])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 2 ,count:  8972 ,index count: (array([False,  True]), array([51000,  8972])) ,keep:  (8972, 497) (8972,)
+CV Train Shape (40972, 497) (40972,)
+CV Val Shape (6664, 497) (6664,)
+Total Trainable Parameters:  33562837
+Total Parameters:  33562837
+----Epoch:1----
+Training Time : 331.0505154132843
+Val Infer Time: 23.21030044555664
+BAS Score on Validation Data: 0.8975635217634239
+Loss on Validation Data: 0.19855607411507784
+Validation loss decreased (inf --> 0.198556).  Saving model ...
+----Epoch:2----
+Training Time : 331.14763855934143
+Val Infer Time: 23.192886114120483
+BAS Score on Validation Data: 0.9522120805845331
+Loss on Validation Data: 0.13684763520528254
+Validation loss decreased (0.198556 --> 0.136848).  Saving model ...
+----Epoch:3----
+Training Time : 331.17301988601685
+Val Infer Time: 23.21131920814514
+BAS Score on Validation Data: 0.9545842676584932
+Loss on Validation Data: 0.1331801254783521
+Validation loss decreased (0.136848 --> 0.133180).  Saving model ...
+----Epoch:4----
+Training Time : 331.2101318836212
+Val Infer Time: 23.2115216255188
+BAS Score on Validation Data: 0.9490025474326654
+Loss on Validation Data: 0.132764350854609
+EarlyStopping counter: 1 out of 7
+----Epoch:5----
+Training Time : 331.23045229911804
+Val Infer Time: 23.212286233901978
+BAS Score on Validation Data: 0.9563879382505952
+Loss on Validation Data: 0.12627760873456892
+Validation loss decreased (0.133180 --> 0.126278).  Saving model ...
+----Epoch:6----
+Training Time : 331.23923802375793
+Val Infer Time: 23.20384168624878
+BAS Score on Validation Data: 0.9627498925466441
+Loss on Validation Data: 0.10936589218212657
+Validation loss decreased (0.126278 --> 0.109366).  Saving model ...
+----Epoch:7----
+Training Time : 331.20353412628174
+Val Infer Time: 23.209471464157104
+BAS Score on Validation Data: 0.9659348277270001
+Loss on Validation Data: 0.12095925226165917
+EarlyStopping counter: 1 out of 7
+----Epoch:8----
+Training Time : 331.20449328422546
+Val Infer Time: 23.204619646072388
+BAS Score on Validation Data: 0.9650653782321358
+Loss on Validation Data: 0.11246999713222376
+EarlyStopping counter: 2 out of 7
+----Epoch:9----
+Training Time : 331.2142026424408
+Val Infer Time: 23.20909333229065
+BAS Score on Validation Data: 0.965250850122449
+Loss on Validation Data: 0.10722372520483281
+Validation loss decreased (0.109366 --> 0.107224).  Saving model ...
+----Epoch:10----
+Training Time : 331.3271679878235
+Val Infer Time: 23.210867404937744
+BAS Score on Validation Data: 0.9665761089505155
+Loss on Validation Data: 0.10308397557746851
+Validation loss decreased (0.107224 --> 0.103084).  Saving model ...
+----Epoch:11----
+Training Time : 331.2256054878235
+Val Infer Time: 23.204228401184082
+BAS Score on Validation Data: 0.9668361869739224
+Loss on Validation Data: 0.10146603059540525
+Validation loss decreased (0.103084 --> 0.101466).  Saving model ...
+----Epoch:12----
+Training Time : 331.2000615596771
+Val Infer Time: 23.22025179862976
+BAS Score on Validation Data: 0.9622915604632678
+Loss on Validation Data: 0.1064068997305546
+EarlyStopping counter: 1 out of 7
+----Epoch:13----
+Training Time : 331.2503037452698
+Val Infer Time: 23.195269107818604
+BAS Score on Validation Data: 0.9673559952065962
+Loss on Validation Data: 0.10463256014591199
+EarlyStopping counter: 2 out of 7
+----Epoch:14----
+Training Time : 331.1866343021393
+Val Infer Time: 23.210570096969604
+BAS Score on Validation Data: 0.9646816522818531
+Loss on Validation Data: 0.1000736147593083
+Validation loss decreased (0.101466 --> 0.100074).  Saving model ...
+----Epoch:15----
+Training Time : 331.2152695655823
+Val Infer Time: 23.206812858581543
+BAS Score on Validation Data: 0.9638520286037099
+Loss on Validation Data: 0.11019152545472652
+EarlyStopping counter: 1 out of 7
+----Epoch:16----
+Training Time : 331.2199351787567
+Val Infer Time: 23.207221508026123
+BAS Score on Validation Data: 0.9670095723228606
+Loss on Validation Data: 0.10248051990162242
+EarlyStopping counter: 2 out of 7
+----Epoch:17----
+Training Time : 331.21085572242737
+Val Infer Time: 23.21614909172058
+BAS Score on Validation Data: 0.9688667259249758
+Loss on Validation Data: 0.10409361152557665
+EarlyStopping counter: 3 out of 7
+----Epoch:18----
+Training Time : 331.13967084884644
+Val Infer Time: 23.212566137313843
+BAS Score on Validation Data: 0.9662242156776699
+Loss on Validation Data: 0.10024400076797704
+EarlyStopping counter: 4 out of 7
+----Epoch:19----
+Training Time : 331.1525893211365
+Val Infer Time: 23.2066593170166
+BAS Score on Validation Data: 0.968111360565786
+Loss on Validation Data: 0.0995208064905194
+EarlyStopping counter: 5 out of 7
+----Epoch:20----
+Training Time : 331.17360281944275
+Val Infer Time: 23.20518159866333
+BAS Score on Validation Data: 0.9681735323433641
+Loss on Validation Data: 0.10192836186532199
+EarlyStopping counter: 6 out of 7
+----Epoch:21----
+Training Time : 331.1694917678833
+Val Infer Time: 23.20385766029358
+BAS Score on Validation Data: 0.9679383230309883
+Loss on Validation Data: 0.10229765456258966
+EarlyStopping counter: 7 out of 7
+Early Stop
+Load the best weight after training: /gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_5.pt
+Inference Test Time: 98.05665850639343
+Inference Test Time: 2.517364740371704
+High Quality
+0.9660809975451393 0.9728849396966991 0.9806020853630074 0.9660809975451393 0.9671205008750684
+              precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99     19588
+           1       0.98      1.00      0.99      5531
+           2       0.98      0.91      0.94      3100
+
+    accuracy                           0.98     28219
+   macro avg       0.98      0.97      0.97     28219
+weighted avg       0.98      0.98      0.98     28219
+
+Low Quality
+0.8603674540682414 0.8425960635881334 0.8263199152451867 0.8603674540682414 0.8751890170808468
+              precision    recall  f1-score   support
+
+           0       0.99      0.98      0.99       635
+           1       0.92      1.00      0.96        65
+           2       0.57      0.60      0.59        20
+
+    accuracy                           0.97       720
+   macro avg       0.83      0.86      0.84       720
+weighted avg       0.97      0.97      0.97       720
+
+
+High Quality Post 2020
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.975448  0.002398  0.000979      6
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.969643  0.003456  0.001411      6
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.970188  0.002887  0.001179      6
+
+Low Quality Post 2020
+                     mean     std       sem  count
+Model                                             
+transformer_esm  0.814474  0.0538  0.021964      6
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.852515  0.033491  0.013673      6
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.831952  0.061045  0.024922      6
+Saving Results
+Fold: 6
+Data Shape Before Sampling:  (59973, 497) (59973,)
+Subtype/Host: 0 ,count:  34603 ,index count: (array([False,  True]), array([25370, 34603])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 1 ,count:  16398 ,index count: (array([False,  True]), array([43575, 16398])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 2 ,count:  8972 ,index count: (array([False,  True]), array([51001,  8972])) ,keep:  (8972, 497) (8972,)
+CV Train Shape (40972, 497) (40972,)
+CV Val Shape (6663, 497) (6663,)
+Total Trainable Parameters:  33562837
+Total Parameters:  33562837
+----Epoch:1----
+Training Time : 331.1649978160858
+Val Infer Time: 23.205429315567017
+BAS Score on Validation Data: 0.9319641232420223
+Loss on Validation Data: 0.18307017563490205
+Validation loss decreased (inf --> 0.183070).  Saving model ...
+----Epoch:2----
+Training Time : 331.0851285457611
+Val Infer Time: 23.204824686050415
+BAS Score on Validation Data: 0.9438607775697111
+Loss on Validation Data: 0.14386504265573322
+Validation loss decreased (0.183070 --> 0.143865).  Saving model ...
+----Epoch:3----
+Training Time : 331.14424681663513
+Val Infer Time: 23.20195484161377
+BAS Score on Validation Data: 0.9483696040075613
+Loss on Validation Data: 0.12862136961812037
+Validation loss decreased (0.143865 --> 0.128621).  Saving model ...
+----Epoch:4----
+Training Time : 331.1631329059601
+Val Infer Time: 23.19456171989441
+BAS Score on Validation Data: 0.9289049030901534
+Loss on Validation Data: 0.16856877574403034
+EarlyStopping counter: 1 out of 7
+----Epoch:5----
+Training Time : 331.2039179801941
+Val Infer Time: 23.206544160842896
+BAS Score on Validation Data: 0.9509480608334994
+Loss on Validation Data: 0.12405849888065215
+Validation loss decreased (0.128621 --> 0.124058).  Saving model ...
+----Epoch:6----
+Training Time : 331.11037611961365
+Val Infer Time: 23.199361562728882
+BAS Score on Validation Data: 0.9562282163563824
+Loss on Validation Data: 0.1148125901996519
+Validation loss decreased (0.124058 --> 0.114813).  Saving model ...
+----Epoch:7----
+Training Time : 331.1650516986847
+Val Infer Time: 23.1996591091156
+BAS Score on Validation Data: 0.9587380385889169
+Loss on Validation Data: 0.1342672195160788
+EarlyStopping counter: 1 out of 7
+----Epoch:8----
+Training Time : 331.1166663169861
+Val Infer Time: 23.20037317276001
+BAS Score on Validation Data: 0.9579094167539358
+Loss on Validation Data: 0.12739699814272554
+EarlyStopping counter: 2 out of 7
+----Epoch:9----
+Training Time : 331.1273543834686
+Val Infer Time: 23.204750537872314
+BAS Score on Validation Data: 0.962168117239715
+Loss on Validation Data: 0.12760548028007648
+EarlyStopping counter: 3 out of 7
+----Epoch:10----
+Training Time : 331.20781350135803
+Val Infer Time: 23.186615228652954
+BAS Score on Validation Data: 0.9613299767189827
+Loss on Validation Data: 0.1054311023499264
+Validation loss decreased (0.114813 --> 0.105431).  Saving model ...
+----Epoch:11----
+Training Time : 331.2119314670563
+Val Infer Time: 23.19599676132202
+BAS Score on Validation Data: 0.9617530774314886
+Loss on Validation Data: 0.10839621954414833
+EarlyStopping counter: 1 out of 7
+----Epoch:12----
+Training Time : 331.179491519928
+Val Infer Time: 23.21418786048889
+BAS Score on Validation Data: 0.9643305775197145
+Loss on Validation Data: 0.12242634045450311
+EarlyStopping counter: 2 out of 7
+----Epoch:13----
+Training Time : 331.2040638923645
+Val Infer Time: 23.20781183242798
+BAS Score on Validation Data: 0.9632974643361875
+Loss on Validation Data: 0.12024215069425662
+EarlyStopping counter: 3 out of 7
+----Epoch:14----
+Training Time : 331.18644642829895
+Val Infer Time: 23.204131841659546
+BAS Score on Validation Data: 0.9631866567138755
+Loss on Validation Data: 0.1113878402983743
+EarlyStopping counter: 4 out of 7
+----Epoch:15----
+Training Time : 331.17773175239563
+Val Infer Time: 23.202112436294556
+BAS Score on Validation Data: 0.9630037075737364
+Loss on Validation Data: 0.11168826114760631
+EarlyStopping counter: 5 out of 7
+----Epoch:16----
+Training Time : 331.1945912837982
+Val Infer Time: 23.20352864265442
+BAS Score on Validation Data: 0.9632232736754086
+Loss on Validation Data: 0.1187687005722922
+EarlyStopping counter: 6 out of 7
+----Epoch:17----
+Training Time : 331.2074146270752
+Val Infer Time: 23.205206871032715
+BAS Score on Validation Data: 0.9614417410790068
+Loss on Validation Data: 0.10747102230929872
+EarlyStopping counter: 7 out of 7
+Early Stop
+Load the best weight after training: /gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_6.pt
+Inference Test Time: 98.10276412963867
+Inference Test Time: 2.52661395072937
+High Quality
+0.9648728557429104 0.9707805513034131 0.9774351593892376 0.9648728557429104 0.9645392590239167
+              precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99     19588
+           1       0.98      1.00      0.99      5531
+           2       0.97      0.90      0.93      3100
+
+    accuracy                           0.98     28219
+   macro avg       0.98      0.96      0.97     28219
+weighted avg       0.98      0.98      0.98     28219
+
+Low Quality
+0.8509186351706037 0.7802833893737212 0.7421479229989868 0.8509186351706037 0.7893213314957401
+              precision    recall  f1-score   support
+
+           0       0.99      0.95      0.97       635
+           1       0.93      1.00      0.96        65
+           2       0.31      0.60      0.41        20
+
+    accuracy                           0.95       720
+   macro avg       0.74      0.85      0.78       720
+weighted avg       0.97      0.95      0.95       720
+
+
+High Quality Post 2020
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.974781  0.002811  0.001063      7
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.968961  0.003633  0.001373      7
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.969381  0.003392  0.001282      7
+
+Low Quality Post 2020
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.809589  0.050784  0.019195      7
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.852287  0.030579  0.011558      7
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.825862  0.058009  0.021925      7
+Saving Results
+Fold: 7
+Data Shape Before Sampling:  (59973, 497) (59973,)
+Subtype/Host: 0 ,count:  34603 ,index count: (array([False,  True]), array([25370, 34603])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 1 ,count:  16398 ,index count: (array([False,  True]), array([43575, 16398])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 2 ,count:  8972 ,index count: (array([False,  True]), array([51001,  8972])) ,keep:  (8972, 497) (8972,)
+CV Train Shape (40972, 497) (40972,)
+CV Val Shape (6663, 497) (6663,)
+Total Trainable Parameters:  33562837
+Total Parameters:  33562837
+----Epoch:1----
+Training Time : 331.1333303451538
+Val Infer Time: 23.18909764289856
+BAS Score on Validation Data: 0.9513058982094981
+Loss on Validation Data: 0.1328874726169275
+Validation loss decreased (inf --> 0.132887).  Saving model ...
+----Epoch:2----
+Training Time : 331.1270217895508
+Val Infer Time: 23.21010422706604
+BAS Score on Validation Data: 0.9568653271031856
+Loss on Validation Data: 0.13888180133570252
+EarlyStopping counter: 1 out of 7
+----Epoch:3----
+Training Time : 331.1175763607025
+Val Infer Time: 23.206259727478027
+BAS Score on Validation Data: 0.9521200820026395
+Loss on Validation Data: 0.1523892164105576INFO:root:Train epoch 2 in 331.149955 seconds
+INFO:root:Train epoch 3 in 331.148317 seconds
+INFO:root:Train epoch 4 in 331.162964 seconds
+INFO:root:Train epoch 5 in 331.189516 seconds
+INFO:root:Train epoch 6 in 331.248489 seconds
+INFO:root:Train epoch 7 in 331.239923 seconds
+INFO:root:Train epoch 8 in 331.263188 seconds
+INFO:root:Train epoch 9 in 331.228959 seconds
+INFO:root:Train epoch 10 in 331.248452 seconds
+INFO:root:Train epoch 11 in 331.262325 seconds
+INFO:root:Train epoch 12 in 331.219783 seconds
+INFO:root:Train epoch 13 in 331.242027 seconds
+INFO:root:Train epoch 14 in 331.242651 seconds
+INFO:root:Train epoch 15 in 331.291896 seconds
+INFO:root:Train epoch 16 in 331.233613 seconds
+INFO:root:Train epoch 17 in 331.190685 seconds
+INFO:root:Train epoch 18 in 331.201026 seconds
+INFO:root:Train epoch 19 in 331.175617 seconds
+INFO:root:Train epoch 20 in 331.198881 seconds
+INFO:root:Train epoch 21 in 331.177628 seconds
+INFO:root:Train epoch 22 in 331.225385 seconds
+INFO:root:Train epoch 23 in 331.201477 seconds
+INFO:root:Train epoch 24 in 331.180669 seconds
+INFO:root:Train epoch 25 in 331.206784 seconds
+INFO:root:Train epoch 26 in 331.259533 seconds
+INFO:root:Train epoch 27 in 331.174801 seconds
+INFO:root:Finish training and load weight for prediction:/gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_8.pt
+INFO:root:Fold: 9
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:70: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  model_data = torch.load(str(model_location), map_location="cpu")
+/gpfs/fs7/grdi/genarcc/common/conda/miniconda3/envs/hai_pytorch/lib/python3.12/site-packages/esm/pretrained.py:74: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  regression_data = torch.load(regression_location, map_location="cpu")
+INFO:root:Start Training Model
+INFO:root:Train epoch 1 in 331.141727 seconds
+INFO:root:Train epoch 2 in 331.075007 seconds
+INFO:root:Train epoch 3 in 331.138440 seconds
+INFO:root:Train epoch 4 in 331.129240 seconds
+INFO:root:Train epoch 5 in 331.219059 seconds
+INFO:root:Train epoch 6 in 331.223620 seconds
+INFO:root:Train epoch 7 in 331.158776 seconds
+INFO:root:Train epoch 8 in 331.194722 seconds
+INFO:root:Train epoch 9 in 331.211508 seconds
+INFO:root:Train epoch 10 in 331.169550 seconds
+INFO:root:Train epoch 11 in 331.207733 seconds
+INFO:root:Train epoch 12 in 331.146222 seconds
+INFO:root:Train epoch 13 in 331.195135 seconds
+INFO:root:Train epoch 14 in 331.163387 seconds
+INFO:root:Train epoch 15 in 331.177906 seconds
+INFO:root:Train epoch 16 in 331.179029 seconds
+INFO:root:Train epoch 17 in 331.177992 seconds
+INFO:root:Train epoch 18 in 331.151789 seconds
+INFO:root:Train epoch 19 in 331.117796 seconds
+INFO:root:Train epoch 20 in 331.110996 seconds
+INFO:root:Train epoch 21 in 331.112846 seconds
+INFO:root:Train epoch 22 in 331.105514 seconds
+INFO:root:Train epoch 23 in 331.098911 seconds
+INFO:root:Train epoch 24 in 331.130576 seconds
+INFO:root:Train epoch 25 in 330.878648 seconds
+INFO:root:Train epoch 26 in 330.742963 seconds
+INFO:root:Train epoch 27 in 330.698632 seconds
+INFO:root:Train epoch 28 in 330.734516 seconds
+INFO:root:Train epoch 29 in 330.758134 seconds
+INFO:root:Finish training and load weight for prediction:/gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_9.pt
+
+EarlyStopping counter: 2 out of 7
+----Epoch:4----
+Training Time : 331.14151668548584
+Val Infer Time: 23.210715293884277
+BAS Score on Validation Data: 0.9531974173580267
+Loss on Validation Data: 0.16842690935474264
+EarlyStopping counter: 3 out of 7
+----Epoch:5----
+Training Time : 331.20740485191345
+Val Infer Time: 23.20563793182373
+BAS Score on Validation Data: 0.9563070962826513
+Loss on Validation Data: 0.1108524644631518
+Validation loss decreased (0.132887 --> 0.110852).  Saving model ...
+----Epoch:6----
+Training Time : 331.24939703941345
+Val Infer Time: 23.208832502365112
+BAS Score on Validation Data: 0.959467876324242
+Loss on Validation Data: 0.11036364475719666
+EarlyStopping counter: 1 out of 7
+----Epoch:7----
+Training Time : 331.1798038482666
+Val Infer Time: 23.200475931167603
+BAS Score on Validation Data: 0.9634047650340758
+Loss on Validation Data: 0.11399157994101493
+EarlyStopping counter: 2 out of 7
+----Epoch:8----
+Training Time : 331.18121695518494
+Val Infer Time: 23.205229997634888
+BAS Score on Validation Data: 0.9637766750756818
+Loss on Validation Data: 0.11548160292814223
+EarlyStopping counter: 3 out of 7
+----Epoch:9----
+Training Time : 331.17487502098083
+Val Infer Time: 23.20919132232666
+BAS Score on Validation Data: 0.9653355000222202
+Loss on Validation Data: 0.09907070121340204
+Validation loss decreased (0.110852 --> 0.099071).  Saving model ...
+----Epoch:10----
+Training Time : 331.2544026374817
+Val Infer Time: 23.20504641532898
+BAS Score on Validation Data: 0.9624131881681705
+Loss on Validation Data: 0.10369013492285349
+EarlyStopping counter: 1 out of 7
+----Epoch:11----
+Training Time : 331.14246368408203
+Val Infer Time: 23.18211269378662
+BAS Score on Validation Data: 0.962178091619419
+Loss on Validation Data: 0.10001526502045718
+EarlyStopping counter: 2 out of 7
+----Epoch:12----
+Training Time : 331.20479941368103
+Val Infer Time: 23.22029209136963
+BAS Score on Validation Data: 0.9645831179909695
+Loss on Validation Data: 0.09872637525129546
+EarlyStopping counter: 3 out of 7
+----Epoch:13----
+Training Time : 331.2618041038513
+Val Infer Time: 23.217867374420166
+BAS Score on Validation Data: 0.9676899270843505
+Loss on Validation Data: 0.09394613984954414
+Validation loss decreased (0.099071 --> 0.093946).  Saving model ...
+----Epoch:14----
+Training Time : 331.21656465530396
+Val Infer Time: 23.208751440048218
+BAS Score on Validation Data: 0.9654472643822444
+Loss on Validation Data: 0.09134807159598364
+Validation loss decreased (0.093946 --> 0.091348).  Saving model ...
+----Epoch:15----
+Training Time : 331.1716339588165
+Val Infer Time: 23.213260412216187
+BAS Score on Validation Data: 0.9681450907785335
+Loss on Validation Data: 0.1030645027453677
+EarlyStopping counter: 1 out of 7
+----Epoch:16----
+Training Time : 331.2495844364166
+Val Infer Time: 23.207406044006348
+BAS Score on Validation Data: 0.9646918764703297
+Loss on Validation Data: 0.10004488507989776
+EarlyStopping counter: 2 out of 7
+----Epoch:17----
+Training Time : 331.1904158592224
+Val Infer Time: 23.208611965179443
+BAS Score on Validation Data: 0.9678242357403005
+Loss on Validation Data: 0.09635168969916384
+EarlyStopping counter: 3 out of 7
+----Epoch:18----
+Training Time : 331.190753698349
+Val Infer Time: 23.209766149520874
+BAS Score on Validation Data: 0.9708728856637415
+Loss on Validation Data: 0.10324014732213112
+EarlyStopping counter: 4 out of 7
+----Epoch:19----
+Training Time : 331.1934862136841
+Val Infer Time: 23.21455478668213
+BAS Score on Validation Data: 0.9672839952358361
+Loss on Validation Data: 0.0912705421955748
+EarlyStopping counter: 5 out of 7
+----Epoch:20----
+Training Time : 331.2299726009369
+Val Infer Time: 23.204798698425293
+BAS Score on Validation Data: 0.9679742101289639
+Loss on Validation Data: 0.08911200651997014
+Validation loss decreased (0.091348 --> 0.089112).  Saving model ...
+----Epoch:21----
+Training Time : 331.18978691101074
+Val Infer Time: 23.20524764060974
+BAS Score on Validation Data: 0.9684342482113218
+Loss on Validation Data: 0.09558842634185079
+EarlyStopping counter: 1 out of 7
+----Epoch:22----
+Training Time : 331.27382254600525
+Val Infer Time: 23.18409037590027
+BAS Score on Validation Data: 0.97132955210731
+Loss on Validation Data: 0.09696817953299963
+EarlyStopping counter: 2 out of 7
+----Epoch:23----
+Training Time : 331.2076940536499
+Val Infer Time: 23.200042724609375
+BAS Score on Validation Data: 0.9658242294474659
+Loss on Validation Data: 0.092619596521535
+EarlyStopping counter: 3 out of 7
+----Epoch:24----
+Training Time : 331.14684319496155
+Val Infer Time: 23.202746629714966
+BAS Score on Validation Data: 0.9680889354017385
+Loss on Validation Data: 0.0979691132297071
+EarlyStopping counter: 4 out of 7
+----Epoch:25----
+Training Time : 331.17940378189087
+Val Infer Time: 23.197063207626343
+BAS Score on Validation Data: 0.968405692154068
+Loss on Validation Data: 0.10019045705688698
+EarlyStopping counter: 5 out of 7
+----Epoch:26----
+Training Time : 331.21752429008484
+Val Infer Time: 23.2039577960968
+BAS Score on Validation Data: 0.9688388575639985
+Loss on Validation Data: 0.09810988842977576
+EarlyStopping counter: 6 out of 7
+----Epoch:27----
+Training Time : 331.2062842845917
+Val Infer Time: 23.204164028167725
+BAS Score on Validation Data: 0.9693630665776243
+Loss on Validation Data: 0.09607035716612373
+EarlyStopping counter: 7 out of 7
+Early Stop
+Load the best weight after training: /gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_7.pt
+Inference Test Time: 98.11675977706909
+Inference Test Time: 2.5227537155151367
+High Quality
+0.9726353743421953 0.9764449586727499 0.9806541440286076 0.9726353743421953 0.9714870666663347
+              precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99     19588
+           1       0.98      1.00      0.99      5531
+           2       0.97      0.93      0.95      3100
+
+    accuracy                           0.99     28219
+   macro avg       0.98      0.97      0.98     28219
+weighted avg       0.99      0.99      0.99     28219
+
+Low Quality
+0.8598425196850394 0.8474566845939355 0.8374785887150473 0.8598425196850394 0.868875750148996
+              precision    recall  f1-score   support
+
+           0       0.99      0.98      0.98       635
+           1       0.89      1.00      0.94        65
+           2       0.63      0.60      0.62        20
+
+    accuracy                           0.97       720
+   macro avg       0.84      0.86      0.85       720
+weighted avg       0.97      0.97      0.97       720
+
+
+High Quality Post 2020
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.974989  0.002668  0.000943      8
+                    mean       std       sem  count
+Model                                              
+transformer_esm  0.96942  0.003606  0.001275      8
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.969644  0.003227  0.001141      8
+
+Low Quality Post 2020
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.814323  0.048886  0.017284      8
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.853232  0.028436  0.010054      8
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.831239  0.055818  0.019734      8
+Saving Results
+Fold: 8
+Data Shape Before Sampling:  (59973, 497) (59973,)
+Subtype/Host: 0 ,count:  34603 ,index count: (array([False,  True]), array([25370, 34603])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 1 ,count:  16398 ,index count: (array([False,  True]), array([43575, 16398])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 2 ,count:  8972 ,index count: (array([False,  True]), array([51001,  8972])) ,keep:  (8972, 497) (8972,)
+CV Train Shape (40972, 497) (40972,)
+CV Val Shape (6663, 497) (6663,)
+Total Trainable Parameters:  33562837
+Total Parameters:  33562837
+----Epoch:1----
+Training Time : 331.1979033946991
+Val Infer Time: 23.207267999649048
+BAS Score on Validation Data: 0.9504157459476804
+Loss on Validation Data: 0.1703731298232763
+Validation loss decreased (inf --> 0.170373).  Saving model ...
+----Epoch:2----
+Training Time : 331.1499545574188
+Val Infer Time: 23.20859980583191
+BAS Score on Validation Data: 0.95107489994665
+Loss on Validation Data: 0.12840581347533106
+Validation loss decreased (0.170373 --> 0.128406).  Saving model ...
+----Epoch:3----
+Training Time : 331.14831709861755
+Val Infer Time: 23.202621936798096
+BAS Score on Validation Data: 0.9592318230377783
+Loss on Validation Data: 0.13865169497768273
+EarlyStopping counter: 1 out of 7
+----Epoch:4----
+Training Time : 331.1629636287689
+Val Infer Time: 23.20917844772339
+BAS Score on Validation Data: 0.9586528714609153
+Loss on Validation Data: 0.13464874155489664
+EarlyStopping counter: 2 out of 7
+----Epoch:5----
+Training Time : 331.1895158290863
+Val Infer Time: 23.20984649658203
+BAS Score on Validation Data: 0.9584293427408669
+Loss on Validation Data: 0.13576612550693978
+EarlyStopping counter: 3 out of 7
+----Epoch:6----
+Training Time : 331.2484893798828
+Val Infer Time: 23.204604387283325
+BAS Score on Validation Data: 0.9612929943812171
+Loss on Validation Data: 0.11564320468446285
+Validation loss decreased (0.128406 --> 0.115643).  Saving model ...
+----Epoch:7----
+Training Time : 331.23992252349854
+Val Infer Time: 23.191797971725464
+BAS Score on Validation Data: 0.9594313950302359
+Loss on Validation Data: 0.12785576225891174
+EarlyStopping counter: 1 out of 7
+----Epoch:8----
+Training Time : 331.2631878852844
+Val Infer Time: 23.224701404571533
+BAS Score on Validation Data: 0.9626639508315279
+Loss on Validation Data: 0.12149854913870826
+EarlyStopping counter: 2 out of 7
+----Epoch:9----
+Training Time : 331.2289593219757
+Val Infer Time: 23.20627188682556
+BAS Score on Validation Data: 0.9628633871564584
+Loss on Validation Data: 0.1151823888312241
+EarlyStopping counter: 3 out of 7
+----Epoch:10----
+Training Time : 331.2484521865845
+Val Infer Time: 23.20562195777893
+BAS Score on Validation Data: 0.9616127570142106
+Loss on Validation Data: 0.11814514106043734
+EarlyStopping counter: 4 out of 7
+----Epoch:11----
+Training Time : 331.26232504844666
+Val Infer Time: 23.20180583000183
+BAS Score on Validation Data: 0.9631977234988187
+Loss on Validation Data: 0.11262611078229871
+Validation loss decreased (0.115643 --> 0.112626).  Saving model ...
+----Epoch:12----
+Training Time : 331.21978306770325
+Val Infer Time: 23.213230848312378
+BAS Score on Validation Data: 0.9634202954811549
+Loss on Validation Data: 0.11446789336868708
+EarlyStopping counter: 1 out of 7
+----Epoch:13----
+Training Time : 331.24202704429626
+Val Infer Time: 23.209797143936157
+BAS Score on Validation Data: 0.9620579009788829
+Loss on Validation Data: 0.1305525498241899
+EarlyStopping counter: 2 out of 7
+----Epoch:14----
+Training Time : 331.2426507472992
+Val Infer Time: 23.205506086349487
+BAS Score on Validation Data: 0.9620880051353288
+Loss on Validation Data: 0.120316906001655
+EarlyStopping counter: 3 out of 7
+----Epoch:15----
+Training Time : 331.29189586639404
+Val Infer Time: 23.206188201904297
+BAS Score on Validation Data: 0.9627024812684857
+Loss on Validation Data: 0.10674417067795956
+Validation loss decreased (0.112626 --> 0.106744).  Saving model ...
+----Epoch:16----
+Training Time : 331.23361349105835
+Val Infer Time: 23.20683002471924
+BAS Score on Validation Data: 0.9622468618803498
+Loss on Validation Data: 0.11530300349461664
+EarlyStopping counter: 1 out of 7
+----Epoch:17----
+Training Time : 331.19068479537964
+Val Infer Time: 23.210605144500732
+BAS Score on Validation Data: 0.9637922055227608
+Loss on Validation Data: 0.1080396780393278
+EarlyStopping counter: 2 out of 7
+----Epoch:18----
+Training Time : 331.2010259628296
+Val Infer Time: 23.189860582351685
+BAS Score on Validation Data: 0.9627024812684857
+Loss on Validation Data: 0.11518750770079333
+EarlyStopping counter: 3 out of 7
+----Epoch:19----
+Training Time : 331.17561745643616
+Val Infer Time: 23.205880880355835
+BAS Score on Validation Data: 0.9607105358799305
+Loss on Validation Data: 0.10669490114427016
+EarlyStopping counter: 4 out of 7
+----Epoch:20----
+Training Time : 331.19888067245483
+Val Infer Time: 23.20249056816101
+BAS Score on Validation Data: 0.9643300764759549
+Loss on Validation Data: 0.1046095644864677
+Validation loss decreased (0.106744 --> 0.104610).  Saving model ...
+----Epoch:21----
+Training Time : 331.1776280403137
+Val Infer Time: 23.204713582992554
+BAS Score on Validation Data: 0.9647325917177664
+Loss on Validation Data: 0.12709468210998334
+EarlyStopping counter: 1 out of 7
+----Epoch:22----
+Training Time : 331.2253849506378
+Val Infer Time: 23.20385718345642
+BAS Score on Validation Data: 0.9621851957859864
+Loss on Validation Data: 0.11203244724199532
+EarlyStopping counter: 2 out of 7
+----Epoch:23----
+Training Time : 331.20147681236267
+Val Infer Time: 23.201894521713257
+BAS Score on Validation Data: 0.9646724737225948
+Loss on Validation Data: 0.11148485012726221
+EarlyStopping counter: 3 out of 7
+----Epoch:24----
+Training Time : 331.18066906929016
+Val Infer Time: 23.202210187911987
+BAS Score on Validation Data: 0.9653065785887341
+Loss on Validation Data: 0.11128700446141393
+EarlyStopping counter: 4 out of 7
+----Epoch:25----
+Training Time : 331.20678424835205
+Val Infer Time: 23.195674180984497
+BAS Score on Validation Data: 0.9655512387911503
+Loss on Validation Data: 0.11261177773428101
+EarlyStopping counter: 5 out of 7
+----Epoch:26----
+Training Time : 331.2595331668854
+Val Infer Time: 23.20305299758911
+BAS Score on Validation Data: 0.9655386692568215
+Loss on Validation Data: 0.13519794595004203
+EarlyStopping counter: 6 out of 7
+----Epoch:27----
+Training Time : 331.1748013496399
+Val Infer Time: 23.20657706260681
+BAS Score on Validation Data: 0.9679633239794612
+Loss on Validation Data: 0.11160582498028712
+EarlyStopping counter: 7 out of 7
+Early Stop
+Load the best weight after training: /gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_8.pt
+Inference Test Time: 98.10926747322083
+Inference Test Time: 2.5185813903808594
+High Quality
+0.9727608902732822 0.9769160140171237 0.9815427562115162 0.9727608902732822 0.9717162815198604
+              precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99     19588
+           1       0.98      1.00      0.99      5531
+           2       0.97      0.93      0.95      3100
+
+    accuracy                           0.99     28219
+   macro avg       0.98      0.97      0.98     28219
+weighted avg       0.99      0.99      0.99     28219
+
+Low Quality
+0.8353018372703412 0.7755855549646745 0.7311812297973862 0.8353018372703412 0.7937344944910397
+              precision    recall  f1-score   support
+
+           0       0.99      0.96      0.97       635
+           1       0.79      1.00      0.88        65
+           2       0.41      0.55      0.47        20
+
+    accuracy                           0.95       720
+   macro avg       0.73      0.84      0.78       720
+weighted avg       0.96      0.95      0.95       720
+
+
+High Quality Post 2020
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.975203  0.002577  0.000859      9
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.969792  0.003552  0.001184      9
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.969874  0.003097  0.001032      9
+
+Low Quality Post 2020
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.810019  0.047517  0.015839      9
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.851239  0.027263  0.009088      9
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.827072  0.053688  0.017896      9
+Saving Results
+Fold: 9
+Data Shape Before Sampling:  (59973, 497) (59973,)
+Subtype/Host: 0 ,count:  34602 ,index count: (array([False,  True]), array([25371, 34602])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 1 ,count:  16398 ,index count: (array([False,  True]), array([43575, 16398])) ,downsampling:  (16000, 497) (16000,)
+Subtype/Host: 2 ,count:  8973 ,index count: (array([False,  True]), array([51000,  8973])) ,keep:  (8973, 497) (8973,)
+CV Train Shape (40973, 497) (40973,)
+CV Val Shape (6663, 497) (6663,)
+Total Trainable Parameters:  33562837
+Total Parameters:  33562837
+----Epoch:1----
+Training Time : 331.141726732254
+Val Infer Time: 23.20401954650879
+BAS Score on Validation Data: 0.9525133576968569
+Loss on Validation Data: 0.14130704140549072
+Validation loss decreased (inf --> 0.141307).  Saving model ...
+----Epoch:2----
+Training Time : 331.0750069618225
+Val Infer Time: 23.186078310012817
+BAS Score on Validation Data: 0.9583227029335779
+Loss on Validation Data: 0.1496958507706175
+EarlyStopping counter: 1 out of 7
+----Epoch:3----
+Training Time : 331.1384403705597
+Val Infer Time: 23.200379610061646
+BAS Score on Validation Data: 0.959941172374886
+Loss on Validation Data: 0.11528323760978057
+Validation loss decreased (0.141307 --> 0.115283).  Saving model ...
+----Epoch:4----
+Training Time : 331.1292402744293
+Val Infer Time: 23.202192306518555
+BAS Score on Validation Data: 0.9606457465551229
+Loss on Validation Data: 0.1272248483606075
+EarlyStopping counter: 1 out of 7
+----Epoch:5----
+Training Time : 331.2190589904785
+Val Infer Time: 23.19680118560791
+BAS Score on Validation Data: 0.9618670058496201
+Loss on Validation Data: 0.10565869464276083
+Validation loss decreased (0.115283 --> 0.105659).  Saving model ...
+----Epoch:6----
+Training Time : 331.2236204147339
+Val Infer Time: 23.206758499145508
+BAS Score on Validation Data: 0.9648306593365632
+Loss on Validation Data: 0.11163132466179759
+EarlyStopping counter: 1 out of 7
+----Epoch:7----
+Training Time : 331.15877628326416
+Val Infer Time: 23.201727628707886
+BAS Score on Validation Data: 0.9620671234367282
+Loss on Validation Data: 0.09712549479918901
+Validation loss decreased (0.105659 --> 0.097125).  Saving model ...
+----Epoch:8----
+Training Time : 331.1947224140167
+Val Infer Time: 23.19787073135376
+BAS Score on Validation Data: 0.9673951435412623
+Loss on Validation Data: 0.09938763138174155
+EarlyStopping counter: 1 out of 7
+----Epoch:9----
+Training Time : 331.21150827407837
+Val Infer Time: 23.187577486038208
+BAS Score on Validation Data: 0.9663286321554504
+Loss on Validation Data: 0.10037998442480153
+EarlyStopping counter: 2 out of 7
+----Epoch:10----
+Training Time : 331.16955041885376
+Val Infer Time: 23.19886565208435
+BAS Score on Validation Data: 0.9650020427462312
+Loss on Validation Data: 0.09205495826365274
+Validation loss decreased (0.097125 --> 0.092055).  Saving model ...
+----Epoch:11----
+Training Time : 331.2077329158783
+Val Infer Time: 23.200111389160156
+BAS Score on Validation Data: 0.9653629140598342
+Loss on Validation Data: 0.10212492743177277
+EarlyStopping counter: 1 out of 7
+----Epoch:12----
+Training Time : 331.1462218761444
+Val Infer Time: 23.197466611862183
+BAS Score on Validation Data: 0.9668487882022644
+Loss on Validation Data: 0.09534662460872645
+EarlyStopping counter: 2 out of 7
+----Epoch:13----
+Training Time : 331.1951353549957
+Val Infer Time: 23.19366979598999
+BAS Score on Validation Data: 0.9715966918236854
+Loss on Validation Data: 0.09032406146152382
+Validation loss decreased (0.092055 --> 0.090324).  Saving model ...
+----Epoch:14----
+Training Time : 331.1633870601654
+Val Infer Time: 23.197203159332275
+BAS Score on Validation Data: 0.9693432152334772
+Loss on Validation Data: 0.08779170259868985
+Validation loss decreased (0.090324 --> 0.087792).  Saving model ...
+----Epoch:15----
+Training Time : 331.17790627479553
+Val Infer Time: 23.214695692062378
+BAS Score on Validation Data: 0.9701259841889543
+Loss on Validation Data: 0.08557403847379119
+Validation loss decreased (0.087792 --> 0.085574).  Saving model ...
+----Epoch:16----
+Training Time : 331.17902874946594
+Val Infer Time: 23.199312210083008
+BAS Score on Validation Data: 0.9685463456622734
+Loss on Validation Data: 0.08783345521120221
+EarlyStopping counter: 1 out of 7
+----Epoch:17----
+Training Time : 331.17799162864685
+Val Infer Time: 23.19737982749939
+BAS Score on Validation Data: 0.9638730788427011
+Loss on Validation Data: 0.09460800887045392
+EarlyStopping counter: 2 out of 7
+----Epoch:18----
+Training Time : 331.1517894268036
+Val Infer Time: 23.198659896850586
+BAS Score on Validation Data: 0.9708215275239764
+Loss on Validation Data: 0.08384796402207687
+Validation loss decreased (0.085574 --> 0.083848).  Saving model ...
+----Epoch:19----
+Training Time : 331.11779594421387
+Val Infer Time: 23.20146918296814
+BAS Score on Validation Data: 0.9709057709208629
+Loss on Validation Data: 0.1047904290989683
+EarlyStopping counter: 1 out of 7
+----Epoch:20----
+Training Time : 331.11099648475647
+Val Infer Time: 23.17996644973755
+BAS Score on Validation Data: 0.9707156644632685
+Loss on Validation Data: 0.08797778707648223
+EarlyStopping counter: 2 out of 7
+----Epoch:21----
+Training Time : 331.11284589767456
+Val Infer Time: 23.19368886947632
+BAS Score on Validation Data: 0.9676220361703772
+Loss on Validation Data: 0.08580143269347518
+EarlyStopping counter: 3 out of 7
+----Epoch:22----
+Training Time : 331.10551381111145
+Val Infer Time: 23.194404363632202
+BAS Score on Validation Data: 0.9717872456195925
+Loss on Validation Data: 0.08002898335439024
+Validation loss decreased (0.083848 --> 0.080029).  Saving model ...
+----Epoch:23----
+Training Time : 331.0989110469818
+Val Infer Time: 23.19698667526245
+BAS Score on Validation Data: 0.9720422538724875
+Loss on Validation Data: 0.08346696429146214
+EarlyStopping counter: 1 out of 7
+----Epoch:24----
+Training Time : 331.13057589530945
+Val Infer Time: 23.20106077194214
+BAS Score on Validation Data: 0.9719555611980185
+Loss on Validation Data: 0.09674268225920898
+EarlyStopping counter: 2 out of 7
+----Epoch:25----
+Training Time : 330.87864804267883
+Val Infer Time: 23.17501711845398
+BAS Score on Validation Data: 0.9728791058579643
+Loss on Validation Data: 0.08730785676131123
+EarlyStopping counter: 3 out of 7
+----Epoch:26----
+Training Time : 330.7429633140564
+Val Infer Time: 23.18047833442688
+BAS Score on Validation Data: 0.9700584190968874
+Loss on Validation Data: 0.0857568663549409
+EarlyStopping counter: 4 out of 7
+----Epoch:27----
+Training Time : 330.698632478714
+Val Infer Time: 23.169644117355347
+BAS Score on Validation Data: 0.9679037587946621
+Loss on Validation Data: 0.0803292622214905
+EarlyStopping counter: 5 out of 7
+----Epoch:28----
+Training Time : 330.73451566696167
+Val Infer Time: 23.17590570449829
+BAS Score on Validation Data: 0.9728371215044215
+Loss on Validation Data: 0.09518290290989997
+EarlyStopping counter: 6 out of 7
+----Epoch:29----
+Training Time : 330.7581343650818
+Val Infer Time: 23.1819007396698
+BAS Score on Validation Data: 0.9712237218336255
+Loss on Validation Data: 0.0984007736988829
+EarlyStopping counter: 7 out of 7
+Early Stop
+Load the best weight after training: /gpfs/fs7/grdi/genarcc/wp1/genomics_unit/IAV/Revision_1/model_weight/transformer_esm/esm2_t12_35M_UR50D_weight/06_NA_Protein_Host/transformer_esm_9.pt
+Inference Test Time: 97.99502491950989
+Inference Test Time: 2.5160205364227295
+High Quality
+0.9714921226359893 0.9772087470364075 0.9836283252882548 0.9714921226359893 0.9723076653680497
+              precision    recall  f1-score   support
+
+           0       0.99      0.99      0.99     19588
+           1       0.98      1.00      0.99      5531
+           2       0.98      0.92      0.95      3100
+
+    accuracy                           0.99     28219
+   macro avg       0.98      0.97      0.98     28219
+weighted avg       0.99      0.99      0.99     28219
+
+Low Quality
+0.8410761154855644 0.833458828304189 0.8360179268725595 0.8410761154855644 0.8396202747956438
+              precision    recall  f1-score   support
+
+           0       0.99      0.97      0.98       635
+           1       0.83      1.00      0.91        65
+           2       0.69      0.55      0.61        20
+
+    accuracy                           0.96       720
+   macro avg       0.84      0.84      0.83       720
+weighted avg       0.97      0.96      0.96       720
+
+
+High Quality Post 2020
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.975404  0.002511  0.000794     10
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.969962  0.003392  0.001073     10
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.970118  0.003019  0.000955     10
+
+Low Quality Post 2020
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.812363  0.045408  0.014359     10
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.850223  0.025904  0.008191     10
+                     mean       std       sem  count
+Model                                               
+transformer_esm  0.828327  0.050773  0.016056     10
+Saving Results
