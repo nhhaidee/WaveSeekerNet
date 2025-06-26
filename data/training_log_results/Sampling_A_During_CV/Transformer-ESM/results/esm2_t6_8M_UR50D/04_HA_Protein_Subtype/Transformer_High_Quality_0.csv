@@ -1,2 +1,0 @@
-,Model,Balanced Accuracy,F1-Score (Macro),Precision (Macro),Recall (Macro),MCC
-0,transformer_esm,0.9998640407168989,0.9974588556583355,0.9952301516376584,0.9998640407168989,0.9998196312172712
