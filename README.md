@@ -9,6 +9,7 @@ We introduce WaveSeekerNet, a novel deep learning model for accurate and rapid p
 
 WaveSeekerNet’s superior performance, efficiency, and ability to flag potential cross-species transmission events highlight its potential for real-time surveillance and pandemic preparedness. This model represents a significant advancement in applying deep learning for IAV classification and holds promise for future epidemiological, veterinary studies, and public health interventions. 
 
+This repository contains the source code and data used to train WaveSeekerNet. The preprint of WaveSeekerNet is now available on bioRxiv (https://www.biorxiv.org/content/10.1101/2025.02.25.639900v2) and under review with GigaScience.
 ## Requirements
 
 1. Pytorch 2.4.1
