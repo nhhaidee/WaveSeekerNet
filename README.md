@@ -98,7 +98,16 @@ clf.fit(X_train, y_train, X_val, y_val)
 clf.predict(X_test)
 ```
 
-
+Metrics to evaluate the model
+```     
+from sklearn.metrics import classification_report, f1_score, precision_score, recall_score, matthews_corrcoef, balanced_accuracy_score
+ba = ba_score(y_true, y_pred)
+f1 = f1_score(y_true, y_pred, average="macro")
+p_score = precision_score(y_true, y_pred, average="macro")
+r_score = recall_score(y_true, y_pred, average="macro")
+mcc = matthews_corrcoef(y_true, y_pred)
+print(classification_report(y_true, y_pred, zero_division=np.nan))
+```
 
 ## Contributors and Maintainers
 
