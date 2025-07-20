@@ -99,9 +99,10 @@ clf.predict(X_test)
 ```
 
 Metrics to evaluate the model
-```     
-from sklearn.metrics import classification_report, f1_score, precision_score, recall_score, matthews_corrcoef, balanced_accuracy_score
-ba = balanced_accuracy_score(y_true, y_pred)
+```  
+from sklearn.metrics import balanced_accuracy_score as ba_score   
+from sklearn.metrics import classification_report, f1_score, precision_score, recall_score, matthews_corrcoef
+ba = ba_score(y_true, y_pred)
 f1 = f1_score(y_true, y_pred, average="macro")
 p_score = precision_score(y_true, y_pred, average="macro")
 r_score = recall_score(y_true, y_pred, average="macro")
