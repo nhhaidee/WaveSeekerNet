@@ -1,60 +1,111 @@
+"""
+WaveSeekerNet model module.
+
+Contains the core neural network architecture (:class:`WaveSeekerNet`),
+the per-block attention-like encoder (:class:`WaveSeekerBlock`), and
+the scikit-learn-compatible classifier wrapper
+(:class:`WaveSeekerClassifier`).
+"""
+from __future__ import annotations
+
+import logging
+import sys
+from time import time
+from typing import Optional, Sequence, Type
+
+import numpy as np
 import torch
 import torch.nn as nn
-from torch.nn import RMSNorm
-from torch.cuda import is_available as is_gpu_available
-import numpy as np
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import balanced_accuracy_score
-from pytorch_optimizer import create_optimizer
-from time import time
 from torchinfo import summary
+from sklearn.base import BaseEstimator, ClassifierMixin
+from sklearn.exceptions import NotFittedError
+from sklearn.metrics import balanced_accuracy_score
+from sklearn.model_selection import train_test_split
+from torch.cuda import is_available as is_gpu_available
+from torch.nn import RMSNorm
+from pytorch_optimizer import create_optimizer
 
-from sub_modules.wavelet_transform import WaveNETHead
-from sub_modules.fourier_transform import FNETHead
-from sub_modules.gmlp import gMLPBlock
-from sub_modules.smoe import SparseMoE, WaveExpert
-from sub_modules.classification_head import ClassificationHead
+from WaveSeekerNet.sub_modules.wavelet_transform import WaveNETHead
+from WaveSeekerNet.sub_modules.fourier_transform import FNETHead
+from WaveSeekerNet.sub_modules.gmlp import gMLPBlock
+from WaveSeekerNet.sub_modules.smoe import SparseMoE, WaveExpert
+from WaveSeekerNet.sub_modules.classification_head import ClassificationHead
 
-from sub_modules.lib.star_layer import StarLayer
-from sub_modules.lib.noisy_linear_layer import NoisyFactorizedLinear
-from sub_modules.lib.make_patches import MakePatches
-from sub_modules.lib.pos_encoding import PositionalEncoding
-from sub_modules.lib.global_pooling import GlobalExpectationPooling
-from sub_modules.lib.activation import ErMish
+from WaveSeekerNet.sub_modules.lib.star_layer import StarLayer
+from WaveSeekerNet.sub_modules.lib.make_patches import MakePatches
+from WaveSeekerNet.sub_modules.lib.pos_encoding import PositionalEncoding
+from WaveSeekerNet.sub_modules.lib.global_pooling import GlobalExpectationPooling
+from WaveSeekerNet.sub_modules.lib.activation import ErMish
+from WaveSeekerNet.sub_modules.lib.kan_layer import KANLinear
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+if not logger.handlers:
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setFormatter(logging.Formatter("%(levelname)s | %(name)s | %(message)s"))
+    logger.addHandler(handler)
 
 
 class WaveSeekerBlock(nn.Module):
+    """A single WaveSeekerNet encoder block.
+
+    Applies parallel token-mixing heads (Wavelet, FFT, gMLP) in parallel,
+    merges their outputs via a :class:`StarLayer`, then processes along
+    the hidden dimension using either a Sparse Mixture-of-Experts
+    (:class:`SparseMoE`) or a single :class:`WaveExpert`.
+
+    Parameters
+    ----------
+    embedding_dim : int
+        Dimensionality of the patch embeddings.
+    n_patches : int
+        Number of patches (sequence length after patch extraction).
+    wavelet_names : Sequence[str]
+        Names of wavelet filters to use (one WaveNETHead per wavelet).
+    ffn_dropout : float
+        Dropout probability applied inside feed-forward sub-layers.
+    use_fft : bool
+        Whether to include the Fourier (FNet) head.
+    use_wavelet : bool
+        Whether to include wavelet heads.
+    device : torch.device
+        Compute device.
+    use_smoe : bool
+        Use Sparse Mixture-of-Experts; otherwise use a single WaveExpert.
+    activation : type
+        Activation function class (instantiated internally).
+    use_gmlp : bool
+        Whether to include the gMLP head.
+    """
+
     def __init__(
-            self,
-            embedding_dim,
-            n_patches,
-            wavelet_names,
-            ffn_dropout,
-            use_fft,
-            use_wavelet,
-            device,
-            use_smoe,
-            activation,
-            use_gmlp
-    ):
-        super(WaveSeekerBlock, self).__init__()
+        self,
+        embedding_dim: int,
+        n_patches: int,
+        wavelet_names: Sequence[str],
+        ffn_dropout: float,
+        use_fft: bool,
+        use_wavelet: bool,
+        device: torch.device,
+        use_smoe: bool,
+        activation: type,
+        use_gmlp: bool,
+    ) -> None:
+        super().__init__()
 
         self.device = device
-
         self.use_fft = use_fft
         self.use_wavelet = use_wavelet
         self.use_gmlp = use_gmlp
-
         self.use_smoe = use_smoe
 
         out_dim = 0
-
         self.norm_1 = RMSNorm(embedding_dim, eps=1e-8)
 
-        # Prepare Wavelet Heads
+        # Wavelet heads
         if self.use_wavelet:
             self.n_wavelets = len(wavelet_names)
-
             self.wave_heads = nn.ModuleList(
                 [
                     nn.Sequential(
@@ -64,20 +115,17 @@ class WaveSeekerBlock(nn.Module):
                     for wavelet_name in wavelet_names
                 ]
             )
-
-            # Add embedding_dim for every wavelet used
             out_dim += embedding_dim * len(wavelet_names)
 
-        # Prepare FFT Head
+        # FFT head
         if self.use_fft:
             self.fft_head = nn.Sequential(
                 nn.Linear(embedding_dim, embedding_dim),
                 FNETHead(embedding_dim, activation),
             )
+            out_dim += embedding_dim
 
-            out_dim += embedding_dim  # Add for the FNET
-
-        # Prepare gMLP Head
+        # gMLP head
         if self.use_gmlp:
             self.gmlp_head = nn.Sequential(
                 nn.Linear(embedding_dim, embedding_dim),
@@ -85,13 +133,12 @@ class WaveSeekerBlock(nn.Module):
                     embedding_dim=embedding_dim,
                     ffn_dropout=ffn_dropout,
                     n_patches=n_patches,
-                    activation=activation
+                    activation=activation,
                 ),
             )
+            out_dim += embedding_dim
 
-            out_dim += embedding_dim  # Add for the gMLP
-
-        # Merging of heads
+        # Merge heads
         self.dropout = nn.Dropout1d(ffn_dropout)
 
         if use_smoe:
@@ -101,105 +148,155 @@ class WaveSeekerBlock(nn.Module):
                 top_k=3,
                 activation=activation,
                 ffn_dropout=0.25,
-                n_patches=n_patches
+                n_patches=n_patches,
             )
-
         else:
-            self.star = StarLayer(emb_in=out_dim,
-                                  emb_out=embedding_dim,
-                                  n_patches=n_patches,
-                                  activation=activation)
+            self.star = StarLayer(
+                emb_in=out_dim,
+                emb_out=embedding_dim,
+                n_patches=n_patches,
+                activation=activation,
+            )
             self.proj_concat = WaveExpert(
                 in_embed=embedding_dim,
                 ffn_dropout=ffn_dropout,
-                activation=activation
+                activation=activation,
             )
 
         self.norm_2 = RMSNorm(embedding_dim, eps=1e-8)
 
-    def weight_init(self, w):
-        if isinstance(w, NoisyFactorizedLinear):
-            nn.init.kaiming_uniform_(w.weight)
-            nn.init.zeros_(w.bias)
+    def forward(
+        self, inputs: torch.Tensor
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        """Forward pass through one WaveSeekerBlock.
 
-    def forward(self, inputs):
+        Parameters
+        ----------
+        inputs : torch.Tensor
+            Shape ``(B, n_patches, embedding_dim)``.
 
-        x_c = []
-
-        # Normalize Inputs
+        Returns
+        -------
+        output : torch.Tensor
+            Same shape as *inputs*, after token mixing and normalisation.
+        z_loss : torch.Tensor
+            Auxiliary routing loss (scalar zero when SMoE is disabled).
+        """
+        x_c: list[torch.Tensor] = []
         x_n = self.norm_1(inputs)
 
-        # Wavelet
         if self.use_wavelet:
-            [x_c.append(wave_head(x_n)) for wave_head in self.wave_heads]
+            for wave_head in self.wave_heads:
+                x_c.append(wave_head(x_n))
 
-        # FFT
         if self.use_fft:
             x_c.append(self.fft_head(x_n))
 
         if self.use_gmlp:
             x_c.append(self.gmlp_head(x_n))
 
-        # Merge heads
-        x_c = torch.concat(x_c, dim=-1)
-        x_c = self.star(x_c) + inputs
-        x_c = self.norm_2(x_c)
+        x_merged = torch.concat(x_c, dim=-1)
+        x_merged = self.star(x_merged) + inputs
+        x_merged = self.norm_2(x_merged)
 
-        # Process along hidden dimension
         if self.use_smoe:
-            x_smoe, z_loss = self.proj_concat(x_c)
-
+            x_out, z_loss = self.proj_concat(x_merged)
         else:
-            z_loss = 0.0
-            x_smoe = self.proj_concat(x_c)
+            z_loss = torch.tensor(0.0, device=inputs.device)
+            x_out = self.proj_concat(x_merged)
 
-        x_c = x_smoe + x_c
-
-        return self.dropout(x_c), z_loss
+        return self.dropout(x_out + x_merged), z_loss
 
 
-class WaveNetTorch(nn.Module):
+class WaveSeekerNet(nn.Module):
+    """Core WaveSeekerNet neural network (PyTorch nn.Module).
+
+    Encodes 2-D genomic representations (FCGR images or protein matrices)
+    as non-overlapping patches, processes them through ``n_blocks`` stacked
+    :class:`WaveSeekerBlock` encoders, pools the result with
+    :class:`GlobalExpectationPooling`, and outputs class logits (and
+    optionally softmax probabilities).
+
+    Parameters
+    ----------
+    seq_L : int
+        Sequence-length dimension of the input (height of the 2-D matrix).
+    res_L : int
+        Residue/feature-length dimension (width of the 2-D matrix).
+    n_channels : int
+        Number of input channels.
+    patch_size : tuple[int, int]
+        ``(height, width)`` of each patch.
+    n_out : int
+        Number of output classes.
+    device : torch.device
+        Compute device.
+    emb_dim : int
+        Patch embedding dimension.
+    wavelet_names : Sequence[str]
+        Wavelet filter names passed to each :class:`WaveNETHead`.
+    wave_dropout : float
+        Dropout rate inside :class:`WaveSeekerBlock` sub-layers.
+    use_fft : bool
+        Include the Fourier (FNet) token-mixing head.
+    use_wavelets : bool
+        Include wavelet token-mixing head(s).
+    n_blocks : int
+        Number of stacked encoder blocks.
+    final_dropout : float
+        Dropout rate inside the classification head.
+    final_hidden_size : int
+        Hidden size of the classification head.
+    return_probs : bool
+        If ``True``, the model also returns softmax class probabilities.
+    use_kan : bool
+        Use KAN layers inside the classification head.
+    use_smoe : bool
+        Use Sparse MoE inside encoder blocks.
+    patch_mode : str
+        One of ``"patch"``, ``"compress"``, or ``"full"``.
+    activation : type
+        Activation function class (instantiated internally by sub-modules).
+    use_gmlp : bool
+        Include the gMLP token-mixing head.
+    """
+
     def __init__(
-            self,
-            seq_L,
-            res_L,
-            n_channels,
-            patch_size,
-            n_out,
-            device,
-            emb_dim,
-            wavelet_names,
-            wave_dropout,
-            use_fft,
-            use_wavelets,
-            n_blocks,
-            final_dropout,
-            final_hidden_size,
-            return_probs,
-            use_kan,
-            use_smoe,
-            patch_mode,
-            activation,
-            use_gmlp
-    ):
+        self,
+        seq_L: int,
+        res_L: int,
+        n_channels: int,
+        patch_size: tuple[int, int],
+        n_out: int,
+        device: torch.device,
+        emb_dim: int,
+        wavelet_names: Sequence[str],
+        wave_dropout: float,
+        use_fft: bool,
+        use_wavelets: bool,
+        n_blocks: int,
+        final_dropout: float,
+        final_hidden_size: int,
+        return_probs: bool,
+        use_kan: bool,
+        use_smoe: bool,
+        patch_mode: str,
+        activation: type,
+        use_gmlp: bool,
+    ) -> None:
         super().__init__()
 
         self.use_kan = use_kan
         self.use_smoe = use_smoe
         self.patch_mode = patch_mode
-
         self.return_probs = return_probs
-
         self.seq_L = seq_L
         self.res_L = res_L
         self.n_channels = n_channels
-
         self.patch_size = patch_size
-
         self.n_out = n_out
-
         self.emb_dim = emb_dim
-        self.wavelet_names = wavelet_names
+        self.wavelet_names = list(wavelet_names)
         self.wave_dropout = wave_dropout
         self.use_fft = use_fft
         self.use_wavelets = use_wavelets
@@ -210,53 +307,34 @@ class WaveNetTorch(nn.Module):
         self.activation = activation
         self.use_gmlp = use_gmlp
 
-#        self.make_patches = nn.Sequential(
-#            MakePatches(
-#                patch_width=patch_size[1],
-#                patch_height=patch_size[0],
-#                emb_dim=self.emb_dim,
-#                n_channel=self.n_channels,
-#                patch_mode=patch_mode,
-#            ),
-#            #PositionalEncoding(self.emb_dim),
-#            nn.Dropout1d(0.5),
-#        )
         self.patch_dropout = nn.Dropout1d(0.5)
-        
         self.make_patches = nn.ModuleList(
             [
-                
                 MakePatches(
-                  patch_width=patch_size[1],
-                  patch_height=patch_size[0],
-                  emb_dim=self.emb_dim,
-                  patch_mode=patch_mode
+                    patch_width=patch_size[1],
+                    patch_height=patch_size[0],
+                    emb_dim=self.emb_dim,
+                    patch_mode=patch_mode,
                 )
                 for _ in range(self.n_channels)
-            
             ]
         )
-        
 
         if self.patch_mode == "full":
             self.n_patches = 160
             self.a_pool = nn.AdaptiveAvgPool1d(self.n_patches)
             self.pool_pos = PositionalEncoding(self.emb_dim)
-
         elif self.patch_mode == "compress":
             seq_area = self.seq_L * self.res_L
-
             self.n_patches = (
-                                     seq_area // (self.patch_size[0] * self.patch_size[1])
-                             ) // 2
+                seq_area // (self.patch_size[0] * self.patch_size[1])
+            ) // 2
             self.a_pool = nn.AdaptiveAvgPool1d(self.n_patches)
             self.pool_pos = PositionalEncoding(self.emb_dim)
-
         elif self.patch_mode == "patch":
             seq_area = self.seq_L * self.res_L
             self.n_patches = seq_area // (self.patch_size[0] * self.patch_size[1])
 
-        # "Self-Attention"
         self.self_attention_enc = nn.ModuleList(
             [
                 WaveSeekerBlock(
@@ -269,16 +347,13 @@ class WaveNetTorch(nn.Module):
                     device=device,
                     use_smoe=self.use_smoe,
                     activation=self.activation,
-                    use_gmlp=self.use_gmlp
+                    use_gmlp=self.use_gmlp,
                 )
                 for _ in range(self.n_blocks)
             ]
         )
 
-        # Summarize "Self-Attention" for classification
         self.create_tokens = GlobalExpectationPooling()
-
-        # Classification head
         self.classifier = ClassificationHead(
             self.emb_dim,
             self.n_out,
@@ -290,95 +365,165 @@ class WaveNetTorch(nn.Module):
             grid_size=32,
         )
 
-    def weight_init(self, w):
-        if isinstance(w, NoisyFactorizedLinear) or isinstance(w, nn.Conv1d):
-            nn.init.kaiming_uniform_(w.weight)
-            nn.init.zeros_(w.bias)
+    def forward(
+        self, x: torch.Tensor
+    ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor] | tuple[torch.Tensor, torch.Tensor]:
+        """Forward pass through the full WaveSeekerNet.
 
-    def forward(self, x):
-        z_loss_sa = 0.0
+        Parameters
+        ----------
+        x : torch.Tensor
+            Input tensor of shape ``(B, n_channels, res_L, seq_L)`` for
+            multi-channel inputs, or ``(B, res_L, seq_L)`` for single-channel.
 
-        # Project each patch through a non-linearity and add positional encoding
-        if len(x.shape) == 3:
+        Returns
+        -------
+        When ``return_probs=True``:
+            ``(logits, probs, z_loss)`` — shapes
+            ``(B, n_out), (B, n_out), scalar``.
+        When ``return_probs=False``:
+            ``(logits, z_loss)`` — shapes ``(B, n_out), scalar``.
+        """
+        z_loss_total = torch.tensor(0.0, device=x.device)
+
+        # Patch extraction
+        if x.dim() == 3:
             x_patch = self.make_patches[0](x.unsqueeze(1))
         else:
-            x_patch_c = []
-            for channel_i in range(self.n_channels):
-                x_temp = x[:, channel_i:channel_i+1, :, :]
-                x_patch_c.append(self.make_patches[channel_i](x_temp))
-            x_patch = torch.concat(x_patch_c, dim=-2)
-        
+            channel_patches = [
+                self.make_patches[i](x[:, i : i + 1, :, :])
+                for i in range(self.n_channels)
+            ]
+            x_patch = torch.concat(channel_patches, dim=-2)
+
         x_patch = self.patch_dropout(x_patch)
-        
-        if self.patch_mode == "full" or self.patch_mode == "compress":
+
+        if self.patch_mode in ("full", "compress"):
             x_patch = self.a_pool(x_patch.transpose(-1, -2)).transpose(-1, -2)
             x_patch = self.pool_pos(x_patch)
 
-        # "Self-Attention" Encoder
-        for i in range(self.n_blocks):
-            x_patch, loss_sa = self.self_attention_enc[i](x_patch)
-            z_loss_sa += loss_sa
-        #for sa_enconder in self.self_attention_enc:
-            #x_sa, loss_sa = sa_enconder(x_patch)
-            #z_loss_sa += loss_sa
+        # Encoder blocks
+        for block in self.self_attention_enc:
+            x_patch, z_loss = block(x_patch)
+            z_loss_total = z_loss_total + z_loss
 
-        # Create classification tokens
         cls_tokens = self.create_tokens(x_patch)
 
-        # Classification output
         if self.return_probs:
-            x_logit, x_out = self.classifier(cls_tokens)
+            x_logit, x_probs = self.classifier(cls_tokens)
+            return x_logit, x_probs, z_loss_total
 
-            return x_logit, x_out, z_loss_sa
-
-        else:
-            return self.classifier(cls_tokens), z_loss_sa
+        return self.classifier(cls_tokens), z_loss_total
 
 
-class WaveSeekerClassifier:
+class WaveSeekerClassifier(BaseEstimator, ClassifierMixin):
+    """Scikit-learn-compatible classifier wrapping :class:`WaveSeekerNet`.
+
+    Follows the scikit-learn estimator API: ``fit``, ``predict``,
+    ``predict_proba``, and ``score`` (inherited from
+    :class:`~sklearn.base.ClassifierMixin`).
+    Compatible with :class:`~sklearn.pipeline.Pipeline`,
+    :class:`~sklearn.model_selection.GridSearchCV`, and
+    :func:`~sklearn.model_selection.cross_val_score`.
+
+    Parameters
+    ----------
+    seq_L : int
+        Sequence-length dimension of the input.
+    res_L : int
+        Residue/feature-length dimension of the input.
+    n_channels : int
+        Number of input channels.
+    patch_size : tuple[int, int]
+        ``(height, width)`` of each patch.
+    n_out : int
+        Number of output classes.
+    emb_dim : int
+        Patch embedding dimension. Default ``196``.
+    wavelet_names : list[str] or None
+        Wavelet filter names. Default ``["bior3.3", "sym4"]``.
+    wave_dropout : float
+        Dropout in WaveSeekerBlocks. Default ``0.5``.
+    use_fft : bool
+        Include Fourier head. Default ``True``.
+    use_wavelets : bool
+        Include wavelet heads. Default ``True``.
+    n_blocks : int
+        Number of encoder blocks. Default ``2``.
+    final_dropout : float
+        Dropout in the classification head. Default ``0.5``.
+    final_hidden_size : int
+        Hidden size of the classification head. Default ``32``.
+    batch_size : int
+        Mini-batch size. Default ``64``.
+    epochs : int
+        Number of training epochs. Default ``30``.
+    lr : float
+        Initial learning rate. Default ``1e-3``.
+    wd : float
+        Weight decay. Default ``0.0``.
+    optimizer_name : str
+        Optimizer name (from pytorch-optimizer). Default ``"Adan"``.
+    use_gc : bool
+        Use gradient centralisation. Default ``True``.
+    use_lookahead : bool
+        Wrap the optimizer with Lookahead. Default ``True``.
+    use_kan : bool
+        Use KAN layers in the classification head. Default ``True``.
+    use_smoe : bool
+        Use Sparse MoE in encoder blocks. Default ``True``.
+    patch_mode : str
+        One of ``"patch"``, ``"compress"``, ``"full"``. Default ``"compress"``.
+    activation : type
+        Activation function class. Default :class:`~WaveSeekerNet.sub_modules.lib.activation.ErMish`.
+    use_gmlp : bool
+        Include gMLP head. Default ``True``.
+    return_probs : bool
+        Return softmax probabilities from the model. Default ``True``.
+
+    Attributes
+    ----------
+    model_ : WaveSeekerNet
+        The fitted underlying PyTorch model. Set by :meth:`fit`.
+    device_ : torch.device
+        Device used during training. Set by :meth:`fit`.
+    loss_history_train_ : list[tuple[float, float, float]]
+        Per-epoch ``(bce_loss, kan_loss, smoe_loss)`` tuples.
+    loss_history_valid_ : list[float]
+        Per-epoch validation losses.
+    score_history_ : list[float]
+        Per-epoch balanced accuracy scores on the validation set.
+    """
+
     def __init__(
-            self,
-            seq_L,
-            res_L,
-            n_channels,
-            patch_size,
-            n_out,
-            emb_dim=196,
-            wavelet_names=["bior3.3", "sym4"],
-            wave_dropout=0.5,
-            use_fft=True,
-            use_wavelets=True,
-            n_blocks=2,
-            final_dropout=0.5,
-            final_hidden_size=32,
-            batch_size=64,
-            epochs=30,
-            lr=1e-3,
-            wd=0.0,
-            optimizer_name="Adan",
-            use_gc=True,
-            use_lookahead=True,
-            use_kan=True,
-            use_smoe=True,
-            patch_mode="compress",
-            activation=ErMish,
-            use_gmlp=True,
-            return_probs=True
-    ):
-        self.use_kan = use_kan
-        self.use_smoe = use_smoe
-        self.patch_mode = patch_mode
-
-        self.activation = activation
-
-        self.batch_size = batch_size
-        self.epochs = epochs
-        self.lr = lr
-        self.wd = wd
-        self.optimizer_name = optimizer_name
-        self.use_gc = use_gc
-        self.use_lookahead = use_lookahead
-
+        self,
+        seq_L: int,
+        res_L: int,
+        n_channels: int,
+        patch_size: tuple[int, int],
+        n_out: int,
+        emb_dim: int = 196,
+        wavelet_names: Optional[list[str]] = None,
+        wave_dropout: float = 0.5,
+        use_fft: bool = True,
+        use_wavelets: bool = True,
+        n_blocks: int = 2,
+        final_dropout: float = 0.5,
+        final_hidden_size: int = 32,
+        batch_size: int = 64,
+        epochs: int = 30,
+        lr: float = 1e-3,
+        wd: float = 0.0,
+        optimizer_name: str = "Adan",
+        use_gc: bool = True,
+        use_lookahead: bool = True,
+        use_kan: bool = True,
+        use_smoe: bool = True,
+        patch_mode: str = "compress",
+        activation: Type[nn.Module] = ErMish,
+        use_gmlp: bool = True,
+        return_probs: bool = True,
+    ) -> None:
         self.seq_L = seq_L
         self.res_L = res_L
         self.n_channels = n_channels
@@ -392,66 +537,71 @@ class WaveSeekerClassifier:
         self.n_blocks = n_blocks
         self.final_dropout = final_dropout
         self.final_hidden_size = final_hidden_size
+        self.batch_size = batch_size
+        self.epochs = epochs
+        self.lr = lr
+        self.wd = wd
+        self.optimizer_name = optimizer_name
+        self.use_gc = use_gc
+        self.use_lookahead = use_lookahead
+        self.use_kan = use_kan
+        self.use_smoe = use_smoe
+        self.patch_mode = patch_mode
+        self.activation = activation
         self.use_gmlp = use_gmlp
         self.return_probs = return_probs
 
-    def fit(self, X, y, X_va=None, y_va=None, save_path=None):
-        # Get device (CPU or GPU)
-        use_autocast = False
-        if is_gpu_available():
-            use_autocast = True
-            device_type = "cuda:0"
+    # ------------------------------------------------------------------
+    # Internal helpers
+    # ------------------------------------------------------------------
 
-        else:
-            device_type = "cpu"
+    def _resolve_wavelet_names(self) -> list[str]:
+        """Return the wavelet names list, applying the default if not set."""
+        return self.wavelet_names if self.wavelet_names is not None else ["bior3.3", "sym4"]
 
-        self.device = torch.device("cuda:0" if is_gpu_available() else "cpu")
+    @staticmethod
+    def _get_device() -> torch.device:
+        """Return the best available compute device."""
+        return torch.device("cuda:0" if is_gpu_available() else "cpu")
 
-        print("Using: %s!" % self.device)
-
-        self.loss_history_train = []
-        self.loss_history_valid = []
-        self.score_history = []
-
-        # Prepare data
-        if X_va is not None:
-            X_train = torch.tensor(X)
-            y_train = torch.tensor(y)
-
-            X_valid = torch.tensor(X_va).to(self.device)
-            y_valid = torch.tensor(y_va).to(self.device)
-
-        else:
-            X_train, X_va, y_train, y_va = train_test_split(
-                X, y, test_size=0.10, stratify=y, random_state=0
+    def _check_is_fitted(self) -> None:
+        """Raise :exc:`~sklearn.exceptions.NotFittedError` if not yet trained."""
+        if not hasattr(self, "model_"):
+            raise NotFittedError(
+                f"This {type(self).__name__} instance is not fitted yet. "
+                "Call 'fit' before using this estimator."
             )
 
-            X_train = torch.tensor(X_train)
-            y_train = torch.tensor(y_train)
-
-            X_valid = torch.tensor(X_va).to(self.device)
-            y_valid = torch.tensor(y_va).to(self.device)
-
-        # Create a dataset loader
-        dataset_train = torch.utils.data.DataLoader(
-            list(zip(X_train, y_train)),
-            shuffle=True,
+    def _make_dataloader(
+        self,
+        *tensors: torch.Tensor,
+        shuffle: bool = False,
+    ) -> torch.utils.data.DataLoader:
+        """Wrap tensors in a :class:`~torch.utils.data.TensorDataset` DataLoader."""
+        return torch.utils.data.DataLoader(
+            torch.utils.data.TensorDataset(*tensors),
+            shuffle=shuffle,
             batch_size=self.batch_size,
         )
-        dataset_valid = torch.utils.data.DataLoader(
-            list(zip(X_valid, y_valid)), shuffle=False, batch_size=self.batch_size
-        )
 
-        # Put model on the appropriate device
-        self.model = WaveNetTorch(
+    def _init_model(self) -> None:
+        """
+        Centralized internal helper to initialize the WaveSeekerNet architecture.
+        Sets self.device_ and self.model_.
+        """
+        self.device_ = self._get_device()
+        logger.info("Using device: %s", self.device_ )
+        wavelet_names = self._resolve_wavelet_names()
+
+        self.model_ = WaveSeekerNet(
             seq_L=self.seq_L,
             res_L=self.res_L,
             n_channels=self.n_channels,
-            device=self.device,
+            device=self.device_,
             patch_size=self.patch_size,
             n_out=self.n_out,
             emb_dim=self.emb_dim,
-            wavelet_names=self.wavelet_names,
+            wavelet_names=wavelet_names,
             wave_dropout=self.wave_dropout,
             use_fft=self.use_fft,
             use_wavelets=self.use_wavelets,
@@ -463,28 +613,79 @@ class WaveSeekerClassifier:
             patch_mode=self.patch_mode,
             use_kan=self.use_kan,
             activation=self.activation,
-            use_gmlp=self.use_gmlp
-        )
+            use_gmlp=self.use_gmlp,
+        ).to(self.device_)
+    # ------------------------------------------------------------------
+    # Public API
+    # ------------------------------------------------------------------
 
-        self.model.to(self.device)
+    def fit(
+        self,
+        X: np.ndarray,
+        y: np.ndarray,
+        X_va: Optional[np.ndarray] = None,
+        y_va: Optional[np.ndarray] = None,
+        save_path: Optional[str] = None,
+    ) -> "WaveSeekerClassifier":
+        """Train the classifier.
 
-#        summary(self.model, input_size=( 2,  2, X_train.shape[2], X_train.shape[3]),
-#                col_names=["input_size", "output_size", "kernel_size", "num_params", "mult_adds"], depth=10)
+        Parameters
+        ----------
+        X : np.ndarray
+            Training features.
+        y : np.ndarray
+            Training labels (integer-encoded).
+        X_va : np.ndarray, optional
+            Validation features. If ``None``, 10 % of training data is held
+            out via stratified split.
+        y_va : np.ndarray, optional
+            Validation labels (required when *X_va* is provided).
+        save_path : str, optional
+            If given, model weights are saved to this path after training
+            via :func:`torch.save`.
 
-        model_parameters = filter(lambda p: p.requires_grad, self.model.parameters())
-        params_train = sum([np.prod(p.size()) for p in model_parameters])
-        print("Total Trainable Parameters: ", params_train)
+        Returns
+        -------
+        self : WaveSeekerClassifier
+            Fitted estimator (enables method chaining).
+        """
+        self._init_model()
+        use_autocast = is_gpu_available()
+        device_type = "cuda" if use_autocast else "cpu"
 
-        model_parameters = self.model.parameters()
-        params_total = sum([np.prod(p.size()) for p in model_parameters])
-        print("Total Parameters: ", params_total)
+        self.loss_history_train_: list[tuple[float, float, float]] = []
+        self.loss_history_valid_: list[float] = []
+        self.score_history_: list[float] = []
 
-        optimizer_1 = create_optimizer(
-            self.model,
+        # ---- Data preparation ----
+        if X_va is not None:
+            X_train_t = torch.tensor(X)
+            y_train_t = torch.tensor(y)
+            X_valid_t = torch.tensor(X_va)
+            y_valid_t = torch.tensor(y_va)
+        else:
+            X_tr, X_va_s, y_tr, y_va_s = train_test_split(
+                X, y, test_size=0.10, stratify=y, random_state=0
+            )
+            X_train_t = torch.tensor(X_tr)
+            y_train_t = torch.tensor(y_tr)
+            X_valid_t = torch.tensor(X_va_s)
+            y_valid_t = torch.tensor(y_va_s)
+
+        loader_train = self._make_dataloader(X_train_t, y_train_t, shuffle=True)
+        loader_valid = self._make_dataloader(X_valid_t, y_valid_t)
+
+        trainable = sum(p.numel() for p in self.model_.parameters() if p.requires_grad)
+        total = sum(p.numel() for p in self.model_.parameters())
+        logger.info("Trainable parameters: %d / %d total", trainable, total)
+
+        # ---- Optimizer & scheduler ----
+        optimizer = create_optimizer(
+            self.model_,
             wd_ban_list=[
-                str(x[0])
-                for x in list(self.model.named_parameters())
-                if ("m_scaler" in x[0]) or ("rms_scaler" in x[0])
+                name
+                for name, _ in self.model_.named_parameters()
+                if "m_scaler" in name or "rms_scaler" in name
             ],
             optimizer_name=self.optimizer_name,
             lr=self.lr,
@@ -492,212 +693,188 @@ class WaveSeekerClassifier:
             use_lookahead=self.use_lookahead,
             use_gc=self.use_gc,
         )
-
         scheduler = torch.optim.lr_scheduler.OneCycleLR(
-            optimizer_1,
+            optimizer,
             max_lr=0.01,
-            steps_per_epoch=len(dataset_train),
-            epochs=self.epochs
+            steps_per_epoch=len(loader_train),
+            epochs=self.epochs,
         )
+        loss_fn = torch.nn.CrossEntropyLoss().to(self.device_)
+        scaler = torch.amp.GradScaler(device_type)
 
-        loss_fn1 = torch.nn.CrossEntropyLoss().to(self.device)
-
-        scaler_1 = torch.amp.GradScaler(self.device)
-
-        # Training loop
+        # ---- Training loop ----
         for epoch in range(self.epochs):
-            i = 0
-            start = time()
+            train_start = time()
 
-            if torch.cuda.is_available:
-                torch.cuda.empty_cache()
+            self.model_.train()
+            bce_loss = kan_loss = mh_moe_loss = 0.0
 
-            # Training steps
-            self.model.train()
-
-            bce_loss = 0.0
-            kan_loss = 0.0
-            mh_moe_loss = 0.0
-            for batch_num, batch in enumerate(dataset_train):
-                x_in, y_in = batch
-                x_in = x_in.to(self.device)
-                y_in = y_in.to(self.device)
+            for x_in, y_in in loader_train:
+                x_in, y_in = x_in.to(self.device_), y_in.to(self.device_)
 
                 with torch.amp.autocast(
-                        device_type=device_type,
-                        dtype=torch.bfloat16,
-                        enabled=use_autocast
+                    device_type=device_type,
+                    dtype=torch.bfloat16,
+                    enabled=use_autocast,
                 ):
                     if self.return_probs:
-                    # Compute outputs
-                      x_logit, sm_out, moe_loss = self.model(x_in)
+                        x_logit, _, moe_loss = self.model_(x_in)
                     else:
-                      x_logit, moe_loss = self.model(x_in)
+                        x_logit, moe_loss = self.model_(x_in)
 
-                    # Calculate loss - KAN
+                    loss_1 = loss_fn(x_logit, y_in)
+                    total_loss = loss_1
+
                     if self.use_kan:
-                        k = self.model.classifier.logits._modules[
-                            "0"
-                        ].regularization_loss(1.0, 1.0)
-                        k += self.model.classifier.logits._modules[
-                            "1"
-                        ].regularization_loss(1.0, 1.0)
-                        k += self.model.classifier.logits._modules[
-                            "2"
-                        ].regularization_loss(1.0, 1.0)
-
-                        k = k / 3.0
-                        k = 0.01 * k
-
-                    # Calculate loss - BCE
-                    loss_1 = loss_fn1(x_logit, y_in)
-
-                    # Combine Losses
-                    if self.use_kan:
-                        total_loss = loss_1 + k
-
-                    else:
-                        total_loss = loss_1
+                        kan_layers = [
+                            layer
+                            for layer in self.model_.classifier.logits
+                            if isinstance(layer, KANLinear)
+                        ]
+                        k = sum(
+                            layer.regularization_loss(1.0, 1.0)
+                            for layer in kan_layers
+                        )
+                        k = 0.01 * k / max(1, len(kan_layers))
+                        total_loss = total_loss + k
 
                     if self.use_smoe:
                         sa_moe = moe_loss * 0.1
-                        total_loss += sa_moe
+                        total_loss = total_loss + sa_moe
 
                 bce_loss += loss_1.item()
-
                 if self.use_kan:
                     kan_loss += k.item()
-
                 if self.use_smoe:
                     mh_moe_loss += sa_moe.item()
 
-                # Backwards pass
-                optimizer_1.zero_grad()
-                scaler_1.scale(total_loss).backward()
-
-                # Update weights
-                scaler_1.step(optimizer_1)
-                scaler_1.update()
+                optimizer.zero_grad()
+                scaler.scale(total_loss).backward()
+                scaler.step(optimizer)
+                scaler.update()
                 scheduler.step()
 
-            end = time()
+            train_time = time() - train_start
+            n_batches = len(loader_train)
+            bce_loss /= n_batches
+            kan_loss /= n_batches
+            mh_moe_loss /= n_batches
 
-            total_time = end - start
-
-            bce_loss /= len(dataset_train)
-            kan_loss /= len(dataset_train)
-            mh_moe_loss /= len(dataset_train)
-
-            # Validation steps
-            start = time()
-
-            self.model.eval()
-
+            # ---- Validation ----
+            infer_start = time()
+            self.model_.eval()
             val_loss = 0.0
-
-            val_pred = []
-            val_labels = []
+            val_pred: list[int] = []
+            val_labels: list[int] = []
 
             with torch.no_grad():
-                for batch in dataset_valid:
-                    x_v, y_v = batch
-
+                for x_v, y_v in loader_valid:
+                    x_v, y_v = x_v.to(self.device_), y_v.to(self.device_)
                     with torch.amp.autocast(
-                            device_type=device_type,
-                            dtype=torch.bfloat16,
-                            enabled=use_autocast
+                        device_type=device_type,
+                        dtype=torch.bfloat16,
+                        enabled=use_autocast,
                     ):
                         if self.return_probs:
-                          outputs, sm_out, _ = self.model(x_v)
+                            outputs, _, _ = self.model_(x_v)
                         else:
-                          outputs, _ = self.model(x_v)
-
-                        loss_v = loss_fn1(outputs, y_v)
-
-                    val_loss += loss_v.item()
+                            outputs, _ = self.model_(x_v)
+                        val_loss += loss_fn(outputs, y_v).item()
 
                     _, pred = torch.max(outputs, 1)
+                    val_pred.extend(pred.detach().cpu().numpy())
+                    val_labels.extend(y_v.detach().cpu().numpy())
 
-                    val_pred.extend(pred.cpu().numpy())
-                    val_labels.extend(y_v.cpu().numpy())
-
-            end = time()
-
-            inference_time = end - start
-
-            val_loss /= len(dataset_valid)
+            infer_time = time() - infer_start
+            val_loss /= len(loader_valid)
             val_bas = balanced_accuracy_score(val_labels, val_pred)
 
-            print(
-                f"Epoch {epoch + 1}: BCE Loss: {bce_loss:.4f}"
-            )
-            print(
-                f"KAN Loss: {kan_loss:.4f}, MH-SMoE (SA) Loss: {mh_moe_loss:.4f}"
+            logger.info(
+                "Epoch %d/%d | BCE: %.4f | KAN: %.4f | SMoE: %.4f | "
+                "Val Loss: %.4f | Val BA: %.4f | "
+                "Train: %.1fs | Infer: %.1fs",
+                epoch + 1,
+                self.epochs,
+                bce_loss,
+                kan_loss,
+                mh_moe_loss,
+                val_loss,
+                val_bas,
+                train_time,
+                infer_time,
             )
 
-            self.loss_history_train.append((bce_loss, kan_loss, mh_moe_loss))
+            self.loss_history_train_.append((bce_loss, kan_loss, mh_moe_loss))
+            self.loss_history_valid_.append(val_loss)
+            self.score_history_.append(val_bas)
 
-            print(
-                f"Val Loss: {val_loss:.4f} Val BA-Score: {val_bas: 4f} Training Time: {total_time: 4f} Inference Time: {inference_time: 4f}"
-            )
-
-            self.loss_history_valid.append(val_loss)
-            self.score_history.append(val_bas)
         if save_path is not None:
-            torch.save(self.model.state_dict(), save_path)
+            torch.save(self.model_.state_dict(), save_path)
+            logger.info("Model weights saved to %s", save_path)
+
         return self
 
-    def predict(self, X):
-        self.model.eval()
+    def predict(
+        self, X: np.ndarray, return_logits: bool = False
+    ) -> np.ndarray | tuple[np.ndarray, np.ndarray]:
+        """Predict class labels for samples in *X*.
 
-        val_pred = []
+        Parameters
+        ----------
+        X : np.ndarray
+            Input features, same shape as used in :meth:`fit`.
+        return_logits : bool, default=False
 
-        X_unk = torch.tensor(X, device=self.device)
+        Returns
+        -------
+        predictions : np.ndarray
+            Integer class labels of shape ``(n_samples,)``.
 
-        y_nothing = torch.tensor(np.zeros(shape=(X.shape[0],), dtype=int)).to(
-            self.device
-        )
+        Raises
+        ------
+        sklearn.exceptions.NotFittedError
+            If :meth:`fit` has not been called yet.
+        """
+        self._check_is_fitted()
+        self.model_.eval()
 
-        dataset_valid = torch.utils.data.DataLoader(
-            list(zip(X_unk, y_nothing)), shuffle=False, batch_size=self.batch_size
-        )
+        loader = self._make_dataloader(torch.tensor(X, dtype=torch.float32))
+        val_pred: list[int] = []
+        val_logits: list[np.ndarray] = []
+        use_autocast = self.device_.type == "cuda"
 
         with torch.no_grad():
-            for batch in dataset_valid:
-                x_v, _ = batch
+            for (x_v,) in loader:
+                x_v = x_v.to(self.device_)
                 if self.return_probs:
-                  outputs = self.model(x_v)[-3]
+                    outputs, _, _ = self.model_(x_v)
                 else:
-                  outputs = self.model(x_v)[-2]
-
-                pred = torch.max(outputs, 1)[1]
-
-                val_pred.extend(pred.cpu().numpy())
-
+                    outputs, _ = self.model_(x_v)
+                val_pred.extend(torch.max(outputs, 1)[1].detach().cpu().numpy())
+                if return_logits:
+                    val_logits.extend(outputs.detach().cpu().float().numpy())
+        if return_logits:
+            return np.asarray(val_pred), np.asarray(val_logits)
         return np.asarray(val_pred)
 
-    def predict_proba(self, X):
-        self.model.eval()
+    def load_weights(self, path):
+        """
+        Loads model weights from the specified path.
+        """
+        if not hasattr(self, "model_"):
+            print("Initializing model...")
+            self._init_model()
 
-        val_pred = []
+        state_dict = torch.load(path, map_location=self.device_, weights_only=True)
+        self.model_.load_state_dict(state_dict)
+        self.model_.eval()
 
-        X_unk = torch.tensor(X, device=self.device)
-
-        y_nothing = torch.tensor(np.zeros(shape=(X.shape[0],), dtype=int)).to(
-            self.device
-        )
-
-        dataset_valid = torch.utils.data.DataLoader(
-            list(zip(X_unk, y_nothing)), shuffle=False, batch_size=self.batch_size
-        )
-
-        criterion = torch.nn.Softmax(dim=-1)
-        with torch.no_grad():
-            for batch in dataset_valid:
-                x_v, _ = batch
-
-                outputs = self.model(x_v)[-2]
-
-                val_pred.extend(outputs.cpu().numpy())
-
-        return np.asarray(val_pred)
+    def get_model(self):
+        """
+        Returns the underlying PyTorch model (nn.Module).
+        Ensures the model is initialized first.
+        """
+        if not hasattr(self, "model_"):
+            print ("Initializing model...")
+            self._init_model()
+        return self.model_
