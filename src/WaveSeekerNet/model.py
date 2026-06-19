@@ -523,6 +523,7 @@ class WaveSeekerClassifier(BaseEstimator, ClassifierMixin):
         activation: Type[nn.Module] = ErMish,
         use_gmlp: bool = True,
         return_probs: bool = True,
+        device: Optional[str | torch.device] = None,
     ) -> None:
         self.seq_L = seq_L
         self.res_L = res_L
@@ -550,6 +551,7 @@ class WaveSeekerClassifier(BaseEstimator, ClassifierMixin):
         self.activation = activation
         self.use_gmlp = use_gmlp
         self.return_probs = return_probs
+        self.device = device
 
     # ------------------------------------------------------------------
     # Internal helpers
@@ -559,11 +561,11 @@ class WaveSeekerClassifier(BaseEstimator, ClassifierMixin):
         """Return the wavelet names list, applying the default if not set."""
         return self.wavelet_names if self.wavelet_names is not None else ["bior3.3", "sym4"]
 
-    @staticmethod
-    def _get_device() -> torch.device:
+    def _get_device(self) -> torch.device:
         """Return the best available compute device."""
-        return torch.device("cpu")
-        #return torch.device("cuda:0" if is_gpu_available() else "cpu")
+        if self.device is not None:
+            return torch.device(self.device)
+        return torch.device("cuda:0" if is_gpu_available() else "cpu")
 
     def _check_is_fitted(self) -> None:
         """Raise :exc:`~sklearn.exceptions.NotFittedError` if not yet trained."""

@@ -31,6 +31,7 @@ dependencies = [
     "shap==0.48.0",
     "PyWavelets",
     "biopython>=1.80",
+    "complexcgr",
 ]
 dynamic = ["version"]
 
