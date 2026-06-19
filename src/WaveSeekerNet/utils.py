@@ -2,6 +2,7 @@ import logging
 import sys
 import numpy as np
 from Bio import SeqIO
+from complexcgr import FCGR
 
 # Set up module-level logger
 logger = logging.getLogger(__name__)
@@ -159,5 +160,132 @@ def fasta_to_one_hot(
     if out_filename:
         fp.flush()
         logger.info("Encoding complete. Dataset saved to %s", out_filename)
+
+    return fp, headers
+
+
+def clean_sequence_to_n(seq: str) -> str:
+    """
+    Cleans a sequence for CGR representation:
+    - Converts to uppercase
+    - Maps U -> T
+    - Converts any other character that is not A, C, G, or T (e.g. IUPAC characters, gaps) to 'N'
+    """
+    seq_upper = seq.upper().replace('U', 'T')
+    # Convert anything that is not standard A, C, G, T to 'N'
+    return "".join(c if c in 'ACGT' else 'N' for c in seq_upper)
+
+
+def encode_fcgr_chunk(
+        chunk_seqs: list[str],
+        k: int,
+        standardize: bool = True
+) -> np.ndarray:
+    """Helper to encode a batch of cleaned sequences to FCGR matrices."""
+    n_seqs = len(chunk_seqs)
+    grid_dim = 2 ** k
+
+    # Initialize batch array
+    fcgr_batch = np.zeros((n_seqs, grid_dim, grid_dim), dtype=np.float32)
+
+    # Instantiate complexCGR converter
+    fcgr_converter = FCGR(k=k)
+
+    for i, seq in enumerate(chunk_seqs):
+        cleaned_seq = clean_sequence_to_n(seq)
+
+        if not cleaned_seq:
+            continue
+
+        # 1. Get the FCGR matrix (shape: 2**k x 2**k)
+        matrix = np.array(fcgr_converter(cleaned_seq), dtype=np.float32)
+
+        # 2. Standardize base on sequence length independence
+        if standardize:
+            fcgr_sum = np.sum(matrix)
+            if fcgr_sum > 0:
+                max_sz = 4 ** k
+                matrix = (matrix / fcgr_sum) * max_sz
+
+        fcgr_batch[i] = matrix
+
+    return fcgr_batch
+
+
+def fasta_to_fcgr(
+        fasta_path: str,
+        k: int = 6,
+        standardize: bool = True,
+        chunk_size: int = 10000,
+        out_filename: str | None = None
+) -> tuple[np.ndarray, list[str]]:
+    """
+    Read DNA sequences from a FASTA file and convert to FCGR representations.
+
+    Uses disk memory-mapping (np.memmap) if out_filename is provided to allow
+    processing large datasets that exceed available RAM (e.g. 500K+ sequences).
+
+    Parameters
+    ----------
+    fasta_path : str
+        Path to the FASTA file.
+    k : int, default 6
+        k-mer length for Chaos Game Representation. The output resolution
+        for each sequence will be (2**k) x (2**k).
+    standardize : bool, default True
+        If True, normalizes the FCGR frequency matrix so that values are
+        independent of the sequence length.
+    chunk_size : int, default 10000
+        Number of sequences to process in a single batch to limit RAM spikes.
+    out_filename : str or None, default None
+        If provided, writes the array directly to a memory-mapped NumPy file.
+
+    Returns
+    -------
+    X : np.ndarray
+        FCGR matrix array of shape (n_sequences, 2**k, 2**k).
+        If out_filename is provided, this is a memory-mapped numpy array.
+    headers : list of str
+        The FASTA headers (IDs) of the encoded sequences in corresponding order.
+    """
+    # 1. Count sequences in FASTA
+    n_seqs = count_fasta_sequences(fasta_path)
+    grid_dim = 2 ** k
+    logger.info("Found %d sequences in FASTA file: %s", n_seqs, fasta_path)
+    logger.info("Output matrix resolution for k=%d is: (%d x %d)", k, grid_dim, grid_dim)
+
+    # 2. Setup the output array (disk-backed or in-memory)
+    if out_filename:
+        logger.info("Initializing disk-backed memory-mapped array at %s...", out_filename)
+        fp = np.memmap(out_filename, dtype='float32', mode='w+', shape=(n_seqs, grid_dim, grid_dim))
+    else:
+        logger.info("Initializing in-memory array (Warning: Make sure you have enough RAM)...")
+        fp = np.zeros((n_seqs, grid_dim, grid_dim), dtype=np.float32)
+
+    # 3. Stream and encode
+    headers = []
+    chunk = []
+    chunk_start = 0
+
+    for record in SeqIO.parse(fasta_path, "fasta"):
+        headers.append(record.id)
+        chunk.append(str(record.seq))
+
+        if len(chunk) == chunk_size:
+            chunk_end = chunk_start + len(chunk)
+            fp[chunk_start:chunk_end] = encode_fcgr_chunk(chunk, k, standardize)
+            logger.info("Encoded FCGR records %d to %d...", chunk_start, chunk_end)
+            chunk_start = chunk_end
+            chunk = []
+
+    # Process remaining records
+    if chunk:
+        chunk_end = chunk_start + len(chunk)
+        fp[chunk_start:chunk_end] = encode_fcgr_chunk(chunk, k, standardize)
+        logger.info("Encoded final FCGR records %d to %d.", chunk_start, chunk_end)
+
+    if out_filename:
+        fp.flush()
+        logger.info("FCGR encoding complete. Dataset saved to %s", out_filename)
 
     return fp, headers
