@@ -562,7 +562,8 @@ class WaveSeekerClassifier(BaseEstimator, ClassifierMixin):
     @staticmethod
     def _get_device() -> torch.device:
         """Return the best available compute device."""
-        return torch.device("cuda:0" if is_gpu_available() else "cpu")
+        return torch.device("cpu")
+        #return torch.device("cuda:0" if is_gpu_available() else "cpu")
 
     def _check_is_fitted(self) -> None:
         """Raise :exc:`~sklearn.exceptions.NotFittedError` if not yet trained."""
@@ -841,7 +842,6 @@ class WaveSeekerClassifier(BaseEstimator, ClassifierMixin):
         loader = self._make_dataloader(torch.tensor(X, dtype=torch.float32))
         val_pred: list[int] = []
         val_logits: list[np.ndarray] = []
-        use_autocast = self.device_.type == "cuda"
 
         with torch.no_grad():
             for (x_v,) in loader:
@@ -862,7 +862,7 @@ class WaveSeekerClassifier(BaseEstimator, ClassifierMixin):
         Loads model weights from the specified path.
         """
         if not hasattr(self, "model_"):
-            print("Initializing model...")
+            logger.info("Initializing model...")
             self._init_model()
 
         state_dict = torch.load(path, map_location=self.device_, weights_only=True)
@@ -875,6 +875,246 @@ class WaveSeekerClassifier(BaseEstimator, ClassifierMixin):
         Ensures the model is initialized first.
         """
         if not hasattr(self, "model_"):
-            print ("Initializing model...")
+            logger.info ("Initializing model...")
             self._init_model()
         return self.model_
+
+    def summary(self, col_names: Optional[Sequence[str]] = None, depth: int = 10):
+        """Print and return the model structure and parameter count using torchinfo.
+
+        Parameters
+        ----------
+        col_names : Sequence[str], optional
+            Columns to display in the summary. Defaults to input size,
+            output size, number of parameters, and multiply-accumulates.
+        """
+        # Ensure the underlying PyTorch model is initialized
+        if not hasattr(self, "model_"):
+            logger.info("Initializing model...")
+            self._init_model()
+
+        if col_names is None:
+            col_names = ("input_size", "output_size", "num_params", "mult_adds")
+
+        # Determine the input shape based on the classifier's configuration
+        input_size = (self.batch_size, self.n_channels, self.res_L, self.seq_L)
+
+        return summary(
+            self.model_,
+            input_size=input_size,
+            col_names=list(col_names),
+            device=self.device_,
+            depth=depth,
+        )
+
+    def explain(
+            self,
+            X_explain: np.ndarray,
+            background_data: Optional[np.ndarray] = None,
+            explainer_type: str = "gradient",
+            output_type: str = "logits",
+            n_background_samples: int = 50,
+            batch_size: int = 32,
+    ) -> np.ndarray:
+        """
+        Compute SHAP values to explain WaveSeekerNet predictions.
+
+        Parameters
+        ----------
+        X_explain : np.ndarray
+            Input samples to explain. Shape: (n_samples, res_L, seq_L)
+            or (n_samples, n_channels, res_L, seq_L).
+        background_data : np.ndarray, optional
+            Representative baseline data used to initialize the explainer.
+            If None, a random subset of X_explain is used.
+        explainer_type : str, default="gradient"
+            The type of SHAP explainer to use:
+            - "deep": uses DeepExplainer (DeepLIFT). WARNING: May fail with KAN/SMoE/FFT/Wavelets.
+            - "gradient": uses GradientExplainer (Integrated Gradients). Recommended.
+            - "kernel": model-agnostic KernelExplainer.
+        output_type : str, default="logits"
+            Explain "logits" (recommended) or "probs" (probabilities).
+        n_background_samples : int, default=50
+            Number of background samples to choose from if background_data is None.
+        batch_size : int, optional
+            Batch size used during SHAP evaluation to avoid CUDA Out-Of-Memory (OOM) issues.
+            If None, defaults to `self.batch_size`.
+
+        Returns
+        -------
+        shap_values : np.ndarray
+            SHAP values of shape:
+            - (n_samples, res_L, seq_L, num_model_output) for single-channel inputs
+            - (n_samples, n_channels, res_L, seq_L, num_model_output) for multi-channel inputs
+        """
+        self._check_is_fitted()
+        import shap  # Lazy import to avoid dependency issues if shap is not installed
+
+        # Resolve background data
+        if background_data is None:
+            indices = np.random.choice(
+                X_explain.shape[0],
+                min(n_background_samples, X_explain.shape[0]),
+                replace=False
+            )
+            background_data = X_explain[indices]
+
+        # 1. PyTorch-based Explainers (Deep SHAP and Gradient SHAP)
+        if explainer_type in ("deep", "gradient"):
+            # Internal wrapper to return a single output tensor
+            class ShapModelWrapper(torch.nn.Module):
+                def __init__(self, model, out_type):
+                    super().__init__()
+                    self.model = model
+                    self.out_type = out_type
+                    self.model.eval()
+
+                def forward(self, x):
+                    outputs = self.model(x)
+                    if self.model.return_probs:
+                        logits, probs, _ = outputs
+                        return probs if self.out_type == "probs" else logits
+                    else:
+                        logits, _ = outputs
+                        if self.out_type == "probs":
+                            return torch.softmax(logits, dim=-1)
+                        return logits
+
+            wrapper = ShapModelWrapper(self.model_, output_type)
+
+            # Move background data to the model's device
+            background_tensor = torch.tensor(background_data, dtype=torch.float32).to(self.device_)
+
+            if explainer_type == "deep":
+                explainer = shap.DeepExplainer(wrapper, background_tensor)
+            else:
+                # Forward batch_size to control internal combination batching on GPU
+                explainer = shap.GradientExplainer(wrapper, background_tensor, batch_size=batch_size)
+
+            # Explain in mini-batches to prevent GPU OOM
+            shap_values_batches = []
+            num_samples = X_explain.shape[0]
+
+            for i in range(0, num_samples, batch_size):
+                batch_data = X_explain[i: i + batch_size]
+                # Move only the current batch to the GPU
+                batch_tensor = torch.tensor(batch_data, dtype=torch.float32).to(self.device_)
+                # Returns list of Tensors/Arrays or a single Tensor/Array
+                batch_shap = explainer.shap_values(batch_tensor)
+                shap_values_batches.append(batch_shap)
+
+            # Merge batched SHAP outputs
+            if isinstance(shap_values_batches[0], list):
+                # Handle list of length 1 (e.g. [[batch_values_of_shape_B_R_S_C]])
+                if len(shap_values_batches[0]) == 1:
+                    inner_shape = (
+                        shap_values_batches[0][0].shape
+                        if hasattr(shap_values_batches[0][0], "shape")
+                        else "unknown"
+                    )
+                    logger.info(
+                        "Merging SHAP batches: Scenario C (list of length 1). "
+                        "Inner batch shape: %s",
+                        inner_shape
+                    )
+                    shap_values_batches = [batch[0] for batch in shap_values_batches]
+                    if isinstance(shap_values_batches[0], torch.Tensor):
+                        shap_vals = torch.cat(shap_values_batches, dim=0).cpu().numpy()
+                    else:
+                        shap_vals = np.concatenate(shap_values_batches, axis=0)
+                else:
+                    # Multi-class scenario: list of batch arrays per class (e.g. batch_shap has n_classes items)
+                    n_classes = len(shap_values_batches[0])
+                    class_shape = (
+                        shap_values_batches[0][0].shape
+                        if hasattr(shap_values_batches[0][0], "shape")
+                        else "unknown"
+                    )
+                    logger.info(
+                        "Merging SHAP batches: Scenario A (list of class arrays). "
+                        "Classes detected: %d, Array shape per class: %s",
+                        n_classes,
+                        class_shape
+                    )
+                    shap_vals = []
+                    for c in range(n_classes):
+                        class_batches = [batch[c] for batch in shap_values_batches]
+                        if isinstance(class_batches[0], torch.Tensor):
+                            merged = torch.cat(class_batches, dim=0).cpu().numpy()
+                        else:
+                            merged = np.concatenate(class_batches, axis=0)
+                        shap_vals.append(merged)
+                    # Stack classes along the last dimension -> (n_samples, ..., num_model_output)
+                    shap_vals = np.stack(shap_vals, axis=-1)
+            else:
+                # Single-output or already-joined multi-class scenario of shape [B, res_L, seq_L, n_classes]
+                batch_shape = (
+                    shap_values_batches[0].shape
+                    if hasattr(shap_values_batches[0], "shape")
+                    else "unknown"
+                )
+                logger.info(
+                    "Merging SHAP batches: Scenario B (single array). "
+                    "Batch shape: %s",
+                    batch_shape
+                )
+                if isinstance(shap_values_batches[0], torch.Tensor):
+                    shap_vals = torch.cat(shap_values_batches, dim=0).cpu().numpy()
+                else:
+                    shap_vals = np.concatenate(shap_values_batches, axis=0)
+
+            return shap_vals
+
+        # 2. Model-Agnostic Kernel Explainer
+        elif explainer_type == "kernel":
+            original_shape = X_explain.shape[1:]
+
+            # Wrap prediction pipeline using mini-batch evaluation
+            def predict_wrapper(X_flat):
+                X_reshaped = X_flat.reshape(-1, *original_shape)
+                self.model_.eval()
+
+                loader = torch.utils.data.DataLoader(
+                    torch.utils.data.TensorDataset(torch.tensor(X_reshaped, dtype=torch.float32)),
+                    batch_size=batch_size,
+                    shuffle=False,
+                )
+
+                preds = []
+                with torch.no_grad():
+                    for (x_v,) in loader:
+                        x_v = x_v.to(self.device_)
+                        if self.model_.return_probs:
+                            logits, probs, _ = self.model_(x_v)
+                            val = probs if output_type == "probs" else logits
+                        else:
+                            logits, _ = self.model_(x_v)
+                            if output_type == "probs":
+                                val = torch.softmax(logits, dim=-1)
+                            else:
+                                val = logits
+                        preds.extend(val.detach().cpu().numpy())
+                return np.array(preds)
+
+            X_explain_flat = X_explain.reshape(X_explain.shape[0], -1)
+            background_flat = background_data.reshape(background_data.shape[0], -1)
+
+            explainer = shap.KernelExplainer(predict_wrapper, background_flat)
+            shap_vals = explainer.shap_values(X_explain_flat)
+
+            # Reshape SHAP values back to match the original feature shape
+            if isinstance(shap_vals, list):
+                if len(shap_vals) == 1:
+                    shap_vals = shap_vals[0].reshape(X_explain.shape)
+                else:
+                    # Each list element has shape (n_samples, res_L, seq_L)
+                    shap_vals = [sv.reshape(X_explain.shape) for sv in shap_vals]
+                    # Stack along last axis to get (n_samples, res_L, seq_L, num_model_output)
+                    shap_vals = np.stack(shap_vals, axis=-1)
+            else:
+                shap_vals = shap_vals.reshape(X_explain.shape)
+
+            return shap_vals
+
+        else:
+            raise ValueError(f"Unknown explainer_type: {explainer_type}. Choose 'deep', 'gradient', or 'kernel'.")

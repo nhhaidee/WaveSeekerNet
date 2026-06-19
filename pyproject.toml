@@ -1,16 +1,15 @@
 [build-system]
-requires = ["setuptools<81", "wheel"]
+requires = ["setuptools>=61.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "waveseekernet"
-version = "0.1.0"
 description = "Accurate Prediction of Influenza A Virus Subtypes and Host Source Using Attention-Based Deep Learning"
 readme = "README.md"
 license = { file = "LICENSE" }
 authors = [
-    { name = "Hai Nguyen" },
-    { name = "Josip Rudar" },
+    { name = "Hai Nguyen", email = "your.email@example.com" },
+    { name = "Josip Rudar", email = "josip.rudar@example.com" },
 ]
 keywords = ["deep learning", "influenza", "genomics", "bioinformatics", "pytorch"]
 classifiers = [
@@ -23,31 +22,30 @@ classifiers = [
 ]
 requires-python = ">=3.10"
 dependencies = [
-    "torch==2.4.1",
+    "torch>=2.4.1",
     "pytorch_wavelets>=1.3.0",
     "pytorch_optimizer>=3.1.1",
     "scikit-learn>=1.5.1",
     "numpy>=1.26.4",
-    "biopython>=1.84",
-    "pandas>=2.2.2",
-    "pyfastx>=2.1.0",
-    "seaborn>=0.13.2",
-    "matplotlib>=3.9.1",
-    "baycomp>=1.0.3",
-    "PyWavelets",         # pywt — required by pytorch_wavelets
+    "torchinfo==1.8.0",
+    "shap==0.48.0",
+    "PyWavelets",
 ]
+dynamic = ["version"]
 
 [project.optional-dependencies]
 dev = [
     "pytest>=8.0",
     "build",
     "twine",
+    "mypy>=1.0.0",
+    "ruff>=0.3.0",
 ]
 
 [project.urls]
 Homepage = "https://github.com/nhhaidee/WaveSeekerNet"
+Repository = "https://github.com/nhhaidee/WaveSeekerNet.git"
 "Bug Tracker" = "https://github.com/nhhaidee/WaveSeekerNet/issues"
-Preprint = "https://www.biorxiv.org/content/10.1101/2025.02.25.639900v2"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -55,11 +53,25 @@ where = ["src"]
 [tool.setuptools.package-dir]
 "" = "src"
 
-[tool.setuptools.package-data]
-"WaveSeekerNet" = ["py.typed"]
+[tool.setuptools.dynamic]
+version = {attr = "WaveSeekerNet.__version__"}
 
 [tool.mypy]
-python_version = "3.12"
+python_version = "3.10"
 warn_return_any = true
 warn_unused_configs = true
 ignore_missing_imports = true
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes lints
+    "I",    # isort (import sorting)
+    "B",    # flake8-bugbear (common bug patterns)
+    "UP",   # pyupgrade (modernize Python syntax)
+]

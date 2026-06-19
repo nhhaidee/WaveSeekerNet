@@ -1,0 +1,55 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging / build artifacts
+bin/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyCharm / IntelliJ settings
+.idea/
+
+# VS Code settings
+.vscode/
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# PyTorch deep learning weights/checkpoints and large data
+# (Recommended so you don't commit heavy model checkpoints or datasets)
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.onnx
+data/
+logs/
