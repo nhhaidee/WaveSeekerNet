@@ -30,6 +30,7 @@ dependencies = [
     "torchinfo==1.8.0",
     "shap==0.48.0",
     "PyWavelets",
+    "biopython>=1.80",
 ]
 dynamic = ["version"]
 
