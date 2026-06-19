@@ -70,35 +70,35 @@ Pools patch tokens using Global Expectation Pooling and feeds them to the classi
 
 The `WaveSeekerClassifier` class implements the scikit-learn estimator interface. Below is the list of initialization parameters:
 
-| Parameter | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `seq_L` | `int` | *Required* | Sequence-length dimension of the input matrix. |
-| `res_L` | `int` | *Required* | Residue/feature-length dimension of the input matrix (e.g. 5 or 6 for one-hot, 21 for protein). |
-| `n_channels` | `int` | *Required* | Number of input channels (e.g., 1). |
-| `patch_size` | `tuple[int, int]` | *Required* | `(height, width)` size of each patch. |
-| `n_out` | `int` | *Required* | Number of output classes (subtypes/hosts). |
-| `emb_dim` | `int` | `196` | Dimensionality of the patch embeddings. |
-| `wavelet_names` | `list[str] \| None` | `None` | List of wavelet filter names (defaults to `["bior3.3", "sym4"]`). |
-| `wave_dropout` | `float` | `0.5` | Dropout rate inside WaveSeekerBlocks. |
-| `use_fft` | `bool` | `True` | Include Fourier (FNet) token-mixing head. |
-| `use_wavelets` | `bool` | `True` | Include wavelet token-mixing heads. |
-| `use_gmlp` | `bool` | `True` | Include gMLP token-mixing head. |
-| `use_smoe` | `bool` | `True` | Use Sparse Mixture-of-Experts inside encoder blocks. |
-| `use_kan` | `bool` | `True` | Use Kolmogorov-Arnold Network (KAN) layers in the classifier head. |
+| Parameter | Type | Default      | Description |
+| :--- | :--- |:-------------| :--- |
+| `seq_L` | `int` | *Required*   | Sequence-length dimension of the input matrix. |
+| `res_L` | `int` | *Required*   | Residue/feature-length dimension of the input matrix (e.g. 5 or 6 for one-hot, 21 for protein). |
+| `n_channels` | `int` | *Required*   | Number of input channels (e.g., 1). |
+| `patch_size` | `tuple[int, int]` | *Required*   | `(height, width)` size of each patch. |
+| `n_out` | `int` | *Required*   | Number of output classes (subtypes/hosts). |
+| `emb_dim` | `int` | `196`        | Dimensionality of the patch embeddings. |
+| `wavelet_names` | `list[str] \| None` | `None`       | List of wavelet filter names (defaults to `["bior3.3", "sym4"]`). |
+| `wave_dropout` | `float` | `0.5`        | Dropout rate inside WaveSeekerBlocks. |
+| `use_fft` | `bool` | `True`       | Include Fourier (FNet) token-mixing head. |
+| `use_wavelets` | `bool` | `True`       | Include wavelet token-mixing heads. |
+| `use_gmlp` | `bool` | `True`       | Include gMLP token-mixing head. |
+| `use_smoe` | `bool` | `True`       | Use Sparse Mixture-of-Experts inside encoder blocks. |
+| `use_kan` | `bool` | `True`       | Use Kolmogorov-Arnold Network (KAN) layers in the classifier head. |
 | `patch_mode` | `str` | `"compress"` | Patch extraction mode (`"patch"`, `"compress"`, or `"full"`). |
-| `n_blocks` | `int` | `2` | Number of stacked encoder blocks. |
-| `final_dropout` | `float` | `0.5` | Dropout rate in classification head. |
-| `final_hidden_size`| `int` | `32` | Hidden layer size of the classification head. |
-| `epochs` | `int` | `30` | Number of training epochs. |
-| `batch_size` | `int` | `64` | Training batch size. |
-| `lr` | `float` | `1e-3` | Initial learning rate. |
-| `wd` | `float` | `0.0` | Weight decay rate. |
-| `optimizer_name` | `str` | `"Adan"` | PyTorch optimizer name (supported by `pytorch_optimizer`). |
-| `use_gc` | `bool` | `True` | Use Gradient Centralization. |
-| `use_lookahead` | `bool` | `True` | Wrap optimizer with Lookahead. |
-| `activation` | `Type[nn.Module]` | `ErMish` | Activation function class. |
-| `return_probs` | `bool` | `True` | Whether to return softmax class probabilities. |
-| `device` | `str \| torch.device \| None` | `None` | Force device mapping (defaults to CUDA if available, else CPU). |
+| `n_blocks` | `int` | `1`          | Number of stacked encoder blocks. |
+| `final_dropout` | `float` | `0.5`        | Dropout rate in classification head. |
+| `final_hidden_size`| `int` | `32`         | Hidden layer size of the classification head. |
+| `epochs` | `int` | `30`         | Number of training epochs. |
+| `batch_size` | `int` | `64`         | Training batch size. |
+| `lr` | `float` | `1e-3`       | Initial learning rate. |
+| `wd` | `float` | `0.0`        | Weight decay rate. |
+| `optimizer_name` | `str` | `"Adan"`     | PyTorch optimizer name (supported by `pytorch_optimizer`). |
+| `use_gc` | `bool` | `True`       | Use Gradient Centralization. |
+| `use_lookahead` | `bool` | `True`       | Wrap optimizer with Lookahead. |
+| `activation` | `Type[nn.Module]` | `ErMish`     | Activation function class. |
+| `return_probs` | `bool` | `True`       | Whether to return softmax class probabilities. |
+| `device` | `str \| torch.device \| None` | `None`       | Force device mapping (defaults to CUDA if available, else CPU). |
 
 ## How to Train WaveSeekerNet
 

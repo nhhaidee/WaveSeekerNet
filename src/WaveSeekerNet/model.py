@@ -507,7 +507,7 @@ class WaveSeekerClassifier(BaseEstimator, ClassifierMixin):
         wave_dropout: float = 0.5,
         use_fft: bool = True,
         use_wavelets: bool = True,
-        n_blocks: int = 2,
+        n_blocks: int = 1,
         final_dropout: float = 0.5,
         final_hidden_size: int = 32,
         batch_size: int = 64,
