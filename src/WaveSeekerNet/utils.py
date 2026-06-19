@@ -87,7 +87,7 @@ def fasta_to_one_hot(
         seq_len: int,
         res_l: int = 5,
         convert_ambiguous_to_n: bool = True,
-        chunk_size: int = 50000,
+        chunk_size: int = 10000,
         out_filename: str | None = None
 ) -> tuple[np.ndarray, list[str]]:
     """
@@ -393,3 +393,126 @@ def resampling(
             y_temp = np.concatenate((y_temp, y_ele), axis=0)
 
     return X_temp, y_temp
+
+
+def encode_protein_chunk(
+    chunk_seqs: list[str],
+    seq_len: int,
+) -> np.ndarray:
+    """
+    Helper to vectorized-encode a list of protein sequences to one-hot format.
+
+    Parameters
+    ----------
+    chunk_seqs : list of str
+        List of protein sequences.
+    seq_len : int
+        Target sequence length. Sequences are padded or truncated.
+
+    Returns
+    -------
+    one_hot : np.ndarray
+        One-hot encoded array of shape (n_sequences, 21, seq_len).
+        Amino acids 'A', 'C', ... 'Y' are mapped to indices 0..19.
+        Ambiguous/other characters are mapped to index 20 (pos 20).
+        Gaps ('-') are encoded as all-zeros.
+    """
+    n_seqs = len(chunk_seqs)
+
+    # 1. Pre-allocate character array filled with '-' (acts as padding/gap)
+    seq_chars = np.full((n_seqs, seq_len), '-', dtype='U1')
+    for i, seq in enumerate(chunk_seqs):
+        curr_len = min(len(seq), seq_len)
+        seq_chars[i, :curr_len] = list(seq[:curr_len].upper())
+
+    one_hot = np.zeros((n_seqs, 21, seq_len), dtype=np.float32)
+
+    aminos = ['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'V', 'W', 'Y']
+
+    # 2. Match standard amino acids
+    for idx, aa in enumerate(aminos):
+        one_hot[:, idx, :] = (seq_chars == aa)
+
+    # 3. Identify ambiguous (non-standard) amino acids
+    # Any character that is not a standard amino acid and is not a gap
+    is_standard_or_gap = np.zeros((n_seqs, seq_len), dtype=bool)
+    for aa in aminos:
+        is_standard_or_gap |= (seq_chars == aa)
+    is_standard_or_gap |= (seq_chars == '-')
+
+    is_ambiguous = ~is_standard_or_gap
+    one_hot[:, 20, :] = is_ambiguous
+
+    return one_hot
+
+
+def protein_fasta_to_one_hot(
+        fasta_path: str,
+        seq_len: int,
+        chunk_size: int = 10000,
+        out_filename: str | None = None
+) -> tuple[np.ndarray, list[str]]:
+    """
+    Read protein sequences from a FASTA file and convert to one-hot encoding.
+
+    Uses disk memory-mapping (np.memmap) if out_filename is provided to allow
+    processing datasets that exceed available RAM.
+
+    Parameters
+    ----------
+    fasta_path : str
+        Path to the FASTA file.
+    seq_len : int
+        Target sequence length. Sequences are padded or truncated.
+    chunk_size : int, default 50000
+        Number of sequences to process in a single batch to limit RAM spikes.
+    out_filename : str or None, default None
+        If provided, writes the array directly to a memory-mapped NumPy file.
+
+    Returns
+    -------
+    X : np.ndarray
+        One-hot encoded array of shape (n_sequences, 21, seq_len).
+        If out_filename is provided, this is a memory-mapped numpy array.
+    headers : list of str
+        The FASTA headers (IDs) of the encoded sequences in corresponding order.
+    """
+    # 1. Count sequences in FASTA
+    n_seqs = count_fasta_sequences(fasta_path)
+    logger.info("Found %d protein sequences in FASTA file: %s", n_seqs, fasta_path)
+
+    # 2. Setup the output array (disk-backed or in-memory)
+    if out_filename:
+        logger.info("Initializing disk-backed memory-mapped array at %s...", out_filename)
+        fp = np.memmap(out_filename, dtype='float32', mode='w+', shape=(n_seqs, 21, seq_len))
+    else:
+        logger.info("Initializing in-memory array (Warning: Make sure you have enough RAM)...")
+        fp = np.zeros((n_seqs, 21, seq_len), dtype=np.float32)
+
+    # 3. Stream and encode
+    headers = []
+    chunk = []
+    chunk_start = 0
+
+    for record in SeqIO.parse(fasta_path, "fasta"):
+        headers.append(record.id)
+        chunk.append(str(record.seq).upper())
+
+        if len(chunk) == chunk_size:
+            chunk_end = chunk_start + len(chunk)
+            fp[chunk_start:chunk_end] = encode_protein_chunk(chunk, seq_len)
+            logger.info("Encoded protein records %d to %d...", chunk_start, chunk_end-1)
+            chunk_start = chunk_end
+            chunk = []
+
+    # Process remaining records
+    if chunk:
+        chunk_end = chunk_start + len(chunk)
+        fp[chunk_start:chunk_end] = encode_protein_chunk(chunk, seq_len)
+        logger.info("Encoded final protein records %d to %d.", chunk_start, chunk_end-1)
+
+    if out_filename:
+        fp.flush()
+        logger.info("Protein encoding complete. Dataset saved to %s", out_filename)
+
+    return fp, headers
