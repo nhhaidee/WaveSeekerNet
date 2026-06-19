@@ -57,9 +57,9 @@ def encode_chunk(
     one_hot[:, 3, :] = is_T
 
     # 3. Identify ambiguous (non-standard) bases
-    is_real = (seq_chars != '-')
     is_standard = is_A | is_C | is_G | is_T
-    is_ambiguous = is_real & ~is_standard
+    is_gap = (seq_chars == '-')
+    is_ambiguous = ~is_standard & ~is_gap
     is_N = (seq_chars == 'N')
     is_other_ambiguous = is_ambiguous & ~is_N
 
