@@ -1,0 +1,22 @@
+FROM python:3.10-slim
+
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    git \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY pyproject.toml LICENSE README.md /app/
+COPY src/ /app/src/
+
+# Install CPU version of PyTorch first to save space, then the package
+RUN pip install --no-cache-dir torch --index-url https://download.pytorch.org/whl/cpu && \
+    pip install --no-cache-dir .
+
+COPY WaveSeekerNet_Demo.ipynb /app/
+
+CMD ["python", "-c", "import WaveSeekerNet; print('WaveSeekerNet CPU successfully installed!')"]

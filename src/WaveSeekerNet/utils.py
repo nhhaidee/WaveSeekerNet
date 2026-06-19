@@ -3,6 +3,7 @@ import sys
 import numpy as np
 from Bio import SeqIO
 from complexcgr import FCGR
+from sklearn.utils import resample
 
 # Set up module-level logger
 logger = logging.getLogger(__name__)
@@ -290,3 +291,105 @@ def fasta_to_fcgr(
         logger.info("FCGR encoding complete. Dataset saved to %s", out_filename)
 
     return fp, headers
+
+
+def get_rare_sequence(
+    X: np.ndarray,
+    y: np.ndarray,
+    s_splits: int = 10,
+    n_samples: int = 600
+) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """
+    Specifically oversamples extremely rare categories (classes with < s_splits samples)
+    to balance the dataset, and splits the dataset into rare (resampled) and non-rare sets.
+    """
+    unique, counts = np.unique(y, return_counts=True)
+    rare_subtype_counts_index = np.where(counts < s_splits, True, False)
+    rare_subtypes = unique[rare_subtype_counts_index]
+    rare_subtypes_counts = counts[rare_subtype_counts_index]
+
+    X_temp = None
+    y_temp = None
+
+    for i, s_type in enumerate(rare_subtypes):
+        s_type_index = np.where(y == s_type, True, False)
+        X_rare_subtype = X[s_type_index]
+        y_rare_subtype = y[s_type_index]
+
+        X_rare_subtype, y_rare_subtype = resample(
+            X_rare_subtype, y_rare_subtype, replace=True, n_samples=n_samples, random_state=0
+        )
+
+        if i == 0:
+            X_temp = X_rare_subtype
+            y_temp = y_rare_subtype
+        else:
+            X_temp = np.concatenate((X_temp, X_rare_subtype), axis=0)
+            y_temp = np.concatenate((y_temp, y_rare_subtype), axis=0)
+
+    s_type_other_index = np.where(np.isin(y, rare_subtypes), True, False)
+    X_other_subtype = X[~s_type_other_index]
+    y_other_subtype = y[~s_type_other_index]
+
+    logger.info("Rare subtype information after sampling")
+    if X_temp is not None:
+        logger.info("Shape X: %s, shape y: %s", X_temp.shape, y_temp.shape)
+        logger.info("\n%s", np.transpose(np.unique(y_temp, return_counts=True)))
+    else:
+        logger.info("No rare subtypes found.")
+
+    logger.info("Other subtype information without sampling")
+    logger.info("Shape X: %s, shape y: %s", X_other_subtype.shape, y_other_subtype.shape)
+    logger.info("\n%s", np.transpose(np.unique(y_other_subtype, return_counts=True)))
+
+    return X_temp, y_temp, X_other_subtype, y_other_subtype
+
+
+def resampling(
+    X: np.ndarray,
+    y: np.ndarray,
+    n_downsamples: int = 6000,
+    n_upsamples: int = 600
+) -> tuple[np.ndarray, np.ndarray]:
+    """
+    Balances dataset by downsampling over-represented classes (count > n_downsamples)
+    and upsampling under-represented classes (count < n_upsamples).
+    """
+    unique, counts = np.unique(y, return_counts=True)
+    logger.info("Data Shape Before Sampling: %s %s", X.shape, y.shape)
+
+    X_temp = None
+    y_temp = None
+
+    for i, ele in enumerate(unique):
+        n_counts = counts[i]
+        if n_counts > n_downsamples:
+            ele_index = np.where(y == ele, True, False)
+            X_ele = X[ele_index]
+            y_ele = y[ele_index]
+            X_ele, y_ele = resample(
+                X_ele, y_ele, replace=False, n_samples=n_downsamples, random_state=0
+            )
+            logger.info("Subtype/Host: %s, count: %s, downsampling: %s %s", ele, n_counts, X_ele.shape, y_ele.shape)
+        elif n_counts < n_upsamples:
+            ele_index = np.where(y == ele, True, False)
+            X_ele = X[ele_index]
+            y_ele = y[ele_index]
+            X_ele, y_ele = resample(
+                X_ele, y_ele, replace=True, n_samples=n_upsamples, random_state=0
+            )
+            logger.info("Subtype/Host: %s, count: %s, upsampling: %s %s", ele, n_counts, X_ele.shape, y_ele.shape)
+        else:
+            ele_index = np.where(y == ele, True, False)
+            X_ele = X[ele_index]
+            y_ele = y[ele_index]
+            logger.info("Subtype/Host: %s, count: %s, keep: %s %s", ele, n_counts, X_ele.shape, y_ele.shape)
+
+        if i == 0:
+            X_temp = X_ele
+            y_temp = y_ele
+        else:
+            X_temp = np.concatenate((X_temp, X_ele), axis=0)
+            y_temp = np.concatenate((y_temp, y_ele), axis=0)
+
+    return X_temp, y_temp

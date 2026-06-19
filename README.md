@@ -12,6 +12,7 @@ WaveSeekerNet’s superior performance, efficiency, and ability to flag potentia
 This repository contains the source code and data used to train WaveSeekerNet. The preprint of WaveSeekerNet is now available on bioRxiv (https://www.biorxiv.org/content/10.1101/2025.02.25.639900v2) and under review with GigaScience.
 ## Installation
 
+### Standard Installation
 To install `WaveSeekerNet` and its required packages, clone the repository and run:
 
 ```bash
@@ -24,6 +25,63 @@ For development work (including tests, linting, and building):
 
 ```bash
 pip install -e .[dev]
+```
+
+### Conda Installation
+An `environment.yml` file is provided to easily create a Conda environment with all PyTorch, CUDA, and package dependencies pre-configured:
+
+```bash
+# Create the environment from the file
+conda env create -f environment.yml
+
+# Activate the environment
+conda activate waveseekernet
+```
+
+### Docker Containerization
+Dockerfiles are provided to run WaveSeekerNet inside containers with full GPU or CPU support.
+
+#### Option 1: GPU-Enabled Container (CUDA 12.1 + PyTorch)
+Build the image:
+```bash
+docker build -t waveseekernet:latest .
+```
+
+Run a python script with GPU support:
+```bash
+docker run --gpus all -it --rm waveseekernet:latest python your_script.py
+```
+
+#### Option 2: CPU-Only Container
+Build the image:
+```bash
+docker build -f Dockerfile.cpu -t waveseekernet:cpu .
+```
+
+Run container:
+```bash
+docker run -it --rm waveseekernet:cpu python your_script.py
+```
+
+### Singularity / Apptainer (for HPC Clusters)
+For High-Performance Computing (HPC) clusters where root privileges are restricted, you can build a Singularity/Apptainer image.
+
+#### Option 1: Build from Docker Hub (Easiest)
+If you have pushed your Docker image to Docker Hub, you can pull and build it directly:
+```bash
+singularity build waveseekernet.sif docker://username/waveseekernet:latest
+```
+
+#### Option 2: Build from the Definition File
+Build the Singularity Image File (`.sif`) locally using the recipe file:
+```bash
+singularity build waveseekernet.sif waveseekernet.def
+```
+
+#### Running the Singularity Container
+Run a python script utilizing the GPU/CUDA context:
+```bash
+singularity run --nv waveseekernet.sif your_script.py
 ```
 
 ## Requirements
@@ -42,7 +100,7 @@ WaveSeekerNet requires Python 3.10+ and the following core dependencies:
 2. **Sequence Data**: IAV HA and NA RNA/Protein sequences can be downloaded from EpiFlu GISAID database (https://www.gisaid.org/).
 3. **Repository Structure**:
     - `src/WaveSeekerNet`: Contains code for the `WaveSeekerNet` model, blocks, classification head, and submodules.
-    - `sampling.py`: Utility functions for dataset resampling (upsampling, downsampling, and rare sequence extraction).
+    - `sampling.py`: Backward-compatibility wrapper for resampling functions.
     - `WaveSeekerNet_Demo.ipynb`: A complete, executable Jupyter notebook demonstration.
 
 ## Model Architecture Overview
@@ -244,10 +302,10 @@ print("SHAP values shape:", shap_values.shape)
 ```
 
 ### 3. Dataset Resampling (Class Imbalance)
-To combat highly skewed classification targets (e.g., highly prevalent vs. rare viral subtypes/hosts), the package includes helper resampling utilities in `sampling.py`:
+To combat highly skewed classification targets (e.g., highly prevalent vs. rare viral subtypes/hosts), the package includes helper resampling utilities under `WaveSeekerNet` (or `WaveSeekerNet.utils`):
 
 ```python
-from sampling import resampling, get_rare_sequence
+from WaveSeekerNet import resampling, get_rare_sequence
 
 # Downsamples over-represented classes and upsamples under-represented classes
 X_resampled, y_resampled = resampling(

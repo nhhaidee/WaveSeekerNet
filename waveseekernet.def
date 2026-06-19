@@ -1,0 +1,23 @@
+Bootstrap: docker
+From: pytorch/pytorch:2.4.1-cuda12.1-cudnn8-runtime
+
+%files
+    . /opt/WaveSeekerNet
+
+%post
+    cd /opt/WaveSeekerNet
+    apt-get update && apt-get install -y git build-essential
+    pip install --no-cache-dir .
+    
+%environment
+    export LC_ALL=C.UTF-8
+    export LANG=C.UTF-8
+
+%runscript
+    exec python "$@"
+
+%help
+    WaveSeekerNet: Accurate Prediction of Influenza A Virus Subtypes and Host Source.
+    
+    To run scripts with GPU support:
+      singularity run --nv waveseekernet.sif your_script.py
