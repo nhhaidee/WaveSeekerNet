@@ -10,105 +10,265 @@ We introduce WaveSeekerNet, a novel deep learning model for accurate and rapid p
 WaveSeekerNet’s superior performance, efficiency, and ability to flag potential cross-species transmission events highlight its potential for real-time surveillance and pandemic preparedness. This model represents a significant advancement in applying deep learning for IAV classification and holds promise for future epidemiological, veterinary studies, and public health interventions. 
 
 This repository contains the source code and data used to train WaveSeekerNet. The preprint of WaveSeekerNet is now available on bioRxiv (https://www.biorxiv.org/content/10.1101/2025.02.25.639900v2) and under review with GigaScience.
+## Installation
+
+To install `WaveSeekerNet` and its required packages, clone the repository and run:
+
+```bash
+git clone https://github.com/nhhaidee/WaveSeekerNet.git
+cd WaveSeekerNet
+pip install .
+```
+
+For development work (including tests, linting, and building):
+
+```bash
+pip install -e .[dev]
+```
+
 ## Requirements
 
-1. Pytorch 2.4.1
-2. [Pytorch Wavelet package] 1.3.0
-3. [Pytorch Optimizer] 3.1.1
-4. Other requirements: Python 3.12+, scikit-learn 1.5.1, complexcgr 0.8.0, seaborn 0.13.2, matplotlib 3.9.1, pyfastx 2.1.0, pandas 2.2.2, numpy 1.26.4, biopython 1.84, baycomp 1.0.3.
+WaveSeekerNet requires Python 3.10+ and the following core dependencies:
+
+1. **PyTorch** >= 2.4.1 (with GPU support highly recommended)
+2. **[Pytorch Wavelet package]** >= 1.3.0
+3. **[Pytorch Optimizer]** >= 3.1.1
+4. Other dependencies: `scikit-learn>=1.5.1`, `numpy>=1.26.4`, `torchinfo==1.8.0`, `shap==0.48.0`, `PyWavelets`, `biopython>=1.80`, `complexcgr`, `seaborn`, `matplotlib`, `pyfastx`, `pandas`, `baycomp`.
 
 
 ## Data and Source Code
 
-1. Metadata for the datasets used in the paper can be found in GigaDB (https://doi.org/10.5524/102732).
-2. IAV HA and NA RNA/Protein sequences can be downloaded from EpiFLu GISAID database (https://www.gisaid.org/).
-3. Source code for model training and evaluation can be found in the `src` directory:
-    - `src/WaveSeekerNet`: Contains code for the WaveSeekerNet model
-    - `src/Transformer`: Contains code for the Transformer-only and the pre-trained ESM-2 models
+1. **Dataset Metadata**: Metadata for the datasets used in the paper can be found in GigaDB (https://doi.org/10.5524/102732).
+2. **Sequence Data**: IAV HA and NA RNA/Protein sequences can be downloaded from EpiFlu GISAID database (https://www.gisaid.org/).
+3. **Repository Structure**:
+    - `src/WaveSeekerNet`: Contains code for the `WaveSeekerNet` model, blocks, classification head, and submodules.
+    - `sampling.py`: Utility functions for dataset resampling (upsampling, downsampling, and rare sequence extraction).
+    - `WaveSeekerNet_Demo.ipynb`: A complete, executable Jupyter notebook demonstration.
+
+## Model Architecture Overview
+
+WaveSeekerNet introduces an attention-based deep learning architecture designed for biological sequences, specifically optimizing feature representation across multi-scale dimensions.
+
+### 1. Patch Extraction (`MakePatches`)
+Biological sequences are represented in 2-D (Frequency Chaos Game Representation (FCGR) for DNA/RNA or residue-by-channel matrix for protein). These are divided into non-overlapping patches and mapped to an embedding space:
+* **`patch_mode="patch"`**: Traditional non-overlapping patches.
+* **`patch_mode="compress"`**: Compresses sequence dimensions before patch extraction.
+* **`patch_mode="full"`**: Retains complete spatial dimensions using average pooling.
+
+### 2. WaveSeekerBlock (Encoder)
+Instead of traditional self-attention which suffers from high computational complexity, each block processes tokens in parallel:
+* **Wavelet Head (`WaveNETHead`)**: Applies a 1-level Discrete Wavelet Transform (DWT), processes approximation and detail coefficients separately using a `StarLayer`, soft-thresholds noise using shrinkage regularization, and reconstructs via Inverse DWT.
+* **Fourier Head (`FNETHead`)**: Applies a 2-D Real FFT, applies efficient multi-head linear self-attention, prunes low-magnitude frequencies using shrinkage, and reconstructs via Inverse FFT.
+* **gMLP Head (`gMLPBlock`)**: Applies a spatial gating unit over token projections.
+* **Merging (`StarLayer`)**: Integrates parallel heads.
+* **Channel-Mixing (`SparseMoE` / `WaveExpert`)**: Processes the hidden dimension using a Sparse Mixture-of-Experts (SMoE) router selecting top-3 experts, or falls back to a single `WaveExpert`.
+
+### 3. Classification Head (`ClassificationHead`)
+Pools patch tokens using Global Expectation Pooling and feeds them to the classification head, which can utilize **Kolmogorov-Arnold Network (KAN)** layers (`KANLinear`) in place of standard fully-connected layers.
+
+## Model Parameters Reference
+
+The `WaveSeekerClassifier` class implements the scikit-learn estimator interface. Below is the list of initialization parameters:
+
+| Parameter | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `seq_L` | `int` | *Required* | Sequence-length dimension of the input matrix. |
+| `res_L` | `int` | *Required* | Residue/feature-length dimension of the input matrix (e.g. 5 or 6 for one-hot, 21 for protein). |
+| `n_channels` | `int` | *Required* | Number of input channels (e.g., 1). |
+| `patch_size` | `tuple[int, int]` | *Required* | `(height, width)` size of each patch. |
+| `n_out` | `int` | *Required* | Number of output classes (subtypes/hosts). |
+| `emb_dim` | `int` | `196` | Dimensionality of the patch embeddings. |
+| `wavelet_names` | `list[str] \| None` | `None` | List of wavelet filter names (defaults to `["bior3.3", "sym4"]`). |
+| `wave_dropout` | `float` | `0.5` | Dropout rate inside WaveSeekerBlocks. |
+| `use_fft` | `bool` | `True` | Include Fourier (FNet) token-mixing head. |
+| `use_wavelets` | `bool` | `True` | Include wavelet token-mixing heads. |
+| `use_gmlp` | `bool` | `True` | Include gMLP token-mixing head. |
+| `use_smoe` | `bool` | `True` | Use Sparse Mixture-of-Experts inside encoder blocks. |
+| `use_kan` | `bool` | `True` | Use Kolmogorov-Arnold Network (KAN) layers in the classifier head. |
+| `patch_mode` | `str` | `"compress"` | Patch extraction mode (`"patch"`, `"compress"`, or `"full"`). |
+| `n_blocks` | `int` | `2` | Number of stacked encoder blocks. |
+| `final_dropout` | `float` | `0.5` | Dropout rate in classification head. |
+| `final_hidden_size`| `int` | `32` | Hidden layer size of the classification head. |
+| `epochs` | `int` | `30` | Number of training epochs. |
+| `batch_size` | `int` | `64` | Training batch size. |
+| `lr` | `float` | `1e-3` | Initial learning rate. |
+| `wd` | `float` | `0.0` | Weight decay rate. |
+| `optimizer_name` | `str` | `"Adan"` | PyTorch optimizer name (supported by `pytorch_optimizer`). |
+| `use_gc` | `bool` | `True` | Use Gradient Centralization. |
+| `use_lookahead` | `bool` | `True` | Wrap optimizer with Lookahead. |
+| `activation` | `Type[nn.Module]` | `ErMish` | Activation function class. |
+| `return_probs` | `bool` | `True` | Whether to return softmax class probabilities. |
+| `device` | `str \| torch.device \| None` | `None` | Force device mapping (defaults to CUDA if available, else CPU). |
 
 ## How to Train WaveSeekerNet
-To train WaveSeekerNet, follow these steps:
 
-Load dataset
-```   
- X_train = np.load(path + 'X_train.npy')
- y_train = np.load(path + 'y_train.npy')
- X_test  = np.load(path + 'X_test.npy')
- y_test  = np.load(path + 'y_test.npy')
-```
-Parameters for RNA dataset
-```  
-X_train Shape: (N, 2**D, 2**D) where N is the number of samples, D is the depth of FCGR
-D = 6
-n_out = len(np.unique(y_train))
-n_channels= 1
-seq_len = 2**D
-res_len = 2**D  
-patch_size = (4, 4)
-epochs = 35
-batch_size = 256
-emb_dim = 64
-final_hidden_size = 24
- ```  
-Parameters for Protein dataset
+Here is a quick-start guide to training the classifier:
 
-```  
-X_train Shape: (N, 21, seq_len) where N is the number of samples
-n_out = len(np.unique(y_train))
-n_channels= 1
-seq_len = seq_len
-res_len = 21
-patch_size = (3, res_len)
-epochs = 35
-batch_size = 256
-emb_dim = 64
-final_hidden_size = 24
- ```   
-WaveSeekerNet Hyperparameters
-```     
-params_dict = {"use_fft": False,  # default True
-               "use_wavelets": False,  # default True
-               "use_gmlp": False,  # default True
-               "activation_mish": torch.nn.Mish,  # default ErMish
-               "activation_gelu": torch.nn.GELU,
-               "activation_relu": torch.nn.ReLU,
-               "use_kan": False,  # default True
-               "use_smoe": False,  # default True
-               "use_gc": False,  # default True
-               "use_lookahead": False,  # default True
-               }
+### 1. Load Data
+```python
+import numpy as np
+
+# Load preprocessed arrays (FCGR or one-hot)
+X_train = np.load('X_train.npy')
+y_train = np.load('y_train.npy')
+X_test  = np.load('X_test.npy')
+y_test  = np.load('y_test.npy')
 ```
-Train and predict with WaveSeekerClassifier
-```     
+
+### 2. Configure and Fit the Classifier
+```python
+from WaveSeekerNet import WaveSeekerClassifier
+
+# Initialize the classifier
 clf = WaveSeekerClassifier(
-        n_channels=n_channels,
-        seq_L=seq_len,
-        res_L=res_len,
-        patch_size=patch_size,
-        n_out=n_out,
-        batch_size=batch_size,
-        emb_dim=emb_dim,
-        final_hidden_size=final_hidden_size,
-        epochs=epochs,
-        patch_mode="patch",
-        wavelet_names=["sym4"],
-        n_blocks=1,
-        lr=0.0025)
-clf.fit(X_train, y_train, X_val, y_val)
-clf.predict(X_test)
+    n_channels=1,
+    seq_L=64,                # e.g., 64 for k=6 FCGR (2**k)
+    res_L=64,                # e.g., 64 for k=6 FCGR
+    patch_size=(4, 4),
+    n_out=len(np.unique(y_train)),
+    batch_size=256,
+    emb_dim=64,
+    final_hidden_size=24,
+    epochs=35,
+    patch_mode="patch",
+    wavelet_names=["sym4"],
+    n_blocks=1,
+    lr=0.0025
+)
+
+# Fit model (optionally provides validation data)
+clf.fit(X_train, y_train)
+
+# Predict labels and evaluate
+y_pred = clf.predict(X_test)
 ```
 
-Metrics to evaluate the model
-```  
-from sklearn.metrics import balanced_accuracy_score as ba_score   
-from sklearn.metrics import classification_report, f1_score, precision_score, recall_score, matthews_corrcoef
-ba = ba_score(y_true, y_pred)
-f1 = f1_score(y_true, y_pred, average="macro")
-p_score = precision_score(y_true, y_pred, average="macro")
-r_score = recall_score(y_true, y_pred, average="macro")
-mcc = matthews_corrcoef(y_true, y_pred)
-print(classification_report(y_true, y_pred, zero_division=np.nan))
+### 3. Evaluate Results
+```python
+from sklearn.metrics import classification_report, balanced_accuracy_score, matthews_corrcoef
+
+print("Balanced Accuracy:", balanced_accuracy_score(y_test, y_pred))
+print("MCC:", matthews_corrcoef(y_test, y_pred))
+print(classification_report(y_test, y_pred))
 ```
+
+## Sequence Preprocessing Utilities
+
+The package provides memory-efficient utilities under `WaveSeekerNet.utils` to preprocess raw FASTA genomic sequences into One-Hot Encoded representation or Frequency Chaos Game Representation (FCGR). Both tools support **on-disk memory-mapping (`np.memmap`)** for handling very large datasets (500K+ sequences) without running out of RAM.
+
+### 1. One-Hot Encoding DNA/RNA Sequences
+Convert DNA sequences into a 3D one-hot encoded matrix. Non-standard bases (e.g., IUPAC codes, gaps, or `N`) are grouped under the ambiguous channel.
+
+```python
+from WaveSeekerNet.utils import fasta_to_one_hot
+
+# Convert sequences from a FASTA file and save directly to disk
+X_train, headers = fasta_to_one_hot(
+    fasta_path="path/to/sequences.fasta",
+    seq_len=2400,                   # Target sequence length (pads or truncates)
+    res_l=5,                        # 5 channels: A->0, C->1, G->2, T/U->3, Ambiguous/Padding->4
+    convert_ambiguous_to_n=True,    # Map all non-ACGT bases to N (index 4)
+    chunk_size=50000,               # Process in batches to limit RAM usage
+    out_filename="X_train_onehot.npy" # Creates a disk-backed memory-mapped array
+)
+
+print(X_train.shape) # (n_sequences, 5, 2400)
+```
+
+### 2. Frequency Chaos Game Representation (FCGR)
+Convert DNA sequences to FCGR frequency matrices using the `complexCGR` package. Non-standard characters are automatically cleaned and mapped to `N` before CGR generation.
+
+```python
+from WaveSeekerNet.utils import fasta_to_fcgr
+
+# Convert sequences to standardized FCGR matrices and save to disk
+X_train, headers = fasta_to_fcgr(
+    fasta_path="path/to/sequences.fasta",
+    k=6,                            # k-mer size (generates a 64x64 image)
+    standardize=True,               # Normalize values to be independent of sequence length
+    chunk_size=10000,               # Process in batches to limit RAM usage
+    out_filename="X_train_fcgr.npy" # Creates a disk-backed memory-mapped array
+)
+
+print(X_train.shape) # (n_sequences, 64, 64)
+```
+
+### 3. Loading Large Datasets for Training (Zero-RAM Overhead)
+When training with large datasets (e.g., 500K sequences), load the generated files using NumPy's `mmap_mode='r'`. This ensures that batches are read dynamically from the disk during training rather than filling up your RAM:
+
+```python
+import numpy as np
+import torch
+
+# Load in read-only memmap mode (takes virtually 0 RAM)
+X_train_mmap = np.load("X_train_onehot.npy", mmap_mode="r")
+y_train = np.load("y_train.npy")
+
+# Convert to PyTorch tensors (shares memory buffer, no copying)
+X_train_tensor = torch.from_numpy(X_train_mmap)
+y_train_tensor = torch.from_numpy(y_train)
+
+# Pass to DataLoader
+dataset = torch.utils.data.TensorDataset(X_train_tensor, y_train_tensor)
+train_loader = torch.utils.data.DataLoader(dataset, batch_size=256, shuffle=True)
+```
+
+## Advanced Features
+
+### 1. Model Structure and Parameter Count
+You can print and inspect the architecture of the underlying PyTorch model using the `summary()` method:
+
+```python
+# Displays layer shapes, parameter counts, and MACs
+summary_str = clf.summary()
+print(summary_str)
+```
+
+### 2. Model Explainability (SHAP Support)
+`WaveSeekerClassifier` integrates with the `shap` package to generate feature attribution maps for biological sequences. To avoid GPU out-of-memory errors on large sequence sizes, `explain()` partitions evaluation into mini-batches:
+
+```python
+# Compute SHAP values for explaining predictions
+shap_values = clf.explain(
+    X_explain=X_test[:100],            # Sequence samples to explain
+    background_data=X_train[:50],      # Optional: representative baseline data
+    explainer_type="gradient",         # "gradient" (Integrated Gradients), "deep" (DeepLIFT), or "kernel"
+    output_type="logits",              # Explain "logits" (recommended) or "probs"
+    batch_size=32                      # Batch size used during SHAP evaluation
+)
+
+# Output shape matches inputs stacked with class channels:
+# Single-channel: (n_samples, res_L, seq_L, n_classes)
+# Multi-channel:  (n_samples, n_channels, res_L, seq_L, n_classes)
+print("SHAP values shape:", shap_values.shape)
+```
+
+### 3. Dataset Resampling (Class Imbalance)
+To combat highly skewed classification targets (e.g., highly prevalent vs. rare viral subtypes/hosts), the package includes helper resampling utilities in `sampling.py`:
+
+```python
+from sampling import resampling, get_rare_sequence
+
+# Downsamples over-represented classes and upsamples under-represented classes
+X_resampled, y_resampled = resampling(
+    X_train, 
+    y_train, 
+    n_downsamples=16000, 
+    n_upsamples=600
+)
+
+# Specifically oversamples extremely rare categories (classes with < s_splits samples)
+X_rare, y_rare, X_other, y_other = get_rare_sequence(
+    X_train, 
+    y_train, 
+    s_splits=10, 
+    n_samples=600
+)
+```
+
+## Jupyter Notebook Demo
+
+A fully functional demonstration showing data loading, resampling, model training, evaluation, and explanation can be found in [WaveSeekerNet_Demo.ipynb](WaveSeekerNet_Demo.ipynb).
 
 ## Contributors and Maintainers
 
@@ -117,4 +277,4 @@ print(classification_report(y_true, y_pred, zero_division=np.nan))
 
 
 [Pytorch Wavelet package]: https://github.com/fbcotter/pytorch_wavelets
-[Pytorch Optimizer]:https://github.com/kozistr/pytorch_optimizer
+[Pytorch Optimizer]: https://github.com/kozistr/pytorch_optimizer
