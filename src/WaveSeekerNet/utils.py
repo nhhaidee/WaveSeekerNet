@@ -37,7 +37,7 @@ def encode_chunk(
     n_seqs = len(chunk_seqs)
 
     # 1. Pre-allocate character array filled with 'N' (acts as padding/unknown)
-    seq_chars = np.full((n_seqs, seq_len), 'N', dtype='U1')
+    seq_chars = np.full((n_seqs, seq_len), '-', dtype='U1')
     for i, seq in enumerate(chunk_seqs):
         curr_len = min(len(seq), seq_len)
         # Ensure uppercase for comparison safety
@@ -57,8 +57,9 @@ def encode_chunk(
     one_hot[:, 3, :] = is_T
 
     # 3. Identify ambiguous (non-standard) bases
+    is_real = (seq_chars != '-')
     is_standard = is_A | is_C | is_G | is_T
-    is_ambiguous = ~is_standard
+    is_ambiguous = is_real & ~is_standard
     is_N = (seq_chars == 'N')
     is_other_ambiguous = is_ambiguous & ~is_N
 
@@ -145,7 +146,7 @@ def fasta_to_one_hot(
             fp[chunk_start:chunk_end] = encode_chunk(
                 chunk, seq_len, res_l, convert_ambiguous_to_n
             )
-            logger.info("Encoded records %d to %d...", chunk_start, chunk_end)
+            logger.info("Encoded records %d to %d...", chunk_start, chunk_end-1)
             chunk_start = chunk_end
             chunk = []
 
@@ -155,7 +156,7 @@ def fasta_to_one_hot(
         fp[chunk_start:chunk_end] = encode_chunk(
             chunk, seq_len, res_l, convert_ambiguous_to_n
         )
-        logger.info("Encoded final records %d to %d.", chunk_start, chunk_end)
+        logger.info("Encoded final records %d to %d.", chunk_start, chunk_end-1)
 
     if out_filename:
         fp.flush()
@@ -274,7 +275,7 @@ def fasta_to_fcgr(
         if len(chunk) == chunk_size:
             chunk_end = chunk_start + len(chunk)
             fp[chunk_start:chunk_end] = encode_fcgr_chunk(chunk, k, standardize)
-            logger.info("Encoded FCGR records %d to %d...", chunk_start, chunk_end)
+            logger.info("Encoded FCGR records %d to %d...", chunk_start, chunk_end-1)
             chunk_start = chunk_end
             chunk = []
 
@@ -282,7 +283,7 @@ def fasta_to_fcgr(
     if chunk:
         chunk_end = chunk_start + len(chunk)
         fp[chunk_start:chunk_end] = encode_fcgr_chunk(chunk, k, standardize)
-        logger.info("Encoded final FCGR records %d to %d.", chunk_start, chunk_end)
+        logger.info("Encoded final FCGR records %d to %d.", chunk_start, chunk_end-1)
 
     if out_filename:
         fp.flush()
