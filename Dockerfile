@@ -1,5 +1,5 @@
 # Use the official PyTorch image with CUDA support
-FROM pytorch/pytorch:2.4.1-cuda12.1-cudnn8-runtime
+FROM pytorch/pytorch:2.7.1-cuda12.8-cudnn9-runtime
 
 # Set environment variables to optimize Python runtime in Docker
 ENV PYTHONUNBUFFERED=1 \

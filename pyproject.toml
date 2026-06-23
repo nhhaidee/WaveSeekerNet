@@ -32,6 +32,9 @@ dependencies = [
     "PyWavelets",
     "biopython>=1.80",
     "complexcgr",
+    "pandas",
+    "matplotlib",
+    "seaborn",
 ]
 dynamic = ["version"]
 
