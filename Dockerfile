@@ -14,6 +14,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy configuration files first to optimize layer caching
+# Copy the weights into the container image
+COPY weights /app/assets/weights
 COPY pyproject.toml LICENSE README.md /app/
 COPY src/ /app/src/
 
