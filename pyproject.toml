@@ -35,6 +35,7 @@ dependencies = [
     "pandas",
     "matplotlib",
     "seaborn",
+    "h5py",
 ]
 dynamic = ["version"]
 
